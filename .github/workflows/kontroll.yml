@@ -1,0 +1,20 @@
+# Körs vid varje push till main: bygger sajten.
+# Rött kryss på commiten i GitHub = något är trasigt. Claude kollar och rättar.
+name: Kontroll
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  kontroll:
+    name: Bygge
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run build
