@@ -3,6 +3,7 @@
 Hemsidan för Newstail (Astro). Läs `README.md` här och `../newstail-air/docs/ARBETSSATT.md` (roller och
 rutiner). Konton och kopplingar: `../newstail-air/docs/KONTON.md`. Standarden för alla appar:
 Claude Doc "Appuppsättning by the book".
+Joel och Jimmy jobbar parallellt med var sin Claude och har samma roll – reglerna (grenar, pull requests, versioner) står i `../newstail-air/docs/SAMARBETE.md` i appens repo. Läs den också.
 
 - Joel jobbar i webbläsaren: svenska, kort, inget kodspråk, klick-för-klick.
 - Claude gör all git och kod. Push till `main` publiceras av Vercel (team Plailab, projekt newstail-site).
