@@ -1,13 +1,15 @@
 #!/bin/bash
-# Hämtar klotet och stjärnorna från appen (newstail-air) till sajten, så de ser likadana ut.
-# Körs från sajtens rot med appen bredvid:  bash scripts/sync-orb.sh [sökväg-till-newstail-air]
+# Hämtar klotet och stjärnorna från appen (newstail-app) till sajten, så de ser likadana ut.
+# Körs från sajtens rot med appen bredvid:  bash scripts/sync-orb.sh [sökväg-till-appen]
 #   --check  visar bara om sajten ligger efter appen (ändrar inget).
 # Filerna i src/space/ ska aldrig redigeras för hand – ändra i appen och kör det här.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 CHECK=0
 if [ "${1:-}" = "--check" ]; then CHECK=1; shift; fi
-AIR="${1:-../newstail-air}"
+AIR="${1:-}"
+if [ -z "$AIR" ]; then for d in ../newstail-app ../newstail-air; do [ -d "$d/src/components/air" ] && AIR="$d" && break; done; fi
+AIR="${AIR:-../newstail-app}"
 [ -d "$AIR/src/components/air" ] || { echo "Hittar inte appen i $AIR"; exit 1; }
 
 tmp=$(mktemp -d)

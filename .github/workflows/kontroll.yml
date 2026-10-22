@@ -1,4 +1,5 @@
-# Körs vid varje push till main: bygger sajten.
+# Körs vid varje pull request och varje ihopslagning i main: bygger sajten.
+# Spärren på main kräver att den här (Bygge) är grön innan något slås ihop.
 # Rött kryss på commiten i GitHub = något är trasigt. Claude kollar och rättar.
 name: Kontroll
 on:
