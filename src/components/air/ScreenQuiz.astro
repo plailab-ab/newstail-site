@@ -1,0 +1,76 @@
+---
+/**
+ * Quizen som i appen 2026-10-23: tre prickar, frågan stor, tre svar som pratbubblor,
+ * "Stäng" där Quiz-pillen satt. Klickbar: rätt svar blir vitt med en bock, fel svar skakar,
+ * domen "Rätt!"/"Inte riktigt" och förklaringen kommer under. Spelar själv när den syns.
+ */
+interface Props {
+  t: { close: string; q: string; options: string[]; answer: number; right: string; wrong: string; explain: string; kicker?: string };
+  company?: string;
+  avatar?: string;
+}
+const { t, company = "NORDVIK", avatar = "AL" } = Astro.props;
+---
+
+<div class="scr-quiz" data-quiz data-answer={t.answer}>
+  <div class="scr-hd">
+    <span class="scr-btn" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 19v3M8 22h8"></path></svg></span>
+    <span class="scr-company">{company}</span>
+    <span class="scr-avatar" aria-hidden="true">{avatar}</span>
+  </div>
+  <span class="scr-pill scr-pill-close">{t.close}</span>
+  <div class="scr-quiz-body">
+    <span class="scr-quiz-dots" aria-hidden="true"><i class="is-now"></i><i></i><i></i></span>
+    <strong class="scr-quiz-q">{t.q}</strong>
+    <div class="scr-quiz-opts">
+      {t.options.map((o, i) => (
+        <button type="button" class="scr-bubble scr-quiz-opt" data-i={i} style={`--i: ${i}`}>
+          <span>{o}</span>
+          <svg class="scr-quiz-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0b0f17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5L20 7"></path></svg>
+          <svg class="scr-quiz-x" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9ba7b7" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"></path></svg>
+        </button>
+      ))}
+    </div>
+    <div class="scr-quiz-verdict">
+      <strong data-verdict data-right={t.right} data-wrong={t.wrong}>{t.right}</strong>
+      <span>{t.explain}</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-quiz]").forEach((el) => {
+    const answer = Number(el.dataset.answer);
+    const opts = [...el.querySelectorAll<HTMLButtonElement>(".scr-quiz-opt")];
+    const verdict = el.querySelector<HTMLElement>("[data-verdict]")!;
+    const dot = el.querySelector<HTMLElement>(".scr-quiz-dots i")!;
+    let done = false;
+    let auto = 0;
+    const reset = () => {
+      done = false;
+      el.classList.remove("is-answered");
+      opts.forEach((o) => o.classList.remove("is-right", "is-wrong", "is-other"));
+      dot.className = "is-now";
+    };
+    const pick = (k: number) => {
+      if (done) return;
+      done = true;
+      clearTimeout(auto);
+      opts.forEach((o, j) => o.classList.add(j === answer ? "is-right" : j === k ? "is-wrong" : "is-other"));
+      verdict.textContent = k === answer ? verdict.dataset.right! : verdict.dataset.wrong!;
+      verdict.classList.toggle("is-wrong", k !== answer);
+      dot.className = k === answer ? "is-right" : "is-wrong";
+      el.classList.add("is-answered");
+      // Börjar om efter en stund så man kan prova igen.
+      auto = window.setTimeout(reset, 7000);
+    };
+    opts.forEach((o, k) => o.addEventListener("click", () => pick(k)));
+    // Spelar själv första gången den syns, om ingen hunnit klicka.
+    let played = false;
+    new IntersectionObserver(([e]) => {
+      if (!e!.isIntersecting || played) return;
+      played = true;
+      auto = window.setTimeout(() => pick(answer), 3200);
+    }, { threshold: 0.5 }).observe(el);
+  });
+</script>

@@ -1,20 +1,32 @@
 ---
-/** Publicera: "Vad vill du berätta?", det guldiga klotet (den egna rösten), Skriv istället. */
+/**
+ * Publicera som i appen 2026-10-23: tillbaka-pil, företagsnamnet, "i"; den gula etiketten
+ * NY INTERN NYHET, "Vad vill du berätta?", bärnstensklotet med mikrofonen, hinten,
+ * "Skriv istället" och raden Publicerat längst ner.
+ */
 interface Props {
-  t: { head: string; title: string; hint: string; write: string; published: string };
+  t: { head: string; eyebrow?: string; title: string; hint: string; write: string; published: string };
+  /** Antal publicerade i raden längst ner. */
+  count?: number;
 }
-const { t } = Astro.props;
+const { t, count = 12 } = Astro.props;
 ---
 
 <div class="scr-publish">
-  <div class="scr-head">
-    <span class="scr-round" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></span>
+  <span class="scr-room" aria-hidden="true"></span>
+  <div class="scr-hd">
+    <span class="scr-btn" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg></span>
     <span class="scr-company">{t.head}</span>
-    <span class="scr-round" aria-hidden="true">?</span>
+    <span class="scr-btn scr-btn-i" aria-hidden="true">i</span>
   </div>
-  <span class="scr-hello scr-hello-pub">{t.title}</span>
-  <img class="scr-pub-orb" src="/orbs/orb-72.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+  <span class="scr-eyebrow scr-eyebrow-inside">{t.eyebrow ?? "NY INTERN NYHET"}</span>
+  <span class="scr-h1 scr-h1-pub">{t.title}</span>
+  <div class="scr-pub-orb-wrap">
+    <span class="scr-pub-glow" aria-hidden="true"></span>
+    <img class="scr-pub-orb" src="/orbs/orb-72.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+    <svg class="scr-pub-mic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 19v3M8 22h8"></path></svg>
+  </div>
   <span class="scr-pub-hint">{t.hint}</span>
   <span class="scr-pill scr-pill-pub">{t.write}</span>
-  <span class="scr-pub-foot"><span>{t.published}</span><span>12 ›</span></span>
+  <span class="scr-pub-foot"><span>{t.published}</span><span>{count} <i>›</i></span></span>
 </div>

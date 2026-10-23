@@ -1,5 +1,9 @@
 ---
-/** Admin i en laptop, ritad i HTML med demoföretagets siffror (allt hänger ihop: 34 av 41). */
+/**
+ * Admin i en laptop, ritad i HTML som admin-webben 2026-10-23: menyn i tre grupper, Översikt
+ * med "Publicera internt", kortet HAR LYSSNAT · 7 DAGAR med veckans linje, kortet I DAG med
+ * klotet, och SENASTE INTERNA under linjen. Demoföretagets siffror (34 av 41).
+ */
 interface Props {
   lang: "sv" | "en";
   class?: string;
@@ -10,29 +14,44 @@ const { lang, class: cls = "", mode = "inside" } = Astro.props;
 const sv = lang === "sv";
 const t = sv
   ? {
-      nav: ["Översikt", "Internt", "Medarbetare", "Team", "Insikter", "Företag", "Konto"],
+      nav: [["Översikt", "Internt", "Insikter"], ["Medarbetare", "Team"], ["Företag", "Konto"]],
+      company: "FÖRETAG",
+      owner: "Anna Lindqvist · Ägare",
       title: "Översikt",
-      span: "7 dagar",
-      heard: "HAR LYSSNAT",
-      of: "av 41",
+      publish: "Publicera internt",
+      heard: "HAR LYSSNAT · 7 DAGAR",
+      of: "av 41 igång",
       week: "83 % · veckan innan 78 %",
-      recall: "MINDES RÄTT",
-      recallSub: "i veckans quiz",
+      remind: "7 har inte lyssnat på 7 dagar.",
+      remindBtn: "Påminn alla 7",
+      days: ["lör", "sön", "mån", "tis", "ons", "tors", "i dag"],
+      today: "I DAG",
+      hear: "Hör dagens sändning",
+      hearSub: "34 av 41 har lyssnat · sändningen byggd 05:00",
       section: mode === "inside" ? "SENASTE INTERNA" : "PER TEAM",
+      all: mode === "inside" ? "Alla inlägg" : "Alla team",
       label: "Översikt i Newstails admin med demoföretagets siffror",
     }
   : {
-      nav: ["Overview", "Internal", "People", "Teams", "Insights", "Company", "Account"],
+      nav: [["Overview", "Internal", "Insights"], ["People", "Teams"], ["Company", "Account"]],
+      company: "COMPANY",
+      owner: "Anna Lindqvist · Owner",
       title: "Overview",
-      span: "7 days",
-      heard: "HAVE LISTENED",
-      of: "of 41",
+      publish: "Publish internal",
+      heard: "HAVE LISTENED · 7 DAYS",
+      of: "of 41 active",
       week: "83 % · week before 78 %",
-      recall: "REMEMBERED",
-      recallSub: "in this week's quiz",
+      remind: "7 haven't listened in 7 days.",
+      remindBtn: "Remind all 7",
+      days: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "today"],
+      today: "TODAY",
+      hear: "Hear today's broadcast",
+      hearSub: "34 of 41 have listened · built at 05:00",
       section: mode === "inside" ? "LATEST INTERNAL" : "PER TEAM",
+      all: mode === "inside" ? "All posts" : "All teams",
       label: "Overview in the Newstail admin with the demo company's figures",
     };
+const counts = [29, 31, 33, 32, 35, 34, 34];
 const inside = sv
   ? [
       ["Vi förvärvar två fastigheter i Växjö", 38, 41],
@@ -56,6 +75,7 @@ const teams = sv
       ["Projects & development", 5, 6],
     ];
 const rows = (mode === "inside" ? inside : teams) as [string, number, number][];
+const heardOf = (a: number, b: number) => (sv ? `${a} av ${b} har hört` : `${a} of ${b} heard`);
 ---
 
 <div class={`dev alaptop ${cls}`} style="--w: 940; --h: 545" role="img" aria-label={t.label}>
@@ -66,19 +86,35 @@ const rows = (mode === "inside" ? inside : teams) as [string, number, number][];
         <div class="adm">
           <div class="adm-side">
             <div class="adm-brand"><span class="adm-n">n</span><span><b>Newstail</b><small>ADMIN</small></span></div>
-            <ul>{t.nav.map((n, i) => <li class={i === 0 ? "is-on" : ""}>{n}</li>)}</ul>
+            <div class="adm-nav">
+              {t.nav.map((g, gi) => (
+                <ul>{g.map((n, i) => <li class={gi === 0 && i === 0 ? "is-on" : ""}>{n}</li>)}</ul>
+              ))}
+            </div>
+            <div class="adm-foot-co">
+              <small>{t.company}</small>
+              <b>Nordvik</b>
+              <span class="adm-owner"><i>AL</i>{t.owner}</span>
+            </div>
           </div>
-          <div class="adm-title"><b>{t.title}</b><span>{t.span}</span></div>
+          <div class="adm-top"><span>Svenska</span><span class="adm-out">{sv ? "Logga ut" : "Log out"}</span></div>
+          <div class="adm-title"><b>{t.title}</b><i>?</i><span class="adm-publish">{t.publish}</span></div>
           <div class="adm-card adm-card-1">
             <small>{t.heard}</small>
             <span class="adm-big"><b>34</b><span>{t.of}</span></span>
-            <span class="adm-bar"><span style="width: 83%"></span></span>
-            <small class="adm-foot">{t.week}</small>
+            <span class="adm-sub">{t.week}</span>
+            <span class="adm-remind"><span>{t.remind}</span><span class="adm-remind-btn">{t.remindBtn}</span></span>
+            <svg class="adm-line" viewBox="0 0 440 60" preserveAspectRatio="none" aria-hidden="true">
+              <polyline fill="none" stroke="rgba(236,239,244,.35)" stroke-width="1" points={counts.map((c, i) => `${20 + i * 66.6},${52 - (c - 26) * 4.5}`).join(" ")}></polyline>
+              {counts.map((c, i) => <circle cx={20 + i * 66.6} cy={52 - (c - 26) * 4.5} r={i === 6 ? 4 : 2.5} fill={i === 6 ? "#fff" : "rgba(236,239,244,.7)"} />)}
+            </svg>
+            <span class="adm-days">{t.days.map((d, i) => <span class={i === 6 ? "is-on" : ""}><b>{counts[i]}</b>{d}</span>)}</span>
           </div>
           <div class="adm-card adm-card-2">
-            <small>{t.recall}</small>
-            <span class="adm-big"><b>80</b><span>%</span></span>
-            <small class="adm-foot">{t.recallSub}</small>
+            <small>{t.today}</small>
+            <span class="adm-orb"><img src="/orbs/orb-200.webp" alt="" width="120" height="120" loading="lazy" decoding="async" /><svg width="22" height="22" viewBox="0 0 24 24" fill="#eceff4" aria-hidden="true"><path d="M8 5v14l11-7z"></path></svg></span>
+            <span class="adm-hear">{t.hear}</span>
+            <span class="adm-hear-sub">{t.hearSub}</span>
           </div>
           <div class="adm-rows">
             <small>{t.section}</small>
@@ -87,10 +123,11 @@ const rows = (mode === "inside" ? inside : teams) as [string, number, number][];
                 <span class="adm-row">
                   <span>{name}</span>
                   <span class="adm-bar"><span style={`width: ${Math.round((a / b) * 100)}%`}></span></span>
-                  <span class="adm-num">{sv ? `${a} av ${b}` : `${a} of ${b}`}</span>
+                  <span class="adm-num">{heardOf(a, b)}</span>
                 </span>
               ))}
             </div>
+            <span class="adm-all">{t.all}</span>
           </div>
         </div>
       </div>

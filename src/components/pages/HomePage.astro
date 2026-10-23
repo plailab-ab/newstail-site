@@ -5,6 +5,7 @@ import ScreenPlayer from "../air/ScreenPlayer.astro";
 import ScreenHome from "../air/ScreenHome.astro";
 import ScreenPublish from "../air/ScreenPublish.astro";
 import ScreenRecap from "../air/ScreenRecap.astro";
+import ScreenQuiz from "../air/ScreenQuiz.astro";
 import AdminLaptop from "../air/AdminLaptop.astro";
 import FaqList from "../FaqList.astro";
 import { faqFor } from "../../content/faq";
@@ -22,9 +23,9 @@ const REST = "0.5,0.5,0.1,0";
 
 const c = sv
   ? {
-      h1: "En nyhetsvärd för varje medarbetare.",
-      lead: "Nå de som aldrig öppnar intranätet. Och se att det kom fram.",
-      chips: ["Internt", "Branschen", "Det man själv följer"],
+      h1: "En egen nyhetssändning för varje medarbetare.",
+      lead: "Internt, branschen och egna intressen – uppläst på det språk var och en väljer. Och ni ser att det nådde fram.",
+      chips: ["Internt", "Branschen", "Intressen"],
       heroItems: [
         { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", inside: true },
         { topic: "RÄNTOR", title: "Ränteläget: marknaden räknar med sänkning före jul" },
@@ -40,15 +41,15 @@ const c = sv
       ],
       bcTitle: "Dra upp. Lyssna.",
       bcLead: "En egen sändning, byggd på din roll och det du följer.",
-      bcPoints: ["Tre till tio minuter", "Håll klotet – värden berättar mer", "Varje dag något nytt utanför dina ämnen"],
+      bcPoints: ["Tre till tio minuter", "Håll klotet och fördjupa dig", "Svep för nästa, tryck för paus"],
       inTitle: "Säg det en gång. Vi läser upp det.",
       inLead: "Tala in eller skriv. Det ligger först i allas sändning – och ni ser hur många som hört det.",
-      inTeams: ["Alla", "Förvaltning Jönköping", "Förvaltning Växjö"],
-      inNote: "Bara de ni utser kan publicera. Missar någon det, kommer det i fredagsmejlet.",
+      inTeams: ["Alla", "Ledning", "Sälj", "Produktion"],
       inFloat: "Vi förvärvar två fastigheter i centrala Växjö",
       inHeard: "har hört det",
       recTitle: "Gå djupare. Minns mer.",
       recLead: "Recap med källor, skicka vidare till en kollega och ett kort quiz.",
+      recTabs: ["Recap", "Quiz"],
       leadTitle: "Se att det når fram.",
       leadLead: "Per team. Aldrig per person.",
       leadLink: "Vad ledningen ser",
@@ -58,9 +59,9 @@ const c = sv
       endPrice: "Se priser",
     }
   : {
-      h1: "A news host for every employee.",
-      lead: "Reach the people who never open the intranet. And see that it got through.",
-      chips: ["Internal", "The industry", "What you follow"],
+      h1: "A personal news broadcast for every employee.",
+      lead: "Internal news, the industry and personal interests – read out in the language each person chooses. And you see that it got through.",
+      chips: ["Internal", "Industry", "Interests"],
       heroItems: [
         { topic: "INTERNAL", title: "The 2027 rent negotiation is done", inside: true },
         { topic: "RATES", title: "Rates: the market expects a cut before Christmas" },
@@ -76,15 +77,15 @@ const c = sv
       ],
       bcTitle: "Pull up. Listen.",
       bcLead: "Your own broadcast, built on your role and what you follow.",
-      bcPoints: ["Three to ten minutes", "Hold the orb – the host tells you more", "Something new every day, outside your topics"],
+      bcPoints: ["Three to ten minutes", "Hold the orb to go deeper", "Swipe for next, tap to pause"],
       inTitle: "Say it once. We read it out.",
       inLead: "Record or type it. It comes first in everyone's broadcast – and you see how many heard it.",
-      inTeams: ["Everyone", "Property mgmt Jönköping", "Property mgmt Växjö"],
-      inNote: "Only the people you choose can publish. Anyone who misses it gets it in the Friday email.",
+      inTeams: ["Everyone", "Management", "Sales", "Production"],
       inFloat: "We are acquiring two properties in central Växjö",
       inHeard: "have heard it",
       recTitle: "Go deeper. Remember more.",
       recLead: "A recap with sources, send it on to a colleague, and a short quiz.",
+      recTabs: ["Recap", "Quiz"],
       leadTitle: "See that it gets through.",
       leadLead: "Per team. Never per person.",
       leadLink: "What management sees",
@@ -96,58 +97,65 @@ const c = sv
 
 const player = sv
   ? [
-      { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist", hue: 72 },
-      { topic: "RÄNTOR", title: "Ränteläget: marknaden räknar med sänkning före jul", src: "3 källor", hue: 150 },
-      { topic: "LOKALMARKNADEN", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "2 källor", hue: 200 },
-      { topic: "HV71", title: "HV71 vände och vann borta i Linköping", src: "1 källa", hue: 350 },
+      { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist", hue: 72, inside: true },
+      { topic: "RÄNTOR", title: "Ränteläget: marknaden räknar med sänkning före jul", src: "Dagens industri · SvD", hue: 150 },
+      { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsvärlden", hue: 200 },
+      { topic: "HV71", title: "HV71 vände och vann borta i Linköping", src: "Jönköpings-Posten", hue: 350 },
     ]
   : [
-      { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist", hue: 72 },
-      { topic: "RATES", title: "Rates: the market expects a cut before Christmas", src: "3 sources", hue: 150 },
-      { topic: "OFFICE MARKET", title: "Fewer empty offices in Småland", src: "2 sources", hue: 200 },
-      { topic: "HOCKEY", title: "HV71 came back to win in Linköping", src: "1 source", hue: 350 },
+      { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist", hue: 72, inside: true },
+      { topic: "RATES", title: "Rates: the market expects a cut before Christmas", src: "Dagens industri · SvD", hue: 150 },
+      { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsvärlden", hue: 200 },
+      { topic: "HOCKEY", title: "HV71 came back to win in Linköping", src: "Jönköpings-Posten", hue: 350 },
     ];
 const homeItems = sv
   ? [
       { label: "Internt", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
-      { label: "Räntor", kind: "industry" as const, title: "Sänkning före jul?" },
-      { label: "Lokalmarknaden", kind: "industry" as const, title: "Vakanserna minskar i Småland" },
-      { label: "HV71", kind: "own" as const, title: "Vände och vann i Linköping" },
+      { label: "Bransch", kind: "industry" as const, title: "Hyror upp 3,2 % i Småland" },
+      { label: "Räntor", kind: "own" as const, title: "Marknaden räknar med sänkning före jul" },
+      { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar i Småland" },
+      { label: "Något nytt", kind: "surprise" as const, title: "Nya energikrav från årsskiftet" },
     ]
   : [
       { label: "Internal", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
-      { label: "Rates", kind: "industry" as const, title: "A cut before Christmas?" },
-      { label: "Office market", kind: "industry" as const, title: "Fewer empty offices" },
-      { label: "Hockey", kind: "own" as const, title: "HV71 win in Linköping" },
+      { label: "Industry", kind: "industry" as const, title: "Rents up 3.2 % in Småland" },
+      { label: "Rates", kind: "own" as const, title: "The market expects a cut before Christmas" },
+      { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
+      { label: "Something new", kind: "surprise" as const, title: "New energy rules from the new year" },
     ];
 const recap = sv
   ? {
-      date: "Måndag 5 oktober",
-      sub: "7 punkter · 6 min",
-      send: "Skicka till kollega",
+      date: "IDAG",
+      send: "Skicka vidare",
       share: "Dela",
       items: [
-        { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Från Anna" },
-        { topic: "RÄNTOR", title: "Ränteläget: marknaden räknar med sänkning före jul", src: "3 källor" },
-        { topic: "LOKALMARKNADEN", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "2 källor" },
+        { title: "Hyresförhandlingen för 2027 är klar", text: "Hyrorna höjs med 3,1 % i snitt från januari. Förvaltarna får underlaget i veckan.", src: "", inside: true },
+        { title: "Marknaden räknar med sänkning före jul", text: "Bankerna räknar med en sänkning men inte hur stor. Det påverkar värderingarna inför bokslutet.", src: "Dagens industri" },
       ],
-      quiz: { kicker: "Quiz · 1 av 3", q: "Hur mycket höjs hyrorna i snitt?", options: ["2,4 %", "3,1 %", "4,0 %"], answer: 1 },
+      follow: [
+        { topic: "Energikrav", why: "Ur det du hört" },
+        { topic: "Bostadsmarknaden", why: "Flera kollegor följer" },
+      ],
     }
   : {
-      date: "Monday 5 October",
-      sub: "7 stories · 6 min",
-      send: "Send to colleague",
+      date: "TODAY",
+      send: "Send on",
       share: "Share",
       items: [
-        { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "From Anna" },
-        { topic: "RATES", title: "Rates: the market expects a cut before Christmas", src: "3 sources" },
-        { topic: "OFFICE MARKET", title: "Fewer empty offices in Småland", src: "2 sources" },
+        { title: "The 2027 rent negotiation is done", text: "Rents rise 3.1 % on average from January. Property managers get the material this week.", src: "", inside: true },
+        { title: "The market expects a cut before Christmas", text: "Banks expect a cut but not how big. It affects valuations ahead of year-end.", src: "Dagens industri" },
       ],
-      quiz: { kicker: "Quiz · 1 of 3", q: "How much do rents rise on average?", options: ["2.4 %", "3.1 %", "4.0 %"], answer: 1 },
+      follow: [
+        { topic: "Energy rules", why: "From what you heard" },
+        { topic: "Housing market", why: "Several colleagues follow" },
+      ],
     };
+const quiz = sv
+  ? { close: "Stäng", q: "Hur mycket höjs hyrorna i snitt 2027?", options: ["2,4 %", "3,1 %", "4,0 %"], answer: 1, right: "Rätt!", wrong: "Inte riktigt", explain: "Förhandlingen landade på 3,1 % i snitt från januari – det var dagens interna nyhet." }
+  : { close: "Close", q: "How much do rents rise on average in 2027?", options: ["2.4 %", "3.1 %", "4.0 %"], answer: 1, right: "Correct!", wrong: "Not quite", explain: "The negotiation landed on 3.1 % on average from January – that was today's internal news." };
 const publish = sv
-  ? { head: "PUBLICERA", title: "Vad vill du berätta?", hint: "Tryck på klotet och berätta.", write: "Skriv istället", published: "Publicerat" }
-  : { head: "PUBLISH", title: "What do you want to say?", hint: "Tap the orb and talk.", write: "Type instead", published: "Published" };
+  ? { head: "NORDVIK", eyebrow: "NY INTERN NYHET", title: "Vad vill du berätta?", hint: "Tryck på klotet för att börja spela in.", write: "Skriv istället", published: "Publicerat" }
+  : { head: "NORDVIK", eyebrow: "NEW INTERNAL NEWS", title: "What do you want to say?", hint: "Tap the orb to start recording.", write: "Type instead", published: "Published" };
 const faq = faqFor("home", lang);
 ---
 
@@ -164,18 +172,13 @@ const faq = faqFor("home", lang);
       </div>
       <div class="actions">
         <a class="pill pill-primary pill-lg" href={START_URL}>{ui.start}</a>
-        <button class="pill pill-secondary pill-lg" type="button" data-play-proxy>
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z"></path></svg>
-          <span data-play-proxy-label>{ui.listen}</span>
-        </button>
+        <a class="pill pill-secondary pill-lg" href={R.how}>{ui.nav.how}</a>
       </div>
     </div>
     <div class="split-stage stage-hero">
       <div class="orb-anchor" data-orb-anchor></div>
-      <button class="orb-play play-sample" type="button" data-src={`/audio/sample-${lang}.mp3`} data-label={ui.listen} data-playing={ui.listening} aria-pressed="false" aria-label={ui.listen}>
-        <span class="orb-play-circle"><span class="play-icon" aria-hidden="true"></span></span>
-        <span class="play-label">{ui.listen}</span>
-      </button>
+      <span class="hero-ring" aria-hidden="true"></span>
+      <span class="hero-ring hero-ring-arc" aria-hidden="true"></span>
       <div class="air-dots" aria-hidden="true">
         {c.heroItems.map((_, i) => <span class={i === 0 ? "is-on" : ""} />)}
       </div>
@@ -232,7 +235,7 @@ const faq = faqFor("home", lang);
         <ScreenPlayer items={player} start={1} done={sv ? "Avsluta" : "End"} />
       </Phone>
       <Phone back label={sv ? "Hemvyn i Newstail-appen" : "The Newstail home screen"}>
-        <ScreenHome company="NORDVIK" greeting={sv ? "Hej Anna." : "Hi Anna."} date={sv ? "Måndag 5 oktober" : "Monday 5 October"} items={homeItems} />
+        <ScreenHome company="NORDVIK" greeting={sv ? "Hej Anna." : "Hi Anna."} date={sv ? "Torsdag 23 oktober" : "Thursday 23 October"} items={homeItems} lit={4} />
       </Phone>
     </div>
   </div>
@@ -247,13 +250,12 @@ const faq = faqFor("home", lang);
       <div class="chips" aria-hidden="true">
         {c.inTeams.map((t, i) => <span class={`chip${i === 0 ? " chip-on" : ""}`}>{t}</span>)}
       </div>
-      <p class="note">{c.inNote}</p>
     </div>
     <div class="split-stage stage-device stage-glow" style="--glow-hue: 80">
       <Phone label={sv ? "Publicera i Newstail-appen" : "Publishing in the Newstail app"}>
         <ScreenPublish t={publish} />
       </Phone>
-      <div class="floater hide-m" style="left: 0; top: 34%">{c.inFloat}</div>
+      <div class="floater floater-inside hide-m" style="left: -4%; top: 30%"><small>{sv ? "Internt" : "Internal"}</small>{c.inFloat}</div>
       <div class="floater hide-m" style="right: 4%; bottom: 18%"><b>38 {sv ? "av" : "of"} 41</b><small>{c.inHeard}</small></div>
     </div>
   </div>
@@ -266,10 +268,16 @@ const faq = faqFor("home", lang);
       <h2 class="title-xl">{c.recTitle}</h2>
       <p class="lead">{c.recLead}</p>
     </div>
-    <div class="split-stage stage-device">
-      <Phone label={sv ? "Recapen i Newstail-appen" : "The recap in the Newstail app"}>
-        <ScreenRecap {...recap} />
+    <div class="split-stage stage-device stage-flip" data-flip>
+      <Phone label={sv ? "Recapen och quizen i Newstail-appen" : "The recap and quiz in the Newstail app"}>
+        <div class="scr-flip">
+          <ScreenRecap lang={lang} {...recap} />
+          <ScreenQuiz t={quiz} />
+        </div>
       </Phone>
+      <div class="flip-tabs" role="tablist">
+        {c.recTabs.map((t, i) => <button type="button" class={`flip-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-flip-tab={i}>{t}</button>)}
+      </div>
     </div>
   </div>
 </section>
@@ -345,13 +353,18 @@ const faq = faqFor("home", lang);
       hero.classList.toggle("is-inside", !!x.inside);
       hero.dataset.hue = String(HUES[k % HUES.length]);
       w.__orbKick = (w.__orbKick ?? 0) + 1;
+      // Progressringen börjar om med varje punkt, som i appen.
+      hero.classList.remove("is-running");
+      void hero.offsetWidth;
+      hero.classList.add("is-running");
     };
     const start = () => {
       if (timer || reduced) return;
+      hero.classList.add("is-running");
       timer = window.setInterval(() => {
         i = (i + 1) % items.length;
         show(i);
-      }, 3400);
+      }, 4600);
     };
     const stop = () => {
       clearInterval(timer);
@@ -400,70 +413,34 @@ const faq = faqFor("home", lang);
     );
   }
 
-  // "Lyssna 30 s": spelar röstprovet och skickar röstens styrka till klotet (window.__voiceAmp).
-  const btn = document.querySelector<HTMLButtonElement>(".play-sample");
-  const proxy = document.querySelector<HTMLButtonElement>("[data-play-proxy]");
-  const proxyLabel = document.querySelector<HTMLElement>("[data-play-proxy-label]");
-  if (btn) {
-    let audio: HTMLAudioElement | null = null;
-    let ctx: AudioContext | null = null;
-    let analyser: AnalyserNode | null = null;
-    let raf = 0;
-    const label = btn.querySelector(".play-label")!;
-    const setPlaying = (on: boolean) => {
-      btn.setAttribute("aria-pressed", on ? "true" : "false");
-      btn.classList.toggle("is-playing", on);
-      label.textContent = on ? btn.dataset.playing! : btn.dataset.label!;
-      if (proxyLabel) proxyLabel.textContent = on ? btn.dataset.playing! : btn.dataset.label!;
-      if (!on) {
-        cancelAnimationFrame(raf);
-        w.__voiceAmp = 0;
-      }
+  // Recap och quiz i samma telefon: flikarna byter, och den växlar själv tills någon klickar.
+  document.querySelectorAll<HTMLElement>("[data-flip]").forEach((stage) => {
+    const flip = stage.querySelector<HTMLElement>(".scr-flip")!;
+    const tabs = [...stage.querySelectorAll<HTMLButtonElement>("[data-flip-tab]")];
+    let i = 0;
+    let timer = 0;
+    const show = (k: number) => {
+      i = k;
+      flip.classList.toggle("is-quiz", k === 1);
+      tabs.forEach((t, j) => {
+        t.classList.toggle("is-on", j === k);
+        t.setAttribute("aria-selected", j === k ? "true" : "false");
+      });
     };
-    const tick = () => {
-      if (!analyser) return;
-      const buf = new Uint8Array(analyser.fftSize);
-      analyser.getByteTimeDomainData(buf);
-      let sum = 0;
-      for (let k = 0; k < buf.length; k++) {
-        const v = (buf[k]! - 128) / 128;
-        sum += v * v;
-      }
-      w.__voiceAmp = Math.min(1, Math.sqrt(sum / buf.length) * 4);
-      raf = requestAnimationFrame(tick);
+    const start = () => {
+      if (timer || reduced) return;
+      timer = window.setInterval(() => show((i + 1) % 2), 8000);
     };
-    const toggle = async () => {
-      if (!audio) {
-        audio = new Audio(btn.dataset.src!);
-        audio.preload = "auto";
-        audio.addEventListener("ended", () => setPlaying(false));
-        audio.addEventListener("pause", () => setPlaying(false));
-        audio.addEventListener("play", () => setPlaying(true));
-      }
-      if (!audio.paused) {
-        audio.pause();
-        return;
-      }
-      try {
-        if (!ctx) {
-          ctx = new AudioContext();
-          const src = ctx.createMediaElementSource(audio);
-          analyser = ctx.createAnalyser();
-          analyser.fftSize = 512;
-          src.connect(analyser);
-          analyser.connect(ctx.destination);
-        }
-        await ctx.resume();
-      } catch {
-        analyser = null;
-      }
-      await audio.play();
-      if (analyser) tick();
+    const stop = () => {
+      clearInterval(timer);
+      timer = 0;
     };
-    btn.addEventListener("click", toggle);
-    proxy?.addEventListener("click", () => {
-      document.querySelector(".hero")?.scrollIntoView({ behavior: "smooth" });
-      toggle();
-    });
-  }
+    tabs.forEach((t, k) =>
+      t.addEventListener("click", () => {
+        stop();
+        show(k);
+      }),
+    );
+    new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(stage);
+  });
 </script>
