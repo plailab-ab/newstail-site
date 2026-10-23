@@ -165,7 +165,7 @@ const player = sv
     ];
 const recap = sv
   ? {
-      date: "Måndag 5 oktober",
+      date: "Idag",
       sub: "7 punkter · 6 min",
       send: "Skicka till kollega",
       share: "Dela",
@@ -176,7 +176,7 @@ const recap = sv
       sheet: { title: "Skicka till", people: ["Johan", "Sara", "Elif", "Mateusz"], note: "Värt att ha med sig inför budgetmötet.", button: "Skicka", foot: "Johan hör det i sin nästa sändning." },
     }
   : {
-      date: "Monday 5 October",
+      date: "Today",
       sub: "7 stories · 6 min",
       send: "Send to colleague",
       share: "Share",
@@ -187,8 +187,8 @@ const recap = sv
       sheet: { title: "Send to", people: ["Johan", "Sara", "Elif", "Mateusz"], note: "Worth having before the budget meeting.", button: "Send", foot: "Johan hears it in his next broadcast." },
     };
 const ikapp = sv
-  ? { before: "Sista nyheten slutar …", done: "Du är ikapp.", streak: "4 dagar i rad", recap: "Recap", quiz: "Quiz" }
-  : { before: "The last story ends …", done: "You're caught up.", streak: "4 days in a row", recap: "Recap", quiz: "Quiz" };
+  ? { before: "Sista nyheten slutar …", done: "Du är ikapp.", streak: "Dra för att höra den igen.", recap: "Recap", quiz: "Quiz" }
+  : { before: "The last story ends …", done: "You're caught up.", streak: "Pull up to hear it again.", recap: "Recap", quiz: "Quiz" };
 const mail = sv
   ? { from: "Newstail", when: "fre 15:00", subject: "Det här missade du", company: "NORDVIK", title: "Det här missade du", sub: "Två interna budskap från veckan.", items: ["Hyresförhandlingen för 2027 är klar", "Hyresgästdag i Kvarteret Linden på torsdag"], tag: "INTERNT", button: "Lyssna i appen" }
   : { from: "Newstail", when: "Fri 15:00", subject: "What you missed", company: "NORDVIK", title: "What you missed", sub: "Two internal messages from this week.", items: ["The 2027 rent negotiation is done", "Tenant day at Kvarteret Linden on Thursday"], tag: "INTERNAL", button: "Listen in the app" };
@@ -273,7 +273,7 @@ const mail = sv
     </div>
     <div class="split-stage stage-device">
       <Phone label={sv ? "Recapen med Skicka till kollega" : "The recap with Send to colleague"}>
-        <ScreenRecap {...recap} />
+        <ScreenRecap lang={lang} {...recap} />
       </Phone>
     </div>
   </div>

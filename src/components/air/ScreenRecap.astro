@@ -1,67 +1,90 @@
 ---
-/** Recapen: dagens punkter med källor och Skicka till kollega. Valfritt bladet "Skicka till". */
-export type RecapItem = { topic: string; title: string; text?: string; src: string };
+/**
+ * Recapen som i appen 2026-10-23: samma huvud som hemvyn, Recap-pillen har lyft till "Stäng",
+ * ingen ruta – texten ligger fritt i rymden. Per nyhet: rubrik, sammanfattning och en rad
+ * gråa textlänkar (källan, Hör igen, Dela, Skicka vidare). Interna nyheter har en gul prick,
+ * "Internt" och "Tack". Sist "Att följa" med chips. Valfritt: "Skicka vidare" utfälld under
+ * första nyheten (kollegchips, rad, Skicka) – i stället för det gamla bladet.
+ */
+export type RecapItem = { topic?: string; title: string; text?: string; src: string; inside?: boolean };
 interface Props {
+  lang?: "sv" | "en";
+  /** Dagens etikett, t.ex. "IDAG". */
   date: string;
-  sub: string;
+  sub?: string;
   items: RecapItem[];
   send: string;
   share: string;
+  company?: string;
+  avatar?: string;
+  follow?: { topic: string; why?: string }[];
   sheet?: { title: string; people: string[]; note: string; button: string; foot: string };
-  quiz?: { kicker: string; q: string; options: string[]; answer: number };
+  /** Behålls för bakåtkompatibilitet – quizen är en egen skärm (ScreenQuiz). */
+  quiz?: unknown;
 }
-const { date, sub, items, send, share, sheet, quiz } = Astro.props;
+const { lang = "sv", date, items, send, share, company = "NORDVIK", avatar = "AL", follow = [], sheet } = Astro.props;
+const sv = lang === "sv";
+const L = sv
+  ? { close: "Stäng", hear: "Hör igen", inside: "Internt", thanks: "Tack", follow: "ATT FÖLJA", cancel: "Avbryt" }
+  : { close: "Close", hear: "Hear again", inside: "Internal", thanks: "Thanks", follow: "TO FOLLOW", cancel: "Cancel" };
 ---
 
 <div class="scr-recap">
-  <div class="scr-head">
-    <span class="scr-round" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"></path></svg></span>
-    <span class="scr-company">RECAP</span>
-    <span class="scr-round" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M5 13v7h14v-7"></path></svg></span>
+  <div class="scr-hd">
+    <span class="scr-btn" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 19v3M8 22h8"></path></svg></span>
+    <span class="scr-company">{company}</span>
+    <span class="scr-avatar" aria-hidden="true">{avatar}</span>
   </div>
-  <div class="scr-recap-top">
-    <span class="scr-recap-date">{date}</span>
-    <span class="scr-recap-sub">{sub}</span>
-  </div>
-  <div class="scr-recap-list">
+  <span class="scr-pill scr-pill-close">{L.close}</span>
+  <div class="scr-recap-body">
+    <span class="scr-eyebrow scr-eyebrow-day">{date}</span>
     {
       items.map((x, i) => (
         <div class={`scr-recap-item${sheet && i > 0 ? " is-dim" : ""}`}>
-          <small>{x.topic}</small>
           <strong>{x.title}</strong>
           {x.text && <p>{x.text}</p>}
-          <span class="scr-chips">
-            <span>{x.src}</span>
-            <span class={sheet && i === 0 ? "is-on" : ""}>{send}</span>
-            {!sheet && <span>{share}</span>}
+          <span class="scr-acts">
+            {x.inside ? (
+              <>
+                <span><i class="scr-dot-inside" />{L.inside}</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 12 5.3 5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"></path></svg>{L.thanks}</span>
+              </>
+            ) : (
+              <>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>{x.src}</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l13-8z"></path></svg>{L.hear}</span>
+                <span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"></path></svg>{share}</span>
+              </>
+            )}
+            <span class={sheet && i === 0 ? "is-on" : ""}><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4z"></path><path d="M22 2 11 13"></path></svg>{send}</span>
           </span>
+          {sheet && i === 0 && (
+            <div class="scr-forward">
+              <span class="scr-people">
+                {sheet.people.map((p, k) => <span class={k === 0 ? "is-on" : ""}>{p}</span>)}
+              </span>
+              <span class="scr-line">{sheet.note}</span>
+              <span class="scr-forward-row"><span class="scr-send">{sheet.button}</span><span class="scr-cancel">{L.cancel}</span></span>
+              <small>{sheet.foot}</small>
+            </div>
+          )}
         </div>
       ))
     }
+    {
+      follow.length > 0 && !sheet && (
+        <div class="scr-follow">
+          <span class="scr-eyebrow">{L.follow}</span>
+          <span class="scr-chiprow">
+            {follow.map((f) => (
+              <span class="scr-chip">
+                + {f.topic}
+                {f.why && <em>· {f.why}</em>}
+              </span>
+            ))}
+          </span>
+        </div>
+      )
+    }
   </div>
-  {
-    sheet && (
-      <div class="scr-sheet">
-        <span class="scr-grab" />
-        <strong>{sheet.title}</strong>
-        <span class="scr-people">
-          {sheet.people.map((p, i) => <span class={i === 0 ? "is-on" : ""}>{p}</span>)}
-        </span>
-        <span class="scr-note">{sheet.note}</span>
-        <span class="scr-send">{sheet.button}</span>
-        <small>{sheet.foot}</small>
-      </div>
-    )
-  }
-  {
-    quiz && (
-      <div class="scr-quiz">
-        <small>{quiz.kicker}</small>
-        <strong>{quiz.q}</strong>
-        <span class="scr-quiz-opts">
-          {quiz.options.map((o, i) => <span class={i === quiz.answer ? "is-on" : ""}>{o}</span>)}
-        </span>
-      </div>
-    )
-  }
 </div>

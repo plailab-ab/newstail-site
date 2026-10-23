@@ -1,6 +1,10 @@
 ---
-/** Hemvyn: hälsning, rubriker med färgad etikett, veckans himmel och klotet som vilar nere. */
-export type HomeItem = { label: string; kind: "inside" | "industry" | "own"; title: string };
+/**
+ * Hemvyn som i appen 2026-10-23: mik + företag + avatar, hälsning, datum, Recap-pillen,
+ * pratbubblorna i två kolumner som möts i mitten, veckans himmel (Karlavagnen) till vänster,
+ * pilen och det lilla klotet i vilan längst ner.
+ */
+export type HomeItem = { label: string; kind: "inside" | "industry" | "own" | "surprise"; title: string };
 interface Props {
   company: string;
   greeting: string;
@@ -9,19 +13,33 @@ interface Props {
   /** Tända dagar i veckans himmel (0–7). */
   lit?: number;
   recap?: string;
+  /** Initialer i avataren. */
+  avatar?: string;
 }
-const { company, greeting, date, items, lit = 3, recap = "Recap" } = Astro.props;
+const { company, greeting, date, items, lit = 3, recap = "Recap", avatar = "AL" } = Astro.props;
+/* Karlavagnen (samma form som appens starfield.ts), i rutan 50,534 → 216×101. */
+const shape: [number, number][] = [
+  [0, 0],
+  [0.2, 0.12],
+  [0.4, 0.32],
+  [0.6, 0.44],
+  [0.62, 0.92],
+  [0.95, 1],
+  [1, 0.5],
+];
+const stars = shape.map(([x, y], i) => ({ x: 50 + x * 216, y: 534 + y * 101, lit: i < lit, today: i === lit }));
 ---
 
 <div class="scr-home">
-  <div class="scr-head">
-    <span class="scr-round" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3"></path></svg></span>
+  <span class="scr-horizon" aria-hidden="true"></span>
+  <div class="scr-hd">
+    <span class="scr-btn" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 19v3M8 22h8"></path></svg></span>
     <span class="scr-company">{company}</span>
-    <span class="scr-avatar" aria-hidden="true">AL</span>
+    <span class="scr-avatar" aria-hidden="true">{avatar}</span>
   </div>
-  <span class="scr-hello">{greeting}</span>
+  <span class="scr-h1">{greeting}</span>
   <span class="scr-date">{date}</span>
-  <span class="scr-pill">{recap}</span>
+  <span class="scr-pill scr-pill-recap">{recap}</span>
   <div class="scr-bubbles">
     {
       items.map((x, i) => (
@@ -32,8 +50,17 @@ const { company, greeting, date, items, lit = 3, recap = "Recap" } = Astro.props
       ))
     }
   </div>
-  <div class="scr-week" aria-hidden="true">
-    {Array.from({ length: 7 }, (_, i) => <span class={i < lit ? "is-lit" : ""} />)}
-  </div>
+  <svg class="scr-sky" viewBox="0 0 360 780" width="360" height="780" aria-hidden="true">
+    {stars.map((s) => (
+      <>
+        {s.lit && <circle cx={s.x} cy={s.y} r="11" fill="url(#sky-halo)" />}
+        <circle cx={s.x} cy={s.y} r={s.lit ? 2.6 : s.today ? 2.2 : 1.6} fill="#fff" opacity={s.lit ? 1 : s.today ? 0.6 : 0.4} />
+      </>
+    ))}
+    <defs>
+      <radialGradient id="sky-halo"><stop offset="0" stop-color="#fff" stop-opacity="0.45"></stop><stop offset="1" stop-color="#fff" stop-opacity="0"></stop></radialGradient>
+    </defs>
+  </svg>
+  <span class="scr-nudge" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ba7b7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"></path></svg></span>
   <img class="scr-rest" src="/orbs/orb-262.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
 </div>
