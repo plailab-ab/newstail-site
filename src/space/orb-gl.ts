@@ -259,6 +259,23 @@ export class OrbGL {
     this.gl.viewport(0, 0, c.width, c.height);
   }
 
+  /**
+   * Släpper GPU-kontexten när vyn lämnas (designaudit 2026-10-22, B14) – iOS har få att ge. Bara
+   * om duken faktiskt är borta ur sidan: en effekt som körs om (React i utvecklingsläge) får inte
+   * lämna kvar en död kontext på samma duk.
+   */
+  dispose() {
+    const gl = this.gl;
+    window.setTimeout(() => {
+      try {
+        if ((gl.canvas as HTMLCanvasElement).isConnected) return;
+        gl.getExtension("WEBGL_lose_context")?.loseContext();
+      } catch {
+        /* redan borta */
+      }
+    }, 0);
+  }
+
   clear() {
     const gl = this.gl;
     gl.disable(gl.SCISSOR_TEST);
