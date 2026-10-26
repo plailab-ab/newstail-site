@@ -136,11 +136,11 @@ export const FAQ: Faq[] = [
     tags: ["pricing"],
     sv: {
       q: "Finns det ett minsta antal?",
-      a: "Tio användare ingår – 1 790 kr i månaden. Är ni fler betalar ni 179 kr per användare.",
+      a: "Ja, minst tio användare – 1 790 kr i månaden, alltså 21 480 kr om året. Är ni fler betalar ni 179 kr per användare och månad.",
     },
     en: {
       q: "Is there a minimum?",
-      a: "Ten users are included – €170 a month. Beyond that it's €17 per user.",
+      a: "Yes, ten users minimum – €170 a month, which is €2,040 a year. Beyond that it's €17 per user and month.",
     },
   },
   {
@@ -267,15 +267,15 @@ export const FAQ: Faq[] = [
     slug: { sv: "behover-it-gora-nagot", en: "does-it-need-to-do-anything" },
     cat: "it",
     tags: ["pricing"],
-    sv: { q: "Behöver IT göra något?", a: "Nej. Ni registrerar företaget med er jobbmejl, och kollegorna går med med sin. Inga integrationer." },
-    en: { q: "Does IT need to do anything?", a: "No. You register the company with your work email and colleagues join with theirs. No integrations." },
+    sv: { q: "Behöver IT göra något?", a: "Nej. Ni registrerar företaget med er jobbmejl och bjuder in kollegorna med ett mejl var. Inga integrationer." },
+    en: { q: "Does IT need to do anything?", a: "No. You register the company with your work email and invite colleagues with one email each. No integrations." },
   },
   {
     slug: { sv: "hur-loggar-man-in", en: "how-do-people-log-in" },
     cat: "it",
     tags: ["trust"],
-    sv: { q: "Hur loggar medarbetarna in?", a: "Med sin jobbmejl och en kod som kommer i mejlet." },
-    en: { q: "How do employees log in?", a: "With their work email and a code sent to it." },
+    sv: { q: "Hur loggar medarbetarna in?", a: "Med inbjudan till sin jobbmejl och en kod som kommer i mejlet." },
+    en: { q: "How do employees log in?", a: "With an invitation to their work email and a code sent to it." },
   },
   {
     slug: { sv: "finns-for-android", en: "android" },
@@ -290,11 +290,11 @@ export const FAQ: Faq[] = [
     tags: ["how"],
     sv: {
       q: "Hur kommer vi igång?",
-      a: "Registrera företaget med er jobbmejl. Vi läser in er bransch och marknad, kollegorna går med med sin jobbmejl och den första sändningen kommer samma dag.",
+      a: "Registrera företaget med er jobbmejl. Vi läser in er bransch och marknad, ni bjuder in kollegorna med ett mejl var och den första sändningen kommer samma dag.",
     },
     en: {
       q: "How do we get started?",
-      a: "Register the company with your work email. We read up on your industry and market, colleagues join with their work email and the first broadcast comes the same day.",
+      a: "Register the company with your work email. We read up on your industry and market, you invite colleagues with one email each and the first broadcast comes the same day.",
     },
   },
 ];

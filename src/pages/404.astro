@@ -1,0 +1,43 @@
+---
+/** Sidan som inte finns (2026-10-26). Vercel visar den för alla okända adresser; engelska om adressen börjar på /en/. */
+import Base from "../layouts/Base.astro";
+import { ROUTES, START_URL } from "../content/site";
+---
+
+<Base lang="sv" path="/404/" title="Sidan finns inte – Newstail" description="Sidan du letade efter finns inte. Gå till startsidan eller prova gratis." orb>
+  <section class="section closing page-404" data-space data-hue="262" data-orb="0.5,0.26,0.08,1" data-orb-m="0.5,0.24,0.11,1" data-watch>
+    <div class="stack closing-text">
+      <h1 class="title-xl" data-404="sv">Den här sidan finns inte.</h1>
+      <h1 class="title-xl" data-404="en" hidden>This page doesn't exist.</h1>
+      <p class="lead" data-404="sv">Adressen kan vara felstavad, eller så har sidan flyttat.</p>
+      <p class="lead" data-404="en" hidden>The address may be misspelled, or the page has moved.</p>
+      <div class="actions">
+        <a class="pill pill-primary pill-lg" href={ROUTES.sv.home} data-404="sv">Till startsidan</a>
+        <a class="pill pill-primary pill-lg" href={ROUTES.en.home} data-404="en" hidden>To the start page</a>
+        <a class="pill pill-secondary pill-lg" href={START_URL} data-404="sv">Prova gratis</a>
+        <a class="pill pill-secondary pill-lg" href={START_URL} data-404="en" hidden>Try it free</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-404 {
+    min-height: 100svh;
+  }
+  .page-404 .closing-text {
+    margin-top: 22svh;
+  }
+  [data-404][hidden] {
+    display: none !important;
+  }
+</style>
+
+<script>
+  // Engelska när adressen ligger under /en/.
+  if (location.pathname.startsWith("/en/") || location.pathname === "/en") {
+    document.documentElement.lang = "en";
+    document.title = "Page not found – Newstail";
+    document.querySelectorAll<HTMLElement>("[data-404]").forEach((el) => (el.hidden = el.dataset["404"] !== "en"));
+  }
+</script>

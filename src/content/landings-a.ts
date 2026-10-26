@@ -50,7 +50,7 @@ export const landingsA: Landing[] = [
     faq: [
       {
         q: "Behöver medarbetarna sitta vid en dator?",
-        a: "Nej. De lyssnar i iPhone-appen, på låsskärmen eller i hörlurarna. För att gå med behövs en jobbmejl.",
+        a: "Nej. De lyssnar i iPhone-appen, på låsskärmen eller i hörlurarna. De bjuds in till sin jobbmejl.",
       },
       {
         q: "Vem kan publicera?",
@@ -200,7 +200,7 @@ export const landingsA: Landing[] = [
       { q: "Kan vi välja vem som får ett budskap?", a: "Ja. Ni skickar till alla eller till ett team." },
       {
         q: "Hur går kollegorna med?",
-        a: "De går med med sin jobbmejl. Sändningen kan komma samma dag.",
+        a: "Ni bjuder in dem med ett mejl var. Sändningen kan komma samma dag.",
       },
     ],
     related: ["losningar/intranat", "roller/hr", "branscher/handel-och-butik"],
@@ -469,7 +469,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Hur går en ny medarbetare med?",
-        a: "Med sin jobbmejl. Sändningen kan komma samma dag.",
+        a: "Med en inbjudan till sin jobbmejl. Sändningen kan komma samma dag.",
       },
       {
         q: "Var lagras uppgifterna?",

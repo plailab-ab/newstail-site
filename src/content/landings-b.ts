@@ -73,7 +73,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Hur kommer vi igång?",
-        a: "Registrera er med jobbmejl. Vi läser in er bransch, marknad och konkurrenter, och kollegorna går med med sin jobbmejl. Första sändningen kommer samma dag.",
+        a: "Registrera er med jobbmejl. Vi läser in er bransch, marknad och konkurrenter, och ni bjuder in kollegorna med ett mejl var. Första sändningen kommer samma dag.",
       },
     ],
     related: ["losningar/internkommunikation", "branscher/bygg", "/pris/"],
@@ -232,7 +232,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Behöver vi koppla ihop det med schemat eller kassan?",
-        a: "Nej. Det finns inga integrationer att sätta upp. Kollegorna går med med sin jobbmejl.",
+        a: "Nej. Det finns inga integrationer att sätta upp. Ni bjuder in kollegorna med ett mejl var.",
       },
       {
         q: "Vad kostar det?",
