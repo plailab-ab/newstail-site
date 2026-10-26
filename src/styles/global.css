@@ -3752,7 +3752,7 @@ main {
 .dev {
   position: relative;
   aspect-ratio: var(--w) / var(--h);
-  filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.75));
+  /* Ingen filter-skugga (dyr att rita om) – skuggan ligger som box-shadow på ramen. */
 }
 .dev > .device {
   position: absolute;
@@ -3800,6 +3800,6 @@ main {
     width: 100%;
   }
   .dev {
-    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.7));
+    filter: none;
   }
 }

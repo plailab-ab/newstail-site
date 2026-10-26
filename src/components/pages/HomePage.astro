@@ -335,6 +335,24 @@ const faq = faqFor("home", lang).slice(0, 4);
     const prog = [...scene.querySelectorAll<HTMLElement>("[data-prog]")];
     const caps = [...scene.querySelectorAll<HTMLElement>("[data-cap]")];
     const dots = [...scene.querySelectorAll<HTMLElement>("[data-dot]")];
+    const phone = scene.querySelector<HTMLElement>(".scene-phone")!;
+    const anchor = scene.querySelector<HTMLElement>(".sc-anchor")!;
+    const rail = scene.querySelector<HTMLElement>(".sc-rail-line")!;
+    const arc = scene.querySelector<HTMLElement>(".scr-ring-arc")!;
+    let lastRise = "";
+    let lastRing = "";
+    let lastEnter = "";
+    const setRise = (v: string) => {
+      if (v === lastRise) return;
+      lastRise = v;
+      anchor.style.setProperty("--rise", v);
+      rail.style.setProperty("--rise", v);
+    };
+    const setRing = (v: string) => {
+      if (v === lastRing) return;
+      lastRing = v;
+      arc.style.setProperty("--ring", v);
+    };
     const HUES = [150, 200, 72];
     const REST_HUE = 262;
     let state = "";
@@ -375,28 +393,31 @@ const faq = faqFor("home", lang).slice(0, 4);
       const total = Math.max(1, b.height - H);
       const p = clamp(-b.top / total);
       // Telefonen anländer: lutad och lite mindre innan sektionen fäster.
-      const enter = clamp((H - b.top) / (H * 0.9));
-      scene.style.setProperty("--enter", enter.toFixed(3));
+      const enter = clamp((H - b.top) / (H * 0.9)).toFixed(3);
+      if (enter !== lastEnter) {
+        lastEnter = enter;
+        phone.style.setProperty("--enter", enter);
+      }
       if (p < 0.22) {
         setState("home");
-        scene.style.setProperty("--rise", "0");
-        scene.style.setProperty("--ring", "0");
+        setRise("0");
+        setRing("0");
         setItem(-1);
         setStep(0);
       } else if (p < 0.4) {
         setState("drag");
         const u = ease(clamp((p - 0.22) / 0.18));
-        scene.style.setProperty("--rise", u.toFixed(3));
-        scene.style.setProperty("--ring", "0");
+        setRise(u.toFixed(3));
+        setRing("0");
         setItem(-1);
         setStep(1);
       } else {
         setState("play");
-        scene.style.setProperty("--rise", "1");
+        setRise("1");
         const q = (p - 0.4) / 0.6; // 0–1 över tre punkter
         const k = Math.min(2, Math.floor(q * 3));
         const ring = clamp(q * 3 - k);
-        scene.style.setProperty("--ring", (ring * 100).toFixed(1));
+        setRing((ring * 100).toFixed(1));
         setItem(k);
         setStep(k === 0 ? (ring < 0.45 ? 1 : 2) : k === 1 ? 2 : 3);
       }

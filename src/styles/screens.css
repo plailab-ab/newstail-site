@@ -761,7 +761,6 @@
 /* ---------- Laptopen ---------- */
 .alaptop {
   width: min(100%, 720px);
-  filter: drop-shadow(0 40px 70px rgba(0, 0, 0, 0.7));
 }
 .alaptop-body {
   position: absolute;
@@ -782,7 +781,7 @@
   padding: 14px;
   border-radius: 20px 20px 4px 4px;
   background: #0c0d0f;
-  box-shadow: 0 0 0 1.5px #3c4048;
+  box-shadow: 0 0 0 1.5px #3c4048, 0 40px 70px rgba(0, 0, 0, 0.7);
 }
 .alaptop-notch {
   position: absolute;

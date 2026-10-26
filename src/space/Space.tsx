@@ -130,13 +130,28 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
       stars.resize(W, H);
       orb?.resize(W, H, dpr);
     };
+    const onResize = () => {
+      resize();
+      measureTops();
+    };
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener("resize", onResize);
 
     let sections = readSections();
+    // Sektionernas överkanter i dokumentet, cachade: att mäta alla varje bildruta tvingade
+    // fram en layout per bildruta (2026-10-26). Mäts om vid resize/rescan och var 1,5 s.
+    let docTops: number[] = [];
+    let topsAt = 0;
+    const measureTops = () => {
+      const sy = window.scrollY;
+      docTops = sections.map((s) => s.el.getBoundingClientRect().top + sy);
+      topsAt = performance.now();
+    };
     const rescan = () => {
       sections = readSections();
+      measureTops();
     };
+    measureTops();
     window.addEventListener("load", rescan);
     const mo = new MutationObserver(rescan);
     mo.observe(document.body, { childList: true, subtree: true });
@@ -187,7 +202,9 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
       // vandrar från vyns underkant upp till nära toppen glider klotet dit (2026-10-26). Så
       // står klotet kvar i en fäst sektion (scenen) hela vägen, och lämnar den först när den
       // scrollar ut. Före 2026-10-26 räknades på sektionernas mitt.
-      const tops = sections.map((s) => s.el.getBoundingClientRect().top);
+      if (performance.now() - topsAt > 1500 || docTops.length !== sections.length) measureTops();
+      const sy = window.scrollY;
+      const tops = docTops.map((t) => t - sy);
       const edge = H * 0.1;
       // Glidningen börjar när nästa sektions överkant är 80 % ned i vyn (inte redan vid kanten –
       // en kort sektion i mobilen skulle annars dra klotet redan innan man scrollat).
@@ -331,10 +348,6 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
       } else {
         orb?.clear();
       }
-      // Lämna klotets mitt till sidan (bubblorna i heron lägger sig runt det).
-      document.documentElement.style.setProperty("--orb-x", `${x.toFixed(1)}px`);
-      document.documentElement.style.setProperty("--orb-y", `${y.toFixed(1)}px`);
-      document.documentElement.style.setProperty("--orb-r", `${R.toFixed(1)}px`);
     };
     raf = requestAnimationFrame(frame);
 
@@ -353,7 +366,7 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
     return () => {
       running = false;
       cancelAnimationFrame(raf);
-      window.removeEventListener("resize", resize);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("load", rescan);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("deviceorientation", onOrient);
