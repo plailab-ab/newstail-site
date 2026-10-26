@@ -183,21 +183,21 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
 
     const targetNow = (): Target => {
       if (!sections.length) return { hue: 262, x: 0.5, y: 0.55, r: 0.3, alpha: 1 };
-      const cy = H / 2;
-      // Övergången mellan två sektioner räknas på sektionernas mitt (inte ankarens), så klotet
-      // står exakt på sitt ankare när sektionen fyller skärmen – även i mobilen där ankaret
-      // ligger högt i sektionen.
-      const centers = sections.map((s) => {
-        const b = s.el.getBoundingClientRect();
-        return b.top + b.height / 2;
-      });
-      // Sektionen närmast mitten och vägen till nästa.
+      // Övergången sker vid GRÄNSEN mellan två sektioner: medan nästa sektions överkant
+      // vandrar från vyns underkant upp till nära toppen glider klotet dit (2026-10-26). Så
+      // står klotet kvar i en fäst sektion (scenen) hela vägen, och lämnar den först när den
+      // scrollar ut. Före 2026-10-26 räknades på sektionernas mitt.
+      const tops = sections.map((s) => s.el.getBoundingClientRect().top);
+      const edge = H * 0.1;
+      // Glidningen börjar när nästa sektions överkant är 80 % ned i vyn (inte redan vid kanten –
+      // en kort sektion i mobilen skulle annars dra klotet redan innan man scrollat).
+      const begin = H * 0.8;
       let i = 0;
-      while (i < centers.length - 1 && centers[i + 1]! <= cy) i++;
+      while (i < tops.length - 1 && tops[i + 1]! <= edge) i++;
       const minSide = Math.min(W, H);
       const pick = (s: Section) => targetFor(s, mobile, W, H, minSide);
       const a = pick(sections[i]!);
-      if (i >= centers.length - 1 || centers[i]! > cy) {
+      if (i >= tops.length - 1) {
         if (lastIndex !== i) {
           if (lastIndex >= 0) energy = 1;
           lastIndex = i;
@@ -205,9 +205,8 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
         return a;
       }
       const b = pick(sections[i + 1]!);
-      const span = Math.max(1, centers[i + 1]! - centers[i]!);
-      const u = smooth(clamp01((cy - centers[i]!) / span));
-      // Ljusfronten: när man går över mitten mellan två sektioner.
+      const u = smooth(clamp01((begin - tops[i + 1]!) / Math.max(1, begin - edge)));
+      // Ljusfronten: när man går över mitten av övergången.
       const idx = u < 0.5 ? i : i + 1;
       if (lastIndex !== idx) {
         if (lastIndex >= 0) energy = 1;

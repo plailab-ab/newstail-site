@@ -41,9 +41,12 @@ html {
 }
 /* Startsidan snäpper: man landar alltid på en sektion, aldrig mitt emellan (Joel 2026-09-30).
    Varje sektion där får plats på en skärm – det som är längre (pris, frågor) bor på egen sida. */
-html.snap {
-  scroll-snap-type: y mandatory;
+@media (min-width: 760px) {
+  html.snap {
+    scroll-snap-type: y mandatory;
+  }
 }
+/* Mobilen snäpper inte (2026-10-26): sektionerna är högre än skärmen och scenen scrollas fritt. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
