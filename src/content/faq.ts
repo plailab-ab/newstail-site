@@ -110,11 +110,11 @@ export const FAQ: Faq[] = [
     tags: ["pricing"],
     sv: {
       q: "Vad händer efter provperioden?",
-      a: "Ni lägger in ett kort. Resten av månaden betalas då, och sedan betalar ni i förskott den 1:a varje månad.",
+      a: "Ni lägger in ett kort. Första månaden dras dagen efter provperioden, och sedan samma dag varje månad, i förskott.",
     },
     en: {
       q: "What happens after the trial?",
-      a: "You add a card. The rest of that month is paid then, and after that you pay in advance on the 1st of every month.",
+      a: "You add a card. The first month is charged the day after the trial, and then on the same day every month, in advance.",
     },
   },
   {
@@ -123,11 +123,11 @@ export const FAQ: Faq[] = [
     tags: ["pricing"],
     sv: {
       q: "Vad händer när någon läggs till mitt i månaden?",
-      a: "Hen är med direkt och räknas från nästa 1:a. Ni betalar i förskott den 1:a för antalet användare just då, och får ett mejl tre dagar innan med beloppet.",
+      a: "Hen är med direkt och räknas från nästa dragning. Ni betalar för antalet användare när beloppet dras, och får ett mejl tre dagar innan.",
     },
     en: {
       q: "What happens when someone is added mid-month?",
-      a: "They're in right away and count from the next 1st. You pay in advance on the 1st for the number of users at that moment, and get an email three days ahead with the amount.",
+      a: "They're in right away and count from the next charge. You pay for the number of users when the amount is charged, and get an email three days ahead.",
     },
   },
   {
@@ -136,11 +136,11 @@ export const FAQ: Faq[] = [
     tags: ["pricing"],
     sv: {
       q: "Finns det ett minsta antal?",
-      a: "Ja, tio användare. Är ni färre betalar ni för tio – 1 790 kr i månaden.",
+      a: "Tio användare ingår – 1 790 kr i månaden. Är ni fler betalar ni 179 kr per användare.",
     },
     en: {
       q: "Is there a minimum?",
-      a: "Yes, ten users. If you are fewer you pay for ten – €170 a month.",
+      a: "Ten users are included – €170 a month. Beyond that it's €17 per user.",
     },
   },
   {

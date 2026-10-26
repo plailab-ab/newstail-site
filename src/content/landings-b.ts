@@ -147,7 +147,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Vad kostar det?",
-        a: "179 kr per användare och månad, exkl. moms. Minst 10 användare. 14 dagar gratis, inget kort.",
+        a: "179 kr per användare och månad, exkl. moms. 10 användare ingår. 14 dagar gratis, inget kort.",
       },
     ],
     related: ["losningar/intranat", "losningar/app-for-personalen", "/pris/"],
@@ -402,7 +402,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Vad kostar det?",
-        a: "179 kr per användare och månad, exkl. moms, minst 10 användare. Allt ingår.",
+        a: "179 kr per användare och månad, exkl. moms, 10 användare ingår. Allt ingår.",
       },
     ],
     related: ["losningar/app-for-personalen", "losningar/internkommunikation", "roller/hr"],

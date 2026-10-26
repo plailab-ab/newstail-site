@@ -605,7 +605,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Vad kostar Newstail?",
-        a: "179 kr per användare och månad, exkl. moms, minst 10 användare. Allt ingår.",
+        a: "179 kr per användare och månad, exkl. moms, 10 användare ingår. Allt ingår.",
       },
       {
         q: "Ser man vad en enskild person har hört?",
@@ -842,7 +842,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Vad kostar Newstail?",
-        a: "179 kr per användare och månad, exkl. moms, minst 10 användare. 14 dagar gratis, inget kort och ingen bindning.",
+        a: "179 kr per användare och månad, exkl. moms, 10 användare ingår. 14 dagar gratis, inget kort och ingen bindning.",
       },
     ],
     related: ["losningar/omvarldsbevakning", "guider/omvarldsanalys", "/pris/"],
