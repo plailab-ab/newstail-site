@@ -108,7 +108,7 @@
 }
 .hero-v3-stage {
   position: relative;
-  min-height: calc(var(--orb-size) + 140px);
+  min-height: calc(var(--orb-size) + 60px);
 }
 .hero-v3 .caption-hero {
   top: calc(50% + var(--orb-size) / 2 + 22px);
@@ -137,8 +137,8 @@
     order: 2;
   }
   .hero-v3-stage {
-    --orb-size: min(62vw, 34svh);
-    min-height: calc(var(--orb-size) + 118px);
+    --orb-size: min(64vw, 36svh);
+    min-height: calc(var(--orb-size) + 40px);
   }
   .hero-v3 .caption-hero {
     top: calc(50% + var(--orb-size) / 2 + 16px);
@@ -598,7 +598,7 @@
     order: 2;
   }
   /* Språket: klotet ovanför texten som förut. */
-  .split.orb-left.lang-split .split-stage {
+  .lang-split .split-stage {
     order: -1;
   }
   .hide-m {
@@ -606,7 +606,7 @@
   }
   .stage-language {
     --orb-size: min(56vw, 30svh);
-    min-height: calc(var(--orb-size) + 120px);
+    min-height: calc(var(--orb-size) + 40px);
   }
   .section {
     padding-top: 3.5rem;
@@ -670,4 +670,13 @@
   .footer-col h3 {
     margin: 0;
   }
+}
+
+/* Ingressen i språksektionen tonar när språket byter */
+[data-lang-lead] {
+  transition: opacity 220ms ease, transform 220ms ease;
+}
+[data-lang-lead].is-switching {
+  opacity: 0;
+  transform: translateY(4px);
 }

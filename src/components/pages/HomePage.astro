@@ -23,18 +23,12 @@ const { lang } = Astro.props;
 const sv = lang === "sv";
 const ui = UI[lang];
 const R = ROUTES[lang];
-const words = (s: string) => s.split(" ");
 const REST = "0.5,0.5,0.1,0";
 
 const c = sv
   ? {
       h1: "En egen nyhetssändning för varje medarbetare.",
       lead: "Internt, branschen och egna intressen – uppläst på det språk var och en väljer.",
-      heroItems: [
-        { topic: "Internt", title: "Hyresförhandlingen för 2027 är klar", inside: true },
-        { topic: "Räntor", title: "Marknaden räknar med sänkning före jul" },
-        { topic: "HV71", title: "Vände och vann borta i Linköping" },
-      ],
       scene: {
         greeting: "Hej Anna.",
         date: "Torsdag 23 oktober",
@@ -46,12 +40,11 @@ const c = sv
         ],
       },
       langTitle: "Alla hänger med. På sitt språk.",
-      langLead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap.",
       langSamples: [
-        { code: "SV", topic: "Internt", title: "Vi förvärvar två fastigheter i centrala Växjö" },
-        { code: "EN", topic: "Internal", title: "We are acquiring two properties in central Växjö" },
-        { code: "DE", topic: "Intern", title: "Wir erwerben zwei Immobilien im Zentrum von Växjö" },
-        { code: "ES", topic: "Interno", title: "Adquirimos dos inmuebles en el centro de Växjö" },
+        { code: "SV", lead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap." },
+        { code: "EN", lead: "Everyone picks the host's language. The same news, the same internal messages." },
+        { code: "DE", lead: "Jeder wählt die Sprache des Moderators. Dieselben Nachrichten, dieselben internen Botschaften." },
+        { code: "ES", lead: "Cada uno elige el idioma del presentador. Las mismas noticias, los mismos mensajes internos." },
       ],
       inTitle: "Säg det en gång. Vi läser upp det.",
       inLead: "Tala in eller skriv. Det ligger först i allas sändning – och ni ser hur många som hört det.",
@@ -72,11 +65,6 @@ const c = sv
   : {
       h1: "A personal news broadcast for every employee.",
       lead: "Internal news, the industry and personal interests – read out in the language each person chooses.",
-      heroItems: [
-        { topic: "Internal", title: "The 2027 rent negotiation is done", inside: true },
-        { topic: "Rates", title: "The market expects a cut before Christmas" },
-        { topic: "Hockey", title: "HV71 came back to win in Linköping" },
-      ],
       scene: {
         greeting: "Hi Anna.",
         date: "Thursday 23 October",
@@ -88,12 +76,11 @@ const c = sv
         ],
       },
       langTitle: "Everyone keeps up. In their language.",
-      langLead: "Everyone picks the host's language. The same news, the same internal messages.",
       langSamples: [
-        { code: "EN", topic: "Internal", title: "We are acquiring two properties in central Växjö" },
-        { code: "SV", topic: "Internt", title: "Vi förvärvar två fastigheter i centrala Växjö" },
-        { code: "DE", topic: "Intern", title: "Wir erwerben zwei Immobilien im Zentrum von Växjö" },
-        { code: "ES", topic: "Interno", title: "Adquirimos dos inmuebles en el centro de Växjö" },
+        { code: "EN", lead: "Everyone picks the host's language. The same news, the same internal messages." },
+        { code: "SV", lead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap." },
+        { code: "DE", lead: "Jeder wählt die Sprache des Moderators. Dieselben Nachrichten, dieselben internen Botschaften." },
+        { code: "ES", lead: "Cada uno elige el idioma del presentador. Las mismas noticias, los mismos mensajes internos." },
       ],
       inTitle: "Say it once. We read it out.",
       inLead: "Record or type it. It comes first in everyone's broadcast – and you see how many heard it.",
@@ -179,15 +166,6 @@ const faq = faqFor("home", lang).slice(0, 4);
   <div class="hero-v3-inner">
     <div class="stage-hero hero-v3-stage">
       <div class="orb-anchor" data-orb-anchor></div>
-      <div class="caption caption-hero" style="--wait: 1200ms" aria-live="off">
-        <span class="caption-topic" data-hero-topic>{c.heroItems[0]!.topic}</span>
-        <span class="caption-title" data-hero-title>
-          {words(c.heroItems[0]!.title).map((w, i) => (
-            <><span class="caption-word" style={`--i: ${i}`}>{w}</span>{" "}</>
-          ))}
-        </span>
-      </div>
-      <script type="application/json" data-hero-items set:html={JSON.stringify(c.heroItems)} />
     </div>
     <div class="hero-v3-text stack">
       <h1 class="title-hero">{c.h1}</h1>
@@ -224,27 +202,19 @@ const faq = faqFor("home", lang).slice(0, 4);
 
 <!-- 3. Språket -->
 <section class="section" id="sprak" data-space data-hue="262" data-watch>
-  <div class="split orb-left lang-split">
+  <div class="split lang-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.langTitle}</h2>
-      <p class="lead">{c.langLead}</p>
+      <p class="lead" data-lang-lead>{c.langSamples[0]!.lead}</p>
       <div class="lang-row" role="tablist">
         {c.langSamples.map((x, i) => (
           <button type="button" class={`lang-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-i={i}>{x.code}</button>
         ))}
       </div>
+      <script type="application/json" data-lang-samples set:html={JSON.stringify(c.langSamples)} />
     </div>
     <div class="split-stage stage-language">
       <div class="orb-anchor" data-orb-anchor></div>
-      <div class="caption caption-language" style="--wait: 300ms" aria-live="off">
-        <span class="caption-topic" data-lang-topic>{c.langSamples[0]!.topic}</span>
-        <span class="caption-title" data-lang-title>
-          {words(c.langSamples[0]!.title).map((w, i) => (
-            <><span class="caption-word" style={`--i: ${i}`}>{w}</span>{" "}</>
-          ))}
-        </span>
-      </div>
-      <script type="application/json" data-lang-samples set:html={JSON.stringify(c.langSamples)} />
     </div>
   </div>
 </section>
@@ -271,7 +241,7 @@ const faq = faqFor("home", lang).slice(0, 4);
 
 <!-- 5. Recap + quiz -->
 <section class="section" id="recap" data-space data-hue="300" data-orb={REST} data-watch>
-  <div class="split orb-left">
+  <div class="split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.recTitle}</h2>
       <p class="lead">{c.recLead}</p>
@@ -335,41 +305,19 @@ const faq = faqFor("home", lang).slice(0, 4);
   const kick = () => {
     w.__orbKick = (w.__orbKick ?? 0) + 1;
   };
-  const swapWords = (el: HTMLElement, text: string) => {
-    el.innerHTML = "";
-    text.split(" ").forEach((word, j) => {
-      const sp = document.createElement("span");
-      sp.className = "caption-word";
-      sp.style.setProperty("--i", String(j));
-      sp.style.setProperty("--wait", "0ms");
-      sp.textContent = word;
-      el.append(sp, " ");
-    });
-  };
 
-  // Heron: rubrikerna byter som värden berättar dem (ämne + rubrik, klotets ton).
+  // Heron: klotet byter färg som när värden går mellan nyheterna (internt, bransch, eget).
   const hero = document.querySelector<HTMLElement>(".hero");
-  const heroItemsEl = hero?.querySelector<HTMLScriptElement>("[data-hero-items]");
-  if (hero && heroItemsEl) {
-    const items = JSON.parse(heroItemsEl.textContent || "[]") as { topic: string; title: string; inside?: boolean }[];
+  if (hero) {
     const HUES = [72, 150, 350];
-    const topic = hero.querySelector<HTMLElement>("[data-hero-topic]")!;
-    const title = hero.querySelector<HTMLElement>("[data-hero-title]")!;
     let i = 0;
     let timer = 0;
-    const show = (k: number) => {
-      const x = items[k]!;
-      topic.textContent = x.topic;
-      swapWords(title, x.title);
-      hero.classList.toggle("is-inside", !!x.inside);
-      hero.dataset.hue = String(HUES[k % HUES.length]);
-      kick();
-    };
     const start = () => {
       if (timer || reduced) return;
       timer = window.setInterval(() => {
-        i = (i + 1) % items.length;
-        show(i);
+        i = (i + 1) % HUES.length;
+        hero.dataset.hue = String(HUES[i]);
+        kick();
       }, 4200);
     };
     const stop = () => {
@@ -461,21 +409,23 @@ const faq = faqFor("home", lang).slice(0, 4);
     update();
   }
 
-  // Språket: samma interna nyhet på värdens fyra språk; flikarna byter direkt.
+  // Språket: flikarna byter ingressens språk och klotets ton; växlar själv tills någon klickar.
   const langSec = document.getElementById("sprak");
   const samplesEl = langSec?.querySelector<HTMLScriptElement>("[data-lang-samples]");
   if (langSec && samplesEl) {
-    const samples = JSON.parse(samplesEl.textContent || "[]") as { code: string; topic: string; title: string }[];
+    const samples = JSON.parse(samplesEl.textContent || "[]") as { code: string; lead: string }[];
     const HUES = [262, 200, 30, 330];
-    const topic = langSec.querySelector<HTMLElement>("[data-lang-topic]")!;
-    const title = langSec.querySelector<HTMLElement>("[data-lang-title]")!;
+    const lead = langSec.querySelector<HTMLElement>("[data-lang-lead]")!;
     const tabs = [...langSec.querySelectorAll<HTMLElement>(".lang-tab")];
     let i = 0;
     let timer = 0;
     const show = (k: number) => {
       const x = samples[k]!;
-      topic.textContent = x.topic;
-      swapWords(title, x.title);
+      lead.classList.add("is-switching");
+      window.setTimeout(() => {
+        lead.textContent = x.lead;
+        lead.classList.remove("is-switching");
+      }, 220);
       tabs.forEach((t, j) => {
         t.classList.toggle("is-on", j === k);
         t.setAttribute("aria-selected", j === k ? "true" : "false");
@@ -488,7 +438,7 @@ const faq = faqFor("home", lang).slice(0, 4);
       timer = window.setInterval(() => {
         i = (i + 1) % samples.length;
         show(i);
-      }, 3000);
+      }, 3600);
     };
     const stop = () => {
       clearInterval(timer);
