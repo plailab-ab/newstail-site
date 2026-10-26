@@ -118,8 +118,10 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
     const resize = () => {
       W = window.innerWidth;
       H = window.innerHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
       mobile = W < 760;
+      // Mobilen ritar klotet och stjärnorna i 1,5× (inte 2–3×): klotets shader räknar per
+      // pixel, och skillnaden syns inte på en telefon men kostar hälften av GPU-tiden.
+      dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2);
       starsCanvas.width = Math.round(W * dpr);
       starsCanvas.height = Math.round(H * dpr);
       starsCanvas.style.width = `${W}px`;
