@@ -1,0 +1,42 @@
+---
+/** Kortet "HAR LYSSNAT · 7 DAGAR" ur admin, i läsbar storlek för mobilen (laptopen är för liten där). */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+const t = sv
+  ? { heard: "HAR LYSSNAT · 7 DAGAR", of: "av 41", week: "83 % · veckan innan 78 %", days: ["lör", "sön", "mån", "tis", "ons", "tors", "i dag"], rows: "SENASTE INTERNA" }
+  : { heard: "HAVE LISTENED · 7 DAYS", of: "of 41", week: "83 % · week before 78 %", days: ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "today"], rows: "LATEST INTERNAL" };
+const counts = [29, 31, 33, 32, 35, 34, 34];
+const rows = sv
+  ? [
+      ["Vi förvärvar två fastigheter i Växjö", 38, 41],
+      ["Hyresförhandlingen för 2027 är klar", 34, 41],
+    ]
+  : [
+      ["We are acquiring two properties in Växjö", 38, 41],
+      ["The 2027 rent negotiation is done", 34, 41],
+    ];
+---
+
+<div class="admc" role="img" aria-label={t.heard}>
+  <small>{t.heard}</small>
+  <span class="admc-big"><b>34</b><span>{t.of}</span></span>
+  <span class="admc-sub">{t.week}</span>
+  <svg class="admc-line" viewBox="0 0 440 60" preserveAspectRatio="none" aria-hidden="true">
+    <polyline fill="none" stroke="rgba(236,239,244,.35)" stroke-width="1" points={counts.map((c, i) => `${20 + i * 66.6},${52 - (c - 26) * 4.5}`).join(" ")}></polyline>
+    {counts.map((c, i) => <circle cx={20 + i * 66.6} cy={52 - (c - 26) * 4.5} r={i === 6 ? 4 : 2.5} fill={i === 6 ? "#fff" : "rgba(236,239,244,.7)"} />)}
+  </svg>
+  <span class="admc-days">{t.days.map((d, i) => <span class={i === 6 ? "is-on" : ""}>{d}</span>)}</span>
+  <div class="admc-rows">
+    <small>{t.rows}</small>
+    {(rows as [string, number, number][]).map(([name, a, b]) => (
+      <span class="admc-row">
+        <span>{name}</span>
+        <span class="adm-bar"><span style={`width: ${Math.round((a / b) * 100)}%`}></span></span>
+        <span class="admc-num">{a} / {b}</span>
+      </span>
+    ))}
+  </div>
+</div>

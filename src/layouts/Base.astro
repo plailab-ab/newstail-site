@@ -4,6 +4,7 @@ import "../styles/global.css";
 import "../styles/devices.css";
 import "../styles/v2.css";
 import "../styles/screens.css";
+import "../styles/home3.css";
 import Space from "../space/Space";
 import { FOOTER, LEGAL_LINKS, LOGIN_URL, ROUTES, SITE, START_URL, UI, orgGraph, type Lang } from "../content/site";
 
@@ -118,7 +119,7 @@ const isCurrent = (href: string) => (path === href || path.startsWith(href) && h
           {
             FOOTER[lang].map((col) => (
               <div class="footer-col">
-                <h3>{col.t}</h3>
+                <h3><button type="button" aria-expanded="false">{col.t}</button></h3>
                 <ul>
                   {col.links.map((l) => (
                     <li>
@@ -194,6 +195,15 @@ const isCurrent = (href: string) => (path === href || path.startsWith(href) && h
         { threshold: 0.3 },
       );
       document.querySelectorAll("[data-watch]").forEach((el) => io.observe(el));
+      // Sidfotens kolumner fälls ihop i mobilen (CSS döljer listorna under 760 px).
+      document.querySelectorAll<HTMLButtonElement>(".footer-col h3 button").forEach((b) => {
+        b.addEventListener("click", () => {
+          const col = b.closest(".footer-col");
+          const open = b.getAttribute("aria-expanded") !== "true";
+          b.setAttribute("aria-expanded", String(open));
+          col?.classList.toggle("is-open", open);
+        });
+      });
       // Enhetsramarna (telefonen, laptopen) är ritade i fasta pixlar och skalas till sin bredd.
       const devs = document.querySelectorAll<HTMLElement>(".dev");
       if (devs.length) {

@@ -1,12 +1,17 @@
 ---
-/** Startsidan (2026-10-05, tavlan): varför – löftet, språket, sändningen, interninfo, recap, ledningen, frågor. */
+/**
+ * Startsidan "En sändning" (2026-10-26): en telefon och ett klot bär hela historien.
+ * 1 heron (bara klotet) · 2 scenen – fäst medan man scrollar: klotet flyger in i telefonen,
+ * dras upp, sändningen spelar · 3 språket · 4 internt · 5 recap + quiz · 6 ledningen ·
+ * 7 frågor · 8 avslut. Inget snäpp i mobilen, hela telefoner, en idé per skärm.
+ */
 import Phone from "../air/Phone.astro";
-import ScreenPlayer from "../air/ScreenPlayer.astro";
-import ScreenHome from "../air/ScreenHome.astro";
+import ScreenScene from "../air/ScreenScene.astro";
 import ScreenPublish from "../air/ScreenPublish.astro";
 import ScreenRecap from "../air/ScreenRecap.astro";
 import ScreenQuiz from "../air/ScreenQuiz.astro";
 import AdminLaptop from "../air/AdminLaptop.astro";
+import AdminCard from "../air/AdminCard.astro";
 import FaqList from "../FaqList.astro";
 import { faqFor } from "../../content/faq";
 import { ROUTES, START_URL, UI, type Lang } from "../../content/site";
@@ -18,30 +23,29 @@ const { lang } = Astro.props;
 const sv = lang === "sv";
 const ui = UI[lang];
 const R = ROUTES[lang];
-const words = (s: string) => s.split(" ");
 const REST = "0.5,0.5,0.1,0";
 
 const c = sv
   ? {
       h1: "En egen nyhetssändning för varje medarbetare.",
-      lead: "Internt, branschen och egna intressen – uppläst på det språk var och en väljer. Och ni ser att det nådde fram.",
-      chips: ["Internt", "Branschen", "Intressen"],
-      heroItems: [
-        { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", inside: true },
-        { topic: "RÄNTOR", title: "Ränteläget: marknaden räknar med sänkning före jul" },
-        { topic: "HV71", title: "HV71 vände och vann borta i Linköping" },
-      ],
+      lead: "Internt, branschen och egna intressen – uppläst på det språk var och en väljer.",
+      scene: {
+        greeting: "Hej Anna.",
+        date: "Torsdag 23 oktober",
+        steps: [
+          { t: "Allt väntar i appen.", d: "Internt, branschen och det du själv följer. Dagens lista står klar när du vaknar." },
+          { t: "Dra upp. Lyssna.", d: "Klotet lyfter och värden börjar berätta. Tre till tio minuter." },
+          { t: "Håll klotet. Fördjupa dig.", d: "Svep för nästa. Tryck för paus. Värden hör vad du vill veta mer om." },
+          { t: "Det interna först.", d: "Det ni publicerar ligger först i allas sändning – på var och ens språk." },
+        ],
+      },
       langTitle: "Alla hänger med. På sitt språk.",
-      langLead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap.",
       langSamples: [
-        { code: "SV", topic: "INTERNT", title: "Vi förvärvar två fastigheter i centrala Växjö" },
-        { code: "EN", topic: "INTERNAL", title: "We are acquiring two properties in central Växjö" },
-        { code: "DE", topic: "INTERN", title: "Wir erwerben zwei Immobilien im Zentrum von Växjö" },
-        { code: "ES", topic: "INTERNO", title: "Adquirimos dos inmuebles en el centro de Växjö" },
+        { code: "SV", lead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap." },
+        { code: "EN", lead: "Everyone picks the host's language. The same news, the same internal messages." },
+        { code: "DE", lead: "Jeder wählt die Sprache des Moderators. Dieselben Nachrichten, dieselben internen Botschaften." },
+        { code: "ES", lead: "Cada uno elige el idioma del presentador. Las mismas noticias, los mismos mensajes internos." },
       ],
-      bcTitle: "Dra upp. Lyssna.",
-      bcLead: "En egen sändning, byggd på din roll och det du följer.",
-      bcPoints: ["Tre till tio minuter", "Håll klotet och fördjupa dig", "Svep för nästa, tryck för paus"],
       inTitle: "Säg det en gång. Vi läser upp det.",
       inLead: "Tala in eller skriv. Det ligger först i allas sändning – och ni ser hur många som hört det.",
       inTeams: ["Alla", "Ledning", "Sälj", "Produktion"],
@@ -60,24 +64,24 @@ const c = sv
     }
   : {
       h1: "A personal news broadcast for every employee.",
-      lead: "Internal news, the industry and personal interests – read out in the language each person chooses. And you see that it got through.",
-      chips: ["Internal", "Industry", "Interests"],
-      heroItems: [
-        { topic: "INTERNAL", title: "The 2027 rent negotiation is done", inside: true },
-        { topic: "RATES", title: "Rates: the market expects a cut before Christmas" },
-        { topic: "HOCKEY", title: "HV71 came back to win away in Linköping" },
-      ],
+      lead: "Internal news, the industry and personal interests – read out in the language each person chooses.",
+      scene: {
+        greeting: "Hi Anna.",
+        date: "Thursday 23 October",
+        steps: [
+          { t: "It's all waiting in the app.", d: "Internal, the industry and what you follow. Today's list is ready when you wake up." },
+          { t: "Pull up. Listen.", d: "The orb rises and the host starts talking. Three to ten minutes." },
+          { t: "Hold the orb. Go deeper.", d: "Swipe for next. Tap to pause. The host hears what you want more of." },
+          { t: "Internal first.", d: "What you publish comes first in everyone's broadcast – in each person's language." },
+        ],
+      },
       langTitle: "Everyone keeps up. In their language.",
-      langLead: "Everyone picks the host's language. The same news, the same internal messages.",
       langSamples: [
-        { code: "EN", topic: "INTERNAL", title: "We are acquiring two properties in central Växjö" },
-        { code: "SV", topic: "INTERNT", title: "Vi förvärvar två fastigheter i centrala Växjö" },
-        { code: "DE", topic: "INTERN", title: "Wir erwerben zwei Immobilien im Zentrum von Växjö" },
-        { code: "ES", topic: "INTERNO", title: "Adquirimos dos inmuebles en el centro de Växjö" },
+        { code: "EN", lead: "Everyone picks the host's language. The same news, the same internal messages." },
+        { code: "SV", lead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap." },
+        { code: "DE", lead: "Jeder wählt die Sprache des Moderators. Dieselben Nachrichten, dieselben internen Botschaften." },
+        { code: "ES", lead: "Cada uno elige el idioma del presentador. Las mismas noticias, los mismos mensajes internos." },
       ],
-      bcTitle: "Pull up. Listen.",
-      bcLead: "Your own broadcast, built on your role and what you follow.",
-      bcPoints: ["Three to ten minutes", "Hold the orb to go deeper", "Swipe for next, tap to pause"],
       inTitle: "Say it once. We read it out.",
       inLead: "Record or type it. It comes first in everyone's broadcast – and you see how many heard it.",
       inTeams: ["Everyone", "Management", "Sales", "Production"],
@@ -95,20 +99,18 @@ const c = sv
       endPrice: "See pricing",
     };
 
-const player = sv
+const sceneItems = sv
   ? [
-      { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist", hue: 72, inside: true },
-      { topic: "RÄNTOR", title: "Ränteläget: marknaden räknar med sänkning före jul", src: "Dagens industri · SvD", hue: 150 },
+      { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Dagens industri · SvD", hue: 150 },
       { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsvärlden", hue: 200 },
-      { topic: "HV71", title: "HV71 vände och vann borta i Linköping", src: "Jönköpings-Posten", hue: 350 },
+      { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist", hue: 72, inside: true },
     ]
   : [
-      { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist", hue: 72, inside: true },
-      { topic: "RATES", title: "Rates: the market expects a cut before Christmas", src: "Dagens industri · SvD", hue: 150 },
+      { topic: "RATES", title: "The market expects a cut before Christmas", src: "Dagens industri · SvD", hue: 150 },
       { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsvärlden", hue: 200 },
-      { topic: "HOCKEY", title: "HV71 came back to win in Linköping", src: "Jönköpings-Posten", hue: 350 },
+      { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist", hue: 72, inside: true },
     ];
-const homeItems = sv
+const bubbles = sv
   ? [
       { label: "Internt", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
       { label: "Bransch", kind: "industry" as const, title: "Hyror upp 3,2 % i Småland" },
@@ -156,94 +158,70 @@ const quiz = sv
 const publish = sv
   ? { head: "NORDVIK", eyebrow: "NY INTERN NYHET", title: "Vad vill du berätta?", hint: "Tryck på klotet för att börja spela in.", write: "Skriv istället", published: "Publicerat" }
   : { head: "NORDVIK", eyebrow: "NEW INTERNAL NEWS", title: "What do you want to say?", hint: "Tap the orb to start recording.", write: "Type instead", published: "Published" };
-const faq = faqFor("home", lang);
+const faq = faqFor("home", lang).slice(0, 4);
 ---
 
-<!-- 1. Hero -->
-<section class="section hero" data-space data-hue="72" data-watch>
-  <div class="split">
-    <div class="split-text stack">
+<!-- 1. Hero: bara klotet -->
+<section class="section hero hero-v3" data-space data-hue="72" data-watch>
+  <div class="hero-v3-inner">
+    <div class="stage-hero hero-v3-stage">
+      <div class="orb-anchor" data-orb-anchor></div>
+    </div>
+    <div class="hero-v3-text stack">
       <h1 class="title-hero">{c.h1}</h1>
       <p class="lead">{c.lead}</p>
-      <div class="chips hero-chips" aria-hidden="true">
-        <span class="chip chip-inside">{c.chips[0]}</span>
-        <span class="chip chip-industry">{c.chips[1]}</span>
-        <span class="chip chip-own">{c.chips[2]}</span>
-      </div>
       <div class="actions">
         <a class="pill pill-primary pill-lg" href={START_URL}>{ui.start}</a>
-        <a class="pill pill-secondary pill-lg" href={R.how}>{ui.nav.how}</a>
+        <a class="link-more" href={R.how}>{ui.nav.how}</a>
       </div>
-    </div>
-    <div class="split-stage stage-hero">
-      <div class="orb-anchor" data-orb-anchor></div>
-      <span class="hero-ring" aria-hidden="true"></span>
-      <span class="hero-ring hero-ring-arc" aria-hidden="true"></span>
-      <div class="air-dots" aria-hidden="true">
-        {c.heroItems.map((_, i) => <span class={i === 0 ? "is-on" : ""} />)}
-      </div>
-      <div class="caption caption-hero" style="--wait: 1500ms" aria-live="off">
-        <span class="caption-topic" data-hero-topic>{c.heroItems[0]!.topic}</span>
-        <span class="caption-title" data-hero-title>
-          {words(c.heroItems[0]!.title).map((w, i) => (
-            <><span class="caption-word" style={`--i: ${i}`}>{w}</span>{" "}</>
-          ))}
-        </span>
-      </div>
-      <script type="application/json" data-hero-items set:html={JSON.stringify(c.heroItems)} />
     </div>
   </div>
 </section>
 
-<!-- 2. Språket -->
-<section class="section" id="sprak" data-space data-hue="262" data-watch>
-  <div class="split orb-left lang-split">
-    <div class="split-text stack">
-      <div class="lang-chips">
-        {c.langSamples.map((x, i) => (
-          <button type="button" class={`lang-chip lang-chip-${i}${i === 0 ? " is-on" : ""}`} data-i={i} aria-label={x.code}>{x.code}</button>
-        ))}
-      </div>
-      <h2 class="title-xl">{c.langTitle}</h2>
-      <p class="lead">{c.langLead}</p>
+<!-- 2. Scenen: klotet in i telefonen, dra upp, sändningen -->
+<section class="scene" id="scen" data-space data-hue="262" data-scene data-watch>
+  <div class="scene-pin">
+    <div class="scene-steps" aria-live="polite">
+      {c.scene.steps.map((s, i) => (
+        <div class={`scene-step${i === 0 ? " is-on" : ""}`} data-step={i}>
+          <h2 class="title-xl">{s.t}</h2>
+          <p class="lead">{s.d}</p>
+        </div>
+      ))}
+      <ol class="scene-progress" aria-hidden="true">
+        {c.scene.steps.map((_, i) => <li class={i === 0 ? "is-on" : ""} data-prog={i}></li>)}
+      </ol>
     </div>
-    <div class="split-stage stage-language">
-      <div class="orb-anchor" data-orb-anchor></div>
-      <div class="caption caption-language" style="--wait: 300ms" aria-live="off">
-        <span class="caption-topic" data-lang-topic>{c.langSamples[0]!.topic}</span>
-        <span class="caption-title" data-lang-title>
-          {words(c.langSamples[0]!.title).map((w, i) => (
-            <><span class="caption-word" style={`--i: ${i}`}>{w}</span>{" "}</>
-          ))}
-        </span>
+    <div class="scene-stage">
+      <Phone clear class="scene-phone" label={sv ? "Newstail-appen: från hemvyn till sändningen" : "The Newstail app: from home to the broadcast"}>
+        <ScreenScene company="NORDVIK" greeting={c.scene.greeting} date={c.scene.date} bubbles={bubbles} items={sceneItems} done={sv ? "Avsluta" : "End"} />
+      </Phone>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Språket -->
+<section class="section" id="sprak" data-space data-hue="262" data-watch>
+  <div class="split lang-split">
+    <div class="split-text stack">
+      <h2 class="title-xl">{c.langTitle}</h2>
+      <p class="lead" data-lang-lead>{c.langSamples[0]!.lead}</p>
+      <div class="lang-row" role="tablist">
+        {c.langSamples.map((x, i) => (
+          <button type="button" class={`lang-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-i={i}>{x.code}</button>
+        ))}
       </div>
       <script type="application/json" data-lang-samples set:html={JSON.stringify(c.langSamples)} />
     </div>
-  </div>
-</section>
-
-<!-- 3. Sändningen -->
-<section class="section" id="sandningen" data-space data-hue="200" data-orb={REST} data-watch>
-  <div class="split">
-    <div class="split-text stack">
-      <h2 class="title-xl">{c.bcTitle}</h2>
-      <p class="lead">{c.bcLead}</p>
-      <ul class="dots-list">{c.bcPoints.map((p) => <li>{p}</li>)}</ul>
-    </div>
-    <div class="split-stage stage-device stage-glow" style="--glow-hue: 280">
-      <Phone label={sv ? "Sändningen i Newstail-appen" : "The broadcast in the Newstail app"}>
-        <ScreenPlayer items={player} start={1} done={sv ? "Avsluta" : "End"} />
-      </Phone>
-      <Phone back label={sv ? "Hemvyn i Newstail-appen" : "The Newstail home screen"}>
-        <ScreenHome company="NORDVIK" greeting={sv ? "Hej Anna." : "Hi Anna."} date={sv ? "Torsdag 23 oktober" : "Thursday 23 October"} items={homeItems} lit={4} />
-      </Phone>
+    <div class="split-stage stage-language">
+      <div class="orb-anchor" data-orb-anchor></div>
     </div>
   </div>
 </section>
 
 <!-- 4. Interninfo -->
 <section class="section" id="inside" data-space data-hue="72" data-orb={REST} data-watch>
-  <div class="split orb-left">
+  <div class="split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.inTitle}</h2>
       <p class="lead">{c.inLead}</p>
@@ -256,17 +234,20 @@ const faq = faqFor("home", lang);
         <ScreenPublish t={publish} />
       </Phone>
       <div class="floater floater-inside hide-m" style="left: -4%; top: 30%"><small>{sv ? "Internt" : "Internal"}</small>{c.inFloat}</div>
-      <div class="floater hide-m" style="right: 4%; bottom: 18%"><b>38 {sv ? "av" : "of"} 41</b><small>{c.inHeard}</small></div>
+      <div class="floater hide-m" style="right: 0; bottom: 18%"><b>38 {sv ? "av" : "of"} 41</b><small>{c.inHeard}</small></div>
     </div>
   </div>
 </section>
 
-<!-- 5. Recap -->
+<!-- 5. Recap + quiz -->
 <section class="section" id="recap" data-space data-hue="300" data-orb={REST} data-watch>
   <div class="split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.recTitle}</h2>
       <p class="lead">{c.recLead}</p>
+      <div class="flip-tabs" role="tablist">
+        {c.recTabs.map((t, i) => <button type="button" class={`flip-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-flip-tab={i}>{t}</button>)}
+      </div>
     </div>
     <div class="split-stage stage-device stage-flip" data-flip>
       <Phone label={sv ? "Recapen och quizen i Newstail-appen" : "The recap and quiz in the Newstail app"}>
@@ -275,24 +256,22 @@ const faq = faqFor("home", lang);
           <ScreenQuiz t={quiz} />
         </div>
       </Phone>
-      <div class="flip-tabs" role="tablist">
-        {c.recTabs.map((t, i) => <button type="button" class={`flip-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-flip-tab={i}>{t}</button>)}
-      </div>
     </div>
   </div>
 </section>
 
 <!-- 6. Ledningen -->
-<section class="section" id="ledare" data-space data-hue="262" data-orb={REST} data-watch>
-  <div class="split split-laptop">
-    <div class="split-text stack">
+<section class="section section-lead" id="ledare" data-space data-hue="262" data-orb={REST} data-watch>
+  <div class="lead-wrap">
+    <div class="stack lead-head">
       <h2 class="title-xl">{c.leadTitle}</h2>
       <p class="lead">{c.leadLead}</p>
       <a class="link-more" href={`${R.trust}${lang === "sv" ? "#ser" : "#sees"}`}>{c.leadLink}</a>
-      <p class="note">{ui.demoNote}</p>
     </div>
-    <div class="split-stage stage-device stage-laptop">
-      <AdminLaptop lang={lang} />
+    <div class="lead-stage">
+      <div class="hide-m lead-laptop"><AdminLaptop lang={lang} /></div>
+      <div class="only-m"><AdminCard lang={lang} /></div>
+      <p class="note">{ui.demoNote}</p>
     </div>
   </div>
 </section>
@@ -304,7 +283,7 @@ const faq = faqFor("home", lang);
       <h2 class="title-xl">{c.faqTitle}</h2>
       <a class="link-more" href={R.faq}>{ui.allQuestions}</a>
     </div>
-    <FaqList items={faq} lang={lang} />
+    <FaqList items={faq} lang={lang} openFirst={false} />
   </div>
 </section>
 
@@ -321,50 +300,25 @@ const faq = faqFor("home", lang);
 </section>
 
 <script>
-  // Heron: rubrikerna byter som värden berättar dem (prickar, ämne + rubrik, klotets ton).
-  const hero = document.querySelector<HTMLElement>(".hero");
-  const heroItemsEl = hero?.querySelector<HTMLScriptElement>("[data-hero-items]");
-  const swapWords = (el: HTMLElement, text: string) => {
-    el.innerHTML = "";
-    text.split(" ").forEach((word, j) => {
-      const sp = document.createElement("span");
-      sp.className = "caption-word";
-      sp.style.setProperty("--i", String(j));
-      sp.style.setProperty("--wait", "0ms");
-      sp.textContent = word;
-      el.append(sp, " ");
-    });
-  };
   const w = window as unknown as { __orbKick?: number; __voiceAmp: number };
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (hero && heroItemsEl) {
-    const items = JSON.parse(heroItemsEl.textContent || "[]") as { topic: string; title: string; inside?: boolean }[];
+  const kick = () => {
+    w.__orbKick = (w.__orbKick ?? 0) + 1;
+  };
+
+  // Heron: klotet byter färg som när värden går mellan nyheterna (internt, bransch, eget).
+  const hero = document.querySelector<HTMLElement>(".hero");
+  if (hero) {
     const HUES = [72, 150, 350];
-    const topic = hero.querySelector<HTMLElement>("[data-hero-topic]")!;
-    const title = hero.querySelector<HTMLElement>("[data-hero-title]")!;
-    const dots = [...hero.querySelectorAll<HTMLElement>(".air-dots span")];
     let i = 0;
     let timer = 0;
-    const show = (k: number) => {
-      const x = items[k]!;
-      topic.textContent = x.topic;
-      swapWords(title, x.title);
-      dots.forEach((d, j) => d.classList.toggle("is-on", j === k));
-      hero.classList.toggle("is-inside", !!x.inside);
-      hero.dataset.hue = String(HUES[k % HUES.length]);
-      w.__orbKick = (w.__orbKick ?? 0) + 1;
-      // Progressringen börjar om med varje punkt, som i appen.
-      hero.classList.remove("is-running");
-      void hero.offsetWidth;
-      hero.classList.add("is-running");
-    };
     const start = () => {
       if (timer || reduced) return;
-      hero.classList.add("is-running");
       timer = window.setInterval(() => {
-        i = (i + 1) % items.length;
-        show(i);
-      }, 4600);
+        i = (i + 1) % HUES.length;
+        hero.dataset.hue = String(HUES[i]);
+        kick();
+      }, 4200);
     };
     const stop = () => {
       clearInterval(timer);
@@ -373,39 +327,126 @@ const faq = faqFor("home", lang);
     new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(hero);
   }
 
-  // Språket: samma interna nyhet på värdens fyra språk; knapparna byter direkt.
+  // Scenen: scrollen är tidslinjen. p = hur långt in i sektionen man är (0–1).
+  //   0–0.22 hemvyn · 0.22–0.40 draget (klotet lyfter) · 0.40–0.62 punkt 1 · 0.62–0.84 punkt 2 · 0.84–1 interna.
+  const scene = document.querySelector<HTMLElement>("[data-scene]");
+  if (scene) {
+    const steps = [...scene.querySelectorAll<HTMLElement>("[data-step]")];
+    const prog = [...scene.querySelectorAll<HTMLElement>("[data-prog]")];
+    const caps = [...scene.querySelectorAll<HTMLElement>("[data-cap]")];
+    const dots = [...scene.querySelectorAll<HTMLElement>("[data-dot]")];
+    const HUES = [150, 200, 72];
+    const REST_HUE = 262;
+    let state = "";
+    let item = -1;
+    let step = -1;
+    const ease = (x: number) => x * x * (3 - 2 * x);
+    const clamp = (x: number) => Math.min(1, Math.max(0, x));
+    const setState = (s: string) => {
+      if (s === state) return;
+      state = s;
+      scene.classList.toggle("s-home", s === "home");
+      scene.classList.toggle("s-drag", s === "drag");
+      scene.classList.toggle("s-play", s === "play");
+    };
+    const setItem = (k: number) => {
+      if (k === item) return;
+      const changed = item !== -1;
+      item = k;
+      caps.forEach((c, j) => c.classList.toggle("is-on", j === k));
+      dots.forEach((d, j) => {
+        d.classList.toggle("is-on", j === k);
+        d.classList.toggle("is-done", j < k);
+      });
+      scene.dataset.hue = String(k < 0 ? REST_HUE : HUES[k]);
+      if (changed || k >= 0) kick();
+    };
+    const setStep = (k: number) => {
+      if (k === step) return;
+      step = k;
+      steps.forEach((s, j) => s.classList.toggle("is-on", j === k));
+      prog.forEach((s, j) => s.classList.toggle("is-on", j <= k));
+    };
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const b = scene.getBoundingClientRect();
+      const H = window.innerHeight;
+      const total = Math.max(1, b.height - H);
+      const p = clamp(-b.top / total);
+      // Telefonen anländer: lutad och lite mindre innan sektionen fäster.
+      const enter = clamp((H - b.top) / (H * 0.9));
+      scene.style.setProperty("--enter", enter.toFixed(3));
+      if (p < 0.22) {
+        setState("home");
+        scene.style.setProperty("--rise", "0");
+        scene.style.setProperty("--ring", "0");
+        setItem(-1);
+        setStep(0);
+      } else if (p < 0.4) {
+        setState("drag");
+        const u = ease(clamp((p - 0.22) / 0.18));
+        scene.style.setProperty("--rise", u.toFixed(3));
+        scene.style.setProperty("--ring", "0");
+        setItem(-1);
+        setStep(1);
+      } else {
+        setState("play");
+        scene.style.setProperty("--rise", "1");
+        const q = (p - 0.4) / 0.6; // 0–1 över tre punkter
+        const k = Math.min(2, Math.floor(q * 3));
+        const ring = clamp(q * 3 - k);
+        scene.style.setProperty("--ring", (ring * 100).toFixed(1));
+        setItem(k);
+        setStep(k === 0 ? (ring < 0.45 ? 1 : 2) : k === 1 ? 2 : 3);
+      }
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
+  }
+
+  // Språket: flikarna byter ingressens språk och klotets ton; växlar själv tills någon klickar.
   const langSec = document.getElementById("sprak");
   const samplesEl = langSec?.querySelector<HTMLScriptElement>("[data-lang-samples]");
   if (langSec && samplesEl) {
-    const samples = JSON.parse(samplesEl.textContent || "[]") as { code: string; topic: string; title: string }[];
+    const samples = JSON.parse(samplesEl.textContent || "[]") as { code: string; lead: string }[];
     const HUES = [262, 200, 30, 330];
-    const topic = langSec.querySelector<HTMLElement>("[data-lang-topic]")!;
-    const title = langSec.querySelector<HTMLElement>("[data-lang-title]")!;
-    const chips = [...langSec.querySelectorAll<HTMLElement>(".lang-chip")];
+    const lead = langSec.querySelector<HTMLElement>("[data-lang-lead]")!;
+    const tabs = [...langSec.querySelectorAll<HTMLElement>(".lang-tab")];
     let i = 0;
     let timer = 0;
     const show = (k: number) => {
       const x = samples[k]!;
-      topic.textContent = x.topic;
-      swapWords(title, x.title);
-      chips.forEach((c, j) => c.classList.toggle("is-on", j === k));
+      lead.classList.add("is-switching");
+      window.setTimeout(() => {
+        lead.textContent = x.lead;
+        lead.classList.remove("is-switching");
+      }, 220);
+      tabs.forEach((t, j) => {
+        t.classList.toggle("is-on", j === k);
+        t.setAttribute("aria-selected", j === k ? "true" : "false");
+      });
       langSec.dataset.hue = String(HUES[k % HUES.length]);
-      w.__orbKick = (w.__orbKick ?? 0) + 1;
+      kick();
     };
     const start = () => {
       if (timer || reduced) return;
       timer = window.setInterval(() => {
         i = (i + 1) % samples.length;
         show(i);
-      }, 2800);
+      }, 3600);
     };
     const stop = () => {
       clearInterval(timer);
       timer = 0;
     };
     new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(langSec);
-    chips.forEach((c, k) =>
-      c.addEventListener("click", () => {
+    tabs.forEach((t, k) =>
+      t.addEventListener("click", () => {
         stop();
         i = k;
         show(k);
@@ -414,9 +455,10 @@ const faq = faqFor("home", lang);
   }
 
   // Recap och quiz i samma telefon: flikarna byter, och den växlar själv tills någon klickar.
-  document.querySelectorAll<HTMLElement>("[data-flip]").forEach((stage) => {
-    const flip = stage.querySelector<HTMLElement>(".scr-flip")!;
-    const tabs = [...stage.querySelectorAll<HTMLButtonElement>("[data-flip-tab]")];
+  const recapSec = document.getElementById("recap");
+  if (recapSec) {
+    const flip = recapSec.querySelector<HTMLElement>(".scr-flip")!;
+    const tabs = [...recapSec.querySelectorAll<HTMLButtonElement>("[data-flip-tab]")];
     let i = 0;
     let timer = 0;
     const show = (k: number) => {
@@ -441,6 +483,6 @@ const faq = faqFor("home", lang);
         show(k);
       }),
     );
-    new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(stage);
-  });
+    new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(recapSec);
+  }
 </script>
