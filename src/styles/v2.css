@@ -12,7 +12,6 @@
 /* ---------- Telefonen ---------- */
 .aphone {
   width: min(340px, calc((100svh - 160px) / 2.105), 78vw);
-  filter: drop-shadow(0 50px 80px rgba(0, 0, 0, 0.75));
 }
 .aphone-body {
   position: absolute;
