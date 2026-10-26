@@ -87,14 +87,27 @@
 }
 .hero-v3-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
   gap: 3rem;
   align-items: center;
   width: 100%;
 }
 .hero-v3-text {
   order: -1;
-  max-width: 34rem;
+  max-width: 49rem;
+}
+/* Raden under ingressen: det som rubriken och ingressen inte hann säga. */
+.hero-sub {
+  margin: 0.9rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+  max-width: 30rem;
+}
+/* Knappen och länken på samma baslinje. */
+.hero-v3 .actions .link-more {
+  margin-top: 0;
+  min-height: 56px;
 }
 .hero-v3-stage {
   position: relative;
@@ -165,8 +178,7 @@
 }
 .scene {
   position: relative;
-  height: 360svh;
-  scroll-snap-align: start;
+  height: 300svh;
 }
 .scene-pin {
   position: sticky;
@@ -232,7 +244,7 @@
   perspective: 1600px;
 }
 .scene-phone {
-  width: min(400px, calc((100svh - 120px) / 2.105), 78vw);
+  width: min(360px, calc((100svh - 120px) / 2.105), 78vw);
   --enter: 0;
   /* Anländer lutad och lite mindre; står rakt när sektionen fäster. */
   transform: rotateY(calc((1 - var(--enter)) * -18deg)) rotateX(calc((1 - var(--enter)) * 5deg)) scale(calc(0.9 + var(--enter) * 0.1));
@@ -385,7 +397,7 @@
 
 @media (max-width: 759px) {
   .scene {
-    height: 340svh;
+    height: 320svh;
   }
   .scene-pin {
     grid-template-columns: 1fr;
@@ -410,7 +422,7 @@
     padding-bottom: 1rem;
   }
   .scene-phone {
-    width: min(70vw, calc((100svh - 272px) / 2.105), 300px);
+    width: min(72vw, calc((100svh - 272px) / 2.105), 270px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -423,9 +435,55 @@
   }
 }
 
-/* ---------- Språket: klotet stort, små flikar i stället för runda knappar ---------- */
-.stage-language {
-  --orb-size: min(440px, 30vw);
+/* ---------- Språket: samma nyhet på fyra språk i telefonen, små flikar utanför ---------- */
+.scr-lang {
+  font-size: 15px;
+  line-height: 1.3;
+  color: #eceff4;
+}
+.aphone .scr-lang {
+  inset: 0;
+}
+.scr-lang > * {
+  position: absolute;
+}
+.scr-lang .scr-h1 {
+  top: 150px;
+}
+.scr-lang-list {
+  left: 0;
+  right: 0;
+  top: 220px;
+  height: 420px;
+}
+.scr-lang-b {
+  top: calc(var(--i) * 96px);
+  max-width: 236px;
+  opacity: 0.42;
+  transform: scale(0.96);
+  transition: opacity 420ms ease, transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 420ms ease, background-color 420ms ease;
+}
+.scr-lang-l {
+  left: 22px;
+}
+.scr-lang-r {
+  right: 22px;
+}
+.scr-lang-b small {
+  color: #9ba7b7;
+}
+.scr-lang-b.is-on {
+  opacity: 1;
+  transform: none;
+  background: linear-gradient(180deg, color-mix(in srgb, #f2b56b 20%, #1e222a), color-mix(in srgb, #f2b56b 9%, #171a20));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 217, 163, 0.22),
+    0 0 0 1.6px rgba(242, 181, 107, 0.32),
+    0 0 28px rgba(242, 181, 107, 0.14),
+    0 14px 32px rgba(0, 0, 0, 0.55);
+}
+.scr-lang-b.is-on small {
+  color: #f2b56b;
 }
 .lang-row {
   display: inline-flex;
@@ -455,7 +513,7 @@
   color: var(--ink);
 }
 
-/* ---------- Ledningen: laptopen stor under rubriken ---------- */
+/* ---------- Ledningen: admin-kortet i läsbar storlek, på alla skärmar ---------- */
 .lead-wrap {
   display: flex;
   flex-direction: column;
@@ -473,17 +531,11 @@
   align-items: center;
   gap: 1.25rem;
 }
-.lead-laptop {
-  width: min(100%, 980px);
-}
-.lead-laptop .alaptop {
-  width: 100%;
-}
-.only-m {
-  display: none;
+.lead-stage .admc {
+  max-width: 560px;
 }
 
-/* Admin-kortet i mobilen */
+/* Admin-kortet */
 .admc {
   width: 100%;
   box-sizing: border-box;
@@ -578,9 +630,6 @@
 
 /* ---------- Mobil: hela telefoner, inget avklipp, inget snäpp ---------- */
 @media (max-width: 759px) {
-  .only-m {
-    display: block;
-  }
   .lead-wrap {
     gap: 1.5rem;
     text-align: left;
@@ -596,8 +645,9 @@
     justify-content: center;
     padding: 0.5rem 0 1rem;
   }
+  /* En telefonstorlek i mobilen: 270 px. */
   .stage-device .aphone {
-    width: min(62vw, 250px);
+    width: min(72vw, 270px);
   }
   .split-stage {
     order: 2;
@@ -605,16 +655,8 @@
   .split.orb-left .split-stage {
     order: 2;
   }
-  /* Språket: klotet ovanför texten som förut. */
-  .lang-split .split-stage {
-    order: -1;
-  }
   .hide-m {
     display: none !important;
-  }
-  .stage-language {
-    --orb-size: min(56vw, 30svh);
-    min-height: calc(var(--orb-size) + 40px);
   }
   .section {
     padding-top: 3.5rem;
@@ -687,4 +729,178 @@
 [data-lang-lead].is-switching {
   opacity: 0;
   transform: translateY(4px);
+}
+
+/* ---------- 2026-10-26, tjugo punkter: typskala, inget snäpp, en telefonstorlek, linjer i stället för kort ---------- */
+/* Typskalan: hero 68, sektion 44, scenens steg 36 (px vid full bredd; rem-basen är 14 px). */
+.title-hero {
+  font-size: clamp(2.6rem, 5.2vw, 4.857rem);
+}
+.title-xl {
+  font-size: clamp(2rem, 3.4vw, 3.143rem);
+}
+.scene-step .title-xl {
+  font-size: clamp(1.9rem, 2.8vw, 2.571rem);
+}
+
+/* Inget snäpp, inga tomma hav: sektionerna har innehållets höjd. Heron är ensam om hela skärmen. */
+html.snap {
+  scroll-snap-type: none;
+}
+.section,
+.sub-hero,
+.sub-section,
+.sub-cta,
+.footer {
+  min-height: 0;
+  scroll-snap-align: none;
+}
+.section {
+  padding-top: clamp(4.5rem, 12vh, 8rem);
+  padding-bottom: clamp(4.5rem, 12vh, 8rem);
+}
+.section.hero-v3,
+.section.sub-top {
+  min-height: 100svh;
+}
+.section.closing {
+  padding-top: clamp(6rem, 18vh, 11rem);
+  padding-bottom: clamp(6rem, 18vh, 11rem);
+}
+@media (max-width: 759px) {
+  .section.hero-v3 {
+    min-height: 100svh;
+  }
+  .section.sub-top {
+    min-height: 0;
+  }
+  .section.closing {
+    min-height: 0;
+  }
+}
+
+/* En telefonstorlek per skärm: 360 px på datorn (270 i mobilen, ovan). */
+@media (min-width: 760px) {
+  .stage-device .aphone {
+    width: min(360px, calc((100svh - 160px) / 2.105));
+  }
+}
+
+/* Linjer i stället för kort – samma grammatik på Trygghet och Pris som på startsidan. */
+.tile,
+.plan,
+.tile.tile-black {
+  border-radius: 0;
+  padding: 1.4rem 0 0;
+  background: transparent;
+  box-shadow: none;
+  border-top: 1px solid rgba(236, 239, 244, 0.22);
+}
+.plan {
+  padding-top: 2rem;
+}
+a.tile:hover {
+  border-top-color: rgba(236, 239, 244, 0.5);
+}
+
+/* Mobilens topplinje: "Prova gratis" som pill, menyn bredvid. */
+@media (max-width: 759px) {
+  .nav-right .nav-start {
+    display: inline-flex;
+    min-height: 36px;
+    padding: 0 0.9rem;
+    font-size: 0.875rem;
+  }
+  .nav.is-scrolled .nav-start {
+    display: inline-flex;
+  }
+}
+
+/* Sidfoten: tyst – logotyp, fyra länkar, språk, kontakt. Katalogen bakom "Mer". */
+.footer {
+  padding-top: clamp(3rem, 8vh, 5rem);
+  padding-bottom: 1.6rem;
+  justify-content: flex-start;
+  gap: 0;
+}
+.footer-quiet {
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem 2.4rem;
+}
+.footer-quiet .logo {
+  width: 150px;
+  height: 22px;
+  margin-right: auto;
+}
+.footer-main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.6rem;
+}
+.footer-main a,
+.footer-quiet .footer-lang,
+.footer-quiet .footer-mail {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+}
+.footer-main a:hover,
+.footer-quiet .footer-lang:hover,
+.footer-quiet .footer-mail:hover {
+  color: var(--ink);
+}
+.footer-more {
+  width: 100%;
+  max-width: var(--max);
+  margin: 2.2rem auto 0;
+  border-top: 1px solid rgba(236, 239, 244, 0.1);
+}
+.footer-more summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.1rem 0;
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+.footer-more summary::-webkit-details-marker {
+  display: none;
+}
+.footer-more summary::after {
+  content: "+";
+  font-weight: 300;
+}
+.footer-more[open] summary::after {
+  content: "–";
+}
+.footer-more summary:hover {
+  color: var(--ink);
+}
+.footer-more .footer-cols {
+  padding: 1rem 0 2rem;
+}
+.footer-foot {
+  margin-top: 1.6rem;
+}
+@media (max-width: 759px) {
+  .footer-quiet {
+    gap: 1rem 1.4rem;
+  }
+  .footer-quiet .logo {
+    width: 100%;
+    margin-right: 0;
+  }
+  .footer-main {
+    width: 100%;
+    gap: 0.6rem 1.2rem;
+  }
+  .footer-col h3 button {
+    padding: 0.85rem 0;
+  }
 }

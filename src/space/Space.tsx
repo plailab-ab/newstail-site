@@ -231,11 +231,15 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
         if (lastIndex >= 0) energy = 1;
         lastIndex = idx;
       }
+      // Saknar nästa sektion klot (alpha 0) tonar klotet bort DÄR DET STÅR i stället för att
+      // flyga mot en osynlig plats – och tänds på plats när en sektion med klot kommer (2026-10-26).
+      const out = b.alpha < 0.01 && a.alpha >= 0.01;
+      const inn = a.alpha < 0.01 && b.alpha >= 0.01;
       return {
         hue: lerpHue(a.hue, b.hue, u),
-        x: lerp(a.x, b.x, u),
-        y: lerp(a.y, b.y, u),
-        r: lerp(a.r, b.r, u),
+        x: out ? a.x : inn ? b.x : lerp(a.x, b.x, u),
+        y: out ? a.y : inn ? b.y : lerp(a.y, b.y, u),
+        r: out ? a.r : inn ? b.r : lerp(a.r, b.r, u),
         alpha: lerp(a.alpha, b.alpha, u),
       };
     };

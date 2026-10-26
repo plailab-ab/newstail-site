@@ -1,0 +1,33 @@
+---
+/**
+ * Språket (2026-10-26): samma interna nyhet som pratbubblor på fyra språk, i telefonen.
+ * Den tända bubblan styrs av sektionen (data-lang-b + is-on); texten utanför byts bara när
+ * någon trycker på en flik.
+ */
+export type LangBubble = { code: string; name: string; title: string };
+interface Props {
+  company: string;
+  heading: string;
+  items: LangBubble[];
+  avatar?: string;
+}
+const { company, heading, items, avatar = "AL" } = Astro.props;
+---
+
+<div class="scr-lang">
+  <div class="scr-hd">
+    <span class="scr-btn" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#eceff4" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="13" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 19v3M8 22h8"></path></svg></span>
+    <span class="scr-company">{company}</span>
+    <span class="scr-avatar" aria-hidden="true">{avatar}</span>
+  </div>
+  <span class="scr-h1">{heading}</span>
+  <div class="scr-lang-list">
+    {items.map((x, i) => (
+      <span class={`scr-bubble scr-lang-b${i === 0 ? " is-on" : ""} ${i % 2 ? "scr-lang-r" : "scr-lang-l"}`} data-lang-b={i} style={`--i: ${i}`}>
+        <small>{x.code} · {x.name}</small>
+        {x.title}
+      </span>
+    ))}
+  </div>
+  <img class="scr-rest" src="/orbs/orb-262.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
+</div>

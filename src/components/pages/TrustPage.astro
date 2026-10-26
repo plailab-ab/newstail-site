@@ -2,7 +2,7 @@
 /**
  * Trygghet: vad ledningen ser och aldrig ser, vad medarbetaren bestämmer, var innehållet kommer
  * ifrån, och papperen för IT. Påståendena följer docs/TREDJEPARTER.md (aggregat från fem personer,
- * databasen i Stockholm).
+ * lagras inom EU).
  */
 import FaqList from "../FaqList.astro";
 import { faqFor } from "../../content/faq";
@@ -26,7 +26,7 @@ const c = sv
       facts: [
         ["Mönster, aldrig personer", "Teamet, aldrig vem."],
         ["Ingen AI tränas på era data", "De används bara för era sändningar."],
-        ["Databasen i Stockholm", "Era data lagras inom EU."],
+        ["Lagras inom EU", "Era data lämnar inte unionen."],
         ["Ni styr vem som publicerar", "Bara de ni utser."],
       ],
       seesKicker: "Ledningen",
@@ -85,7 +85,7 @@ const c = sv
       facts: [
         ["Patterns, never people", "The team, never who."],
         ["No AI is trained on your data", "It's only used for your broadcasts."],
-        ["Database in Stockholm", "Your data is stored within the EU."],
+        ["Stored within the EU", "Your data never leaves the union."],
         ["You decide who publishes", "Only the people you choose."],
       ],
       seesKicker: "Management",

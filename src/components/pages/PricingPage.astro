@@ -16,20 +16,19 @@ const PRICE = sv ? 179 : 17;
 
 const c = sv
   ? {
-      h1: "179 kr per användare och månad.",
-      lead: "Ett pris, ingen bindning. Ni bjuder in dem som ska vara med – och betalar för dem. Tio användare ingår.",
+      h1: "Ett pris. Ingen bindning.",
+      lead: "Ni bjuder in dem som ska vara med och betalar per användare. Minst tio användare.",
       plan: "Newstail",
       unit: "kr",
       per: "per användare och månad",
-      checks: ["Allt ingår", "10 användare ingår", "Ingen bindningstid", "Ni ser beloppet innan det dras"],
+      checks: ["Allt ingår", "Minst tio användare", "Ingen bindningstid", "Ni ser beloppet innan det dras"],
       cta: "Prova gratis i 14 dagar",
       fine: "Inget kort under provperioden. Priser exkl. moms. 17 € i övriga Europa, 18 $ i resten av världen.",
       calcKicker: "Räkna",
       calcTitle: "Vad kostar det för er?",
       emp: "Användare",
       month: "kr/mån",
-      perYear: (n: number) => `${n.toLocaleString("sv-SE")} kr per år`,
-      floor: "Tio användare ingår – 1 790 kr i månaden.",
+      floor: "Minst tio användare – 1 790 kr i månaden.",
       dotScale: "En prick = fem personer",
       payKicker: "Betalningen",
       payTitle: "Ni vet beloppet innan det dras.",
@@ -46,20 +45,19 @@ const c = sv
       big: "Volympris över 1 000 användare – hör av er",
     }
   : {
-      h1: "€17 per user and month.",
-      lead: "One price, no lock-in. You invite the people who should be in – and pay for them. Ten users included.",
+      h1: "One price. No lock-in.",
+      lead: "You invite the people who should be in and pay per user. Ten users minimum.",
       plan: "Newstail",
       unit: "€",
       per: "per user and month",
-      checks: ["Everything included", "10 users included", "No lock-in", "You see the amount before it's charged"],
+      checks: ["Everything included", "Ten users minimum", "No lock-in", "You see the amount before it's charged"],
       cta: "Try it free for 14 days",
       fine: "No card during the trial. Prices excl. VAT. SEK 179 in Sweden, $18 outside Europe.",
       calcKicker: "Calculate",
       calcTitle: "What does it cost for you?",
       emp: "Users",
       month: "€/mo",
-      perYear: (n: number) => `€${n.toLocaleString("en-GB")} per year`,
-      floor: "Ten users included – €170 a month.",
+      floor: "Ten users minimum – €170 a month.",
       dotScale: "One dot = five people",
       payKicker: "Payment",
       payTitle: "You know the amount before it's charged.",
@@ -113,7 +111,6 @@ const E0 = 34;
         </label>
         <div class="calc-sum" aria-live="polite">
           <b><span data-out="sum">{sv ? `${(E0 * PRICE).toLocaleString("sv-SE")}` : `€${(E0 * PRICE).toLocaleString("en-GB")}`}</span><small>{c.month}</small></b>
-          <span data-out="year">{c.perYear(E0 * PRICE * 12)}</span>
           <em data-out="floor" hidden>{c.floor}</em>
         </div>
       </div>
@@ -186,7 +183,6 @@ const E0 = 34;
       const sum = billed * price;
       out("emp").textContent = String(e);
       out("sum").textContent = money(sum);
-      out("year").textContent = sv ? `${money(sum * 12)} kr per år` : `${money(sum * 12)} per year`;
       out("floor").hidden = e >= 10;
       const per = e > 300 ? 25 : e > 60 ? 5 : 1;
       out("scale").hidden = per === 1;

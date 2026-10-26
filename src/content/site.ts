@@ -40,8 +40,9 @@ export const altOf = (lang: Lang, key: RouteKey) => ROUTES[lang === "sv" ? "en" 
 
 export const UI = {
   sv: {
-    nav: { how: "Så funkar det", trust: "Trygghet", pricing: "Pris", login: "Logga in", start: "Prova gratis", switch: "EN", menu: "Meny" },
+    nav: { how: "Så funkar det", trust: "Trygghet", pricing: "Pris", about: "Om oss", login: "Logga in", start: "Prova gratis", switch: "EN", menu: "Meny" },
     otherLang: "English",
+    more: "Mer",
     listen: "Lyssna 30 s",
     listening: "Spelar",
     start: "Prova gratis",
@@ -53,8 +54,9 @@ export const UI = {
     legal: "© 2026 Newstail · Plailab AB",
   },
   en: {
-    nav: { how: "How it works", trust: "Trust", pricing: "Pricing", login: "Log in", start: "Try it free", switch: "SV", menu: "Menu" },
+    nav: { how: "How it works", trust: "Trust", pricing: "Pricing", about: "About us", login: "Log in", start: "Try it free", switch: "SV", menu: "Menu" },
     otherLang: "Svenska",
+    more: "More",
     listen: "Listen 30 s",
     listening: "Playing",
     start: "Try it free",
