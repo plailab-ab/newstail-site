@@ -959,17 +959,22 @@ a.tile:hover {
 }
 .center-stage {
   position: relative;
-  width: min(100%, 720px);
+  width: min(100%, 840px);
   min-height: 0;
 }
 .center-stage .floater {
   max-width: 220px;
 }
-.chips-float {
-  position: absolute;
-  margin: 0;
+.floater-teams {
   max-width: 230px;
-  justify-content: flex-end;
+}
+.floater-teams .chips {
+  margin: 0.5rem 0 0;
+  gap: 0.35rem;
+}
+.floater-teams .chip {
+  font-size: 0.8125rem;
+  padding: 0.3rem 0.65rem;
 }
 .center-stage .floater-inside {
   top: 26%;
