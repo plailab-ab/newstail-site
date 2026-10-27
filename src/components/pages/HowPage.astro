@@ -1,19 +1,18 @@
 ---
 /**
- * Så funkar det (2026-10-26, i startsidans grammatik): en idé per skärm – rubrik, ingress och
- * en hel telefon. Inga etiketter, inget band, inga kort. Tre roller i följd: den som lyssnar
- * (sändningen, språket, efteråt, ikapp), den som publicerar (publicera, fredagsmejlet) och
- * ledningen (admin-kortet). Sist: från registrering till första sändning.
+ * Så funkar det (2026-10-27, "under huven"): startsidan säljer känslan, den här sidan ger
+ * förtroendet. Problemet (bruset) → vi lyssnar på allt → vaskar fram det som är ert (stapeln)
+ * → det interna som ingen läser → det du själv brinner för → och allt det blir ett svep
+ * (telefonen, en gång) → från registrering till första sändning. Illustrationer i stället för
+ * telefoner; tekniskt i känslan, utan att avslöja leverantörer eller arkitektur.
  */
 import Phone from "../air/Phone.astro";
-import ScreenPlayer from "../air/ScreenPlayer.astro";
-import ScreenLang from "../air/ScreenLang.astro";
-import ScreenRecap from "../air/ScreenRecap.astro";
-import ScreenIkapp from "../air/ScreenIkapp.astro";
-import ScreenPublish from "../air/ScreenPublish.astro";
-import MailCard from "../air/MailCard.astro";
-import AdminCard from "../air/AdminCard.astro";
+import ScreenHome from "../air/ScreenHome.astro";
 import IconRow from "../IconRow.astro";
+import Noise from "../how/Noise.astro";
+import Intake from "../how/Intake.astro";
+import Compare from "../how/Compare.astro";
+import Topics from "../how/Topics.astro";
 import { ROUTES, START_URL, UI, type Lang } from "../../content/site";
 
 interface Props {
@@ -25,37 +24,31 @@ const ui = UI[lang];
 const R = ROUTES[lang];
 const REST = "0.5,0.5,0.1,0";
 const id = sv
-  ? { listen: "lyssnar", lang: "sprak", after: "efterat", ikapp: "ikapp", publish: "publicerar", friday: "fredag", leaders: "ledningen", start: "kom-igang" }
-  : { listen: "listen", lang: "languages", after: "after", ikapp: "caught-up", publish: "publish", friday: "friday", leaders: "leaders", start: "get-started" };
+  ? { problem: "bruset", listen: "lyssnar", pick: "urvalet", inside: "publicerar", own: "eget", swipe: "svepet", start: "kom-igang", lang: "sprak", leaders: "ledningen" }
+  : { problem: "noise", listen: "listen", pick: "selection", inside: "publish", own: "own", swipe: "swipe", start: "get-started", lang: "languages", leaders: "leaders" };
 
 const c = sv
   ? {
-      h1: "Så funkar det.",
-      lead: "Dra upp. Värden börjar berätta.",
-      heroIcons: [["clock", "Tre till tio minuter"], ["headphones", "Internt först"], ["check", "Det hörda hoppas över"]],
-      langTitle: "Samma budskap. Ditt språk.",
-      langLead: "Anna spelade in det på svenska. Alla hörde det på sitt språk.",
-      langHeading: "Samma nyhet.",
-      langs: [
-        { code: "SV", name: "Svenska", title: "Vi förvärvar två fastigheter i centrala Växjö" },
-        { code: "EN", name: "English", title: "We are acquiring two properties in central Växjö" },
-        { code: "DE", name: "Deutsch", title: "Wir erwerben zwei Immobilien im Zentrum von Växjö" },
-        { code: "ES", name: "Español", title: "Adquirimos dos inmuebles en el centro de Växjö" },
-      ],
-      afterTitle: "Efteråt: läs mer, dela, minns.",
-      afterIcons: [["doc", "Punkterna med källor"], ["share", "Skicka till en kollega"], ["check", "Ett kort quiz"]],
-      ikappTitle: "Du är ikapp.",
-      ikappLead: "Det du behöver veta. Inget annat. Klotet blir dagens stjärna – sju blir veckans stjärnbild.",
-      ikappBtn: "Se ögonblicket",
-      pubTitle: "Säg det en gång. Vi läser upp det.",
-      pubLead: "Bara de ni utser kan publicera.",
-      pubIcons: [["mic", "Tala in"], ["pen", "Eller skriv"], ["team", "Välj vilka som hör det"]],
-      teams: ["Alla", "Förvaltning Jönköping", "Förvaltning Växjö", "Projekt"],
-      friTitle: "Missade man det, kommer det på fredag.",
-      friLead: "Den som inte hört ett internt budskap får det i fredagsmejlet. Ledningen får veckans ”34 av 41”.",
-      leadTitle: "Se att det når fram.",
-      leadIcons: [["team", "Per team"], ["lock", "Aldrig per person"], ["bars", "Räckvidd och minne"]],
-      leadLink: "Vad ledningen inte ser",
+      h1: "Nyheterna finns. Ingen hinner.",
+      lead: "Branschen, marknaderna och det interna – på olika språk, från olika källor, publicerat när som helst. För mycket för en människa. Lagom för en värd.",
+      m: ["Oberoende av språk", "Oberoende av klockslag", "Oberoende av hur många källor"],
+      listenTitle: "Vi lyssnar på allt. Hela tiden.",
+      listenLead: "Det som publiceras klockan tre på natten på tyska fångas lika säkert som morgonens svenska rubrik.",
+      listenIcons: [["globe", "Alla språk"], ["clock", "Dygnet runt"], ["check", "Samma nyhet från flera källor blir en"]],
+      pickTitle: "Vaskar fram det som är ert.",
+      pickLead: "Ur bruset blir det en sändning: det interna först, sedan er bransch och era marknader, sist det du själv följer. Det du redan hört hoppas över.",
+      bandHead: "Dagens sändning för Anna, förvaltare i Jönköping",
+      groups: ["Internt – alla hör det", "Er omvärld – efter roll", "Ditt eget"],
+      insideTitle: "Det interna som ingen läser.",
+      insideLead: "Nyhetsbrevet ligger oläst. Säg det i stället en gång – med värdens röst, först i allas sändning – och se hur många som hört det.",
+      insideIcons: [["mic", "Tala in eller skriv"], ["team", "Välj vilka som hör det"], ["eye", "Per team, aldrig per person"]],
+      ownTitle: "Det du själv brinner för.",
+      ownLead: "Räntor, energikrav eller HV71 – följ med ett tryck. Sändningen lär sig av vad du håller klotet på och vad du sveper förbi.",
+      ownIcons: [["star", "Följ med ett tryck"], ["bell", "Något nytt varje dag"], ["check", "Blir bättre för varje sändning"]],
+      swipeTitle: "Och allt det här blir … ett svep.",
+      swipeLead: "Så mycket teknik. Så lite att göra. Dra upp klotet och lyssna, tre till tio minuter – på det språk du väljer av fyra.",
+      swipeIcons: [["headphones", "Dra upp. Lyssna."], ["globe", "Fyra språk"], ["clock", "Tre till tio minuter"]],
+      swipeLink: "Se det på startsidan",
       startTitle: "Från registrering till första sändning.",
       startLead: "Samma dag. Inga integrationer.",
       startSteps: [
@@ -64,34 +57,30 @@ const c = sv
         ["Bjud in kollegorna", "Ett mejl var. De är inne på en minut."],
         ["Första sändningen", "Samma dag."],
       ],
+      sceneGreeting: "Hej Anna.",
+      sceneDate: "Torsdag 23 oktober",
     }
   : {
-      h1: "How it works.",
-      lead: "Pull up. The host starts talking.",
-      heroIcons: [["clock", "Three to ten minutes"], ["headphones", "Internal first"], ["check", "Heard stories skipped"]],
-      langTitle: "Same message. Your language.",
-      langLead: "Anna recorded it in Swedish. Everyone heard it in their own language.",
-      langHeading: "Same story.",
-      langs: [
-        { code: "EN", name: "English", title: "We are acquiring two properties in central Växjö" },
-        { code: "SV", name: "Svenska", title: "Vi förvärvar två fastigheter i centrala Växjö" },
-        { code: "DE", name: "Deutsch", title: "Wir erwerben zwei Immobilien im Zentrum von Växjö" },
-        { code: "ES", name: "Español", title: "Adquirimos dos inmuebles en el centro de Växjö" },
-      ],
-      afterTitle: "Afterwards: read more, share, remember.",
-      afterIcons: [["doc", "The stories with sources"], ["share", "Send to a colleague"], ["check", "A short quiz"]],
-      ikappTitle: "You're caught up.",
-      ikappLead: "What you need to know. Nothing else. The orb becomes today's star – seven make the week's constellation.",
-      ikappBtn: "See the moment",
-      pubTitle: "Say it once. We read it out.",
-      pubLead: "Only the people you choose can publish.",
-      pubIcons: [["mic", "Record"], ["pen", "Or type"], ["team", "Choose who hears it"]],
-      teams: ["Everyone", "Property mgmt Jönköping", "Property mgmt Växjö", "Projects"],
-      friTitle: "Missed it? It comes on Friday.",
-      friLead: "Anyone who hasn't heard an internal message gets it in the Friday email. Management gets the week's “34 of 41”.",
-      leadTitle: "See that it gets through.",
-      leadIcons: [["team", "Per team"], ["lock", "Never per person"], ["bars", "Reach and recall"]],
-      leadLink: "What management never sees",
+      h1: "The news is out there. Nobody has the time.",
+      lead: "The industry, the markets and the internal – in different languages, from different sources, published at any hour. Too much for a person. Just right for a host.",
+      m: ["Regardless of language", "Regardless of the hour", "Regardless of how many sources"],
+      listenTitle: "We listen to everything. All the time.",
+      listenLead: "What is published at three in the morning in German is caught as surely as the Swedish headline of the morning.",
+      listenIcons: [["globe", "Every language"], ["clock", "Around the clock"], ["check", "Several sources, one story"]],
+      pickTitle: "We sift out what is yours.",
+      pickLead: "Out of the noise comes a broadcast: internal first, then your industry and markets, last what you follow yourself. Anything you've already heard is skipped.",
+      bandHead: "Today's broadcast for Anna, property manager in Jönköping",
+      groups: ["Internal – everyone hears it", "Your world – by role", "Your own"],
+      insideTitle: "The internal news nobody reads.",
+      insideLead: "The newsletter sits unread. Say it once instead – in the host's voice, first in everyone's broadcast – and see how many heard it.",
+      insideIcons: [["mic", "Record or type"], ["team", "Choose who hears it"], ["eye", "Per team, never per person"]],
+      ownTitle: "What you care about.",
+      ownLead: "Interest rates, energy rules or HV71 – follow with one tap. The broadcast learns from what you hold the orb on and what you swipe past.",
+      ownIcons: [["star", "Follow with one tap"], ["bell", "Something new every day"], ["check", "Better with every broadcast"]],
+      swipeTitle: "And all of this becomes … one swipe.",
+      swipeLead: "So much technology. So little to do. Pull up the orb and listen, three to ten minutes – in the language you choose out of four.",
+      swipeIcons: [["headphones", "Pull up. Listen."], ["globe", "Four languages"], ["clock", "Three to ten minutes"]],
+      swipeLink: "See it on the start page",
       startTitle: "From sign-up to first broadcast.",
       startLead: "The same day. No integrations.",
       startSteps: [
@@ -100,168 +89,142 @@ const c = sv
         ["Invite your colleagues", "One email each. They are in within a minute."],
         ["The first broadcast", "The same day."],
       ],
+      sceneGreeting: "Hi Anna.",
+      sceneDate: "Thursday 23 October",
     };
 
-const player = sv
+const band = [
+  [sv ? "Internt" : "Internal", sv ? "Hyresförhandlingen för 2027 är klar" : "The 2027 rent negotiation is done", 112, 72],
+  [sv ? "Internt" : "Internal", sv ? "Hyresgästdag i Linden på torsdag" : "Tenant day at Linden", 96, 60],
+  [sv ? "Räntor" : "Rates", sv ? "Sänkning före jul?" : "A cut before Christmas?", 150, 150],
+  [sv ? "Lokalmarknaden" : "Office market", sv ? "Vakanserna minskar" : "Fewer empty offices", 128, 200],
+  [sv ? "Energi" : "Energy", sv ? "Nya krav på energideklarationer" : "New energy rating rules", 150, 120],
+  [sv ? "Stadsutveckling" : "City development", sv ? "1 200 bostäder vid Munksjön" : "1,200 homes by Munksjön", 166, 260],
+  ["HV71", sv ? "Vände och vann i Linköping" : "Came back to win in Linköping", 140, 350],
+  [sv ? "Något nytt" : "Something new", sv ? "Solceller på taken" : "Solar on the roofs", 144, 300],
+] as [string, string, number, number][];
+const groupW = [band[0]![2] + band[1]![2], band[2]![2] + band[3]![2] + band[4]![2] + band[5]![2], band[6]![2] + band[7]![2]];
+const bubbles = sv
   ? [
-      { topic: "INTERNT", title: "Vi förvärvar två fastigheter i centrala Växjö", src: "Anna Lindqvist", hue: 72, inside: true },
-      { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Dagens industri · SvD", hue: 150 },
-      { topic: "NÅGOT NYTT", title: "Solceller på taken: nya stödregler för flerbostadshus", src: "2 källor", hue: 300 },
+      { label: "Internt", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
+      { label: "Bransch", kind: "industry" as const, title: "Hyror upp 3,2 % i Småland" },
+      { label: "Räntor", kind: "own" as const, title: "Marknaden räknar med sänkning före jul" },
+      { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar i Småland" },
+      { label: "Något nytt", kind: "surprise" as const, title: "Nya energikrav från årsskiftet" },
     ]
   : [
-      { topic: "INTERNAL", title: "We are acquiring two properties in central Växjö", src: "Anna Lindqvist", hue: 72, inside: true },
-      { topic: "RATES", title: "The market expects a cut before Christmas", src: "Dagens industri · SvD", hue: 150 },
-      { topic: "SOMETHING NEW", title: "Solar on the roofs: new support for apartment blocks", src: "2 sources", hue: 300 },
+      { label: "Internal", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
+      { label: "Industry", kind: "industry" as const, title: "Rents up 3.2 % in Småland" },
+      { label: "Rates", kind: "own" as const, title: "The market expects a cut before Christmas" },
+      { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
+      { label: "Something new", kind: "surprise" as const, title: "New energy rules from the new year" },
     ];
-const recap = sv
-  ? {
-      date: "Idag",
-      sub: "7 punkter · 6 min",
-      send: "Skicka till kollega",
-      share: "Dela",
-      items: [
-        { topic: "RÄNTOR", title: "Ränteläget: marknaden räknar med sänkning före jul", text: "Bankerna räknar med en sänkning men inte hur stor. Det påverkar värderingarna inför bokslutet.", src: "3 källor" },
-        { topic: "LOKALMARKNADEN", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "2 källor" },
-      ],
-      sheet: { title: "Skicka till", people: ["Johan", "Sara", "Elif", "Mateusz"], note: "Värt att ha med sig inför budgetmötet.", button: "Skicka", foot: "Johan hör det i sin nästa sändning." },
-    }
-  : {
-      date: "Today",
-      sub: "7 stories · 6 min",
-      send: "Send to colleague",
-      share: "Share",
-      items: [
-        { topic: "RATES", title: "Rates: the market expects a cut before Christmas", text: "Banks expect a cut but not how big. It affects valuations ahead of year-end.", src: "3 sources" },
-        { topic: "OFFICE MARKET", title: "Fewer empty offices in Småland", src: "2 sources" },
-      ],
-      sheet: { title: "Send to", people: ["Johan", "Sara", "Elif", "Mateusz"], note: "Worth having before the budget meeting.", button: "Send", foot: "Johan hears it in his next broadcast." },
-    };
-const ikapp = sv
-  ? { before: "Sista nyheten slutar …", done: "Du är ikapp.", streak: "Dra för att höra den igen.", recap: "Recap", quiz: "Quiz" }
-  : { before: "The last story ends …", done: "You're caught up.", streak: "Pull up to hear it again.", recap: "Recap", quiz: "Quiz" };
-const publish = sv
-  ? { head: "NORDVIK", eyebrow: "NY INTERN NYHET", title: "Vad vill du berätta?", hint: "Tryck på klotet för att börja spela in.", write: "Skriv istället", published: "Publicerat" }
-  : { head: "NORDVIK", eyebrow: "NEW INTERNAL NEWS", title: "What do you want to say?", hint: "Tap the orb to start recording.", write: "Type instead", published: "Published" };
-const mail = sv
-  ? { from: "Newstail", when: "fre 15:00", subject: "Det här missade du", company: "NORDVIK", title: "Det här missade du", sub: "Två interna budskap från veckan.", items: ["Hyresförhandlingen för 2027 är klar", "Hyresgästdag i Kvarteret Linden på torsdag"], tag: "INTERNT", button: "Lyssna i appen" }
-  : { from: "Newstail", when: "Fri 15:00", subject: "What you missed", company: "NORDVIK", title: "What you missed", sub: "Two internal messages from this week.", items: ["The 2027 rent negotiation is done", "Tenant day at Kvarteret Linden on Thursday"], tag: "INTERNAL", button: "Listen in the app" };
 ---
 
-<!-- 1. Sändningen – också sidans hero -->
-<section class="section sub-top" id={id.listen} data-space data-hue="150" data-orb={REST} data-watch>
-  <div class="split">
-    <div class="split-text stack">
+<!-- 1. Problemet: bruset -->
+<section class="section sub-top how-hero" id={id.problem} data-space data-hue="200" data-orb={REST} data-watch>
+  <div class="wide">
+    <div class="wide-head stack how-hero-text">
       <h1 class="title-hero">{c.h1}</h1>
       <p class="lead">{c.lead}</p>
-      <IconRow items={c.heroIcons as any} />
     </div>
-    <div class="split-stage stage-device">
-      <Phone label={sv ? "Sändningen i Newstail-appen" : "The broadcast in the Newstail app"}>
-        <ScreenPlayer items={player} done={sv ? "Avsluta" : "End"} />
-      </Phone>
+    <Noise lang={lang} />
+    <ul class="how-meta" aria-hidden="true">
+      {c.m.map((x) => <li>{x}</li>)}
+    </ul>
+  </div>
+</section>
+
+<!-- 2. Vi lyssnar på allt -->
+<section class="section" id={id.listen} data-space data-hue="200" data-orb={REST} data-watch>
+  <div class="split orb-left how-split">
+    <div class="split-text stack">
+      <h2 class="title-xl">{c.listenTitle}</h2>
+      <p class="lead">{c.listenLead}</p>
+      <IconRow items={c.listenIcons as any} />
+    </div>
+    <div class="split-stage how-stage">
+      <Intake lang={lang} />
     </div>
   </div>
 </section>
 
-<!-- 2. Språket -->
-<section class="section" id={id.lang} data-space data-hue="262" data-orb={REST} data-watch>
-  <div class="split orb-left">
-    <div class="split-text stack">
-      <h2 class="title-xl">{c.langTitle}</h2>
-      <p class="lead">{c.langLead}</p>
+<!-- 3. Urvalet: stapeln -->
+<section class="section" id={id.pick} data-space data-hue="150" data-orb={REST} data-watch>
+  <div class="wide">
+    <div class="wide-head stack">
+      <h2 class="title-xl">{c.pickTitle}</h2>
+      <p class="lead">{c.pickLead}</p>
     </div>
-    <div class="split-stage stage-device" data-lang-cycle>
-      <Phone label={sv ? "Samma interna nyhet på fyra språk" : "The same internal story in four languages"}>
-        <ScreenLang company="NORDVIK" heading={c.langHeading} items={c.langs} />
-      </Phone>
-    </div>
-  </div>
-</section>
-
-<!-- 3. Efteråt -->
-<section class="section" id={id.after} data-space data-hue="300" data-orb={REST} data-watch>
-  <div class="split">
-    <div class="split-text stack">
-      <h2 class="title-xl">{c.afterTitle}</h2>
-      <IconRow items={c.afterIcons as any} />
-    </div>
-    <div class="split-stage stage-device">
-      <Phone label={sv ? "Recapen med Skicka till kollega" : "The recap with Send to colleague"}>
-        <ScreenRecap lang={lang} {...recap} />
-      </Phone>
-    </div>
-  </div>
-</section>
-
-<!-- 4. Ikapp -->
-<section class="section" id={id.ikapp} data-space data-hue="300" data-orb={REST} data-watch>
-  <div class="split orb-left">
-    <div class="split-text stack">
-      <h2 class="title-xl">{c.ikappTitle}</h2>
-      <p class="lead">{c.ikappLead}</p>
-      <div class="actions">
-        <button class="pill pill-secondary pill-lg" type="button" data-ikapp-replay>
-          <svg width="11" height="11" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><path d="M3 1.5v9l7.5-4.5z"></path></svg>
-          {c.ikappBtn}
-        </button>
+    <div class="band" aria-label={c.bandHead}>
+      <div class="band-head"><span>{c.bandHead}</span><span>6 min 12 s</span></div>
+      <div class="band-groups" aria-hidden="true">
+        {groupW.map((w, i) => <div class="band-group" style={`flex: ${w} 1 0`}><span>{c.groups[i]}</span></div>)}
+      </div>
+      <div class="band-segs" aria-hidden="true">
+        {band.map(([, , w, h], i) => <span class="band-seg" style={`flex: ${w} 1 0; --h: ${h}; --i: ${i}`} />)}
+      </div>
+      <div class="band-labels">
+        {band.map(([t, d, w]) => (
+          <div style={`flex: ${w} 1 0`}>
+            <small>{t}</small>
+            <span>{d}</span>
+          </div>
+        ))}
+      </div>
+      <div class="band-legend">
+        {c.groups.map((g) => <span>{g}</span>)}
       </div>
     </div>
-    <div class="split-stage stage-device">
-      <Phone label={sv ? "Du är ikapp – klotet blir dagens stjärna" : "You're caught up – the orb becomes today's star"}>
-        <ScreenIkapp t={ikapp} />
+  </div>
+</section>
+
+<!-- 4. Det interna som ingen läser -->
+<section class="section" id={id.inside} data-space data-hue="72" data-orb={REST} data-watch>
+  <div class="split how-split">
+    <div class="split-text stack">
+      <h2 class="title-xl">{c.insideTitle}</h2>
+      <p class="lead">{c.insideLead}</p>
+      <IconRow items={c.insideIcons as any} />
+    </div>
+    <div class="split-stage how-stage">
+      <Compare lang={lang} />
+    </div>
+  </div>
+</section>
+
+<!-- 5. Det du själv brinner för -->
+<section class="section" id={id.own} data-space data-hue="300" data-orb={REST} data-watch>
+  <div class="split orb-left how-split">
+    <div class="split-text stack">
+      <h2 class="title-xl">{c.ownTitle}</h2>
+      <p class="lead">{c.ownLead}</p>
+      <IconRow items={c.ownIcons as any} />
+    </div>
+    <div class="split-stage how-stage">
+      <Topics lang={lang} />
+    </div>
+  </div>
+</section>
+
+<!-- 6. Ett svep: telefonen, en gång -->
+<section class="section section-center" id={id.swipe} data-space data-hue="262" data-orb={REST} data-watch>
+  <div class="center-wrap">
+    <div class="stack center-head">
+      <h2 class="title-xl">{c.swipeTitle}</h2>
+      <p class="lead">{c.swipeLead}</p>
+      <IconRow items={c.swipeIcons as any} class="icon-row-center" />
+    </div>
+    <div class="center-stage stage-device">
+      <Phone label={sv ? "Newstail-appen: dra upp klotet och lyssna" : "The Newstail app: pull up the orb and listen"}>
+        <ScreenHome company="NORDVIK" greeting={c.sceneGreeting} date={c.sceneDate} items={bubbles} lit={4} />
       </Phone>
     </div>
+    <a class="link-more" href={`${R.home}#scen`}>{c.swipeLink}</a>
   </div>
 </section>
 
-<!-- 5. Publicera -->
-<section class="section" id={id.publish} data-space data-hue="72" data-orb={REST} data-watch>
-  <div class="split">
-    <div class="split-text stack">
-      <h2 class="title-xl">{c.pubTitle}</h2>
-      <p class="lead">{c.pubLead}</p>
-      <IconRow items={c.pubIcons as any} />
-      <div class="chips" aria-hidden="true">
-        {c.teams.map((t, i) => <span class={`chip${i === 0 ? " chip-on" : ""}`}>{t}</span>)}
-      </div>
-    </div>
-    <div class="split-stage stage-device stage-glow" style="--glow-hue: 80">
-      <Phone label={sv ? "Publicera i Newstail-appen" : "Publishing in the Newstail app"}>
-        <ScreenPublish t={publish} />
-      </Phone>
-    </div>
-  </div>
-</section>
-
-<!-- 6. Fredagsmejlet -->
-<section class="section" id={id.friday} data-space data-hue="72" data-orb={REST} data-watch>
-  <div class="split orb-left">
-    <div class="split-text stack">
-      <h2 class="title-xl">{c.friTitle}</h2>
-      <p class="lead">{c.friLead}</p>
-    </div>
-    <div class="split-stage stage-mail">
-      <MailCard t={mail} />
-    </div>
-  </div>
-</section>
-
-<!-- 7. Ledningen -->
-<section class="section section-lead" id={id.leaders} data-space data-hue="262" data-orb={REST} data-watch>
-  <div class="lead-wrap">
-    <div class="stack lead-head">
-      <h2 class="title-xl">{c.leadTitle}</h2>
-      <IconRow items={c.leadIcons as any} class="icon-row-center" />
-      <a class="link-more" href={`${R.trust}${sv ? "#ser" : "#sees"}`}>{c.leadLink}</a>
-    </div>
-    <div class="lead-stage">
-      <AdminCard lang={lang} />
-      <p class="note">{ui.demoNote}</p>
-    </div>
-  </div>
-</section>
-
-<!-- 8. Kom igång -->
+<!-- 7. Kom igång -->
 <section class="section" id={id.start} data-space data-hue="200" data-orb={REST} data-watch>
   <div class="wide">
     <div class="wide-head stack">
@@ -283,26 +246,3 @@ const mail = sv
     <p class="note">{ui.noCard}</p>
   </div>
 </section>
-
-<script>
-  // Språket: bubblorna tänds en i taget medan telefonen syns.
-  const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.querySelectorAll<HTMLElement>("[data-lang-cycle]").forEach((stage) => {
-    const bubbles = [...stage.querySelectorAll<HTMLElement>("[data-lang-b]")];
-    if (bubbles.length < 2) return;
-    let i = 0;
-    let timer = 0;
-    const start = () => {
-      if (timer || reduced) return;
-      timer = window.setInterval(() => {
-        i = (i + 1) % bubbles.length;
-        bubbles.forEach((b, j) => b.classList.toggle("is-on", j === i));
-      }, 3000);
-    };
-    const stop = () => {
-      clearInterval(timer);
-      timer = 0;
-    };
-    new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(stage);
-  });
-</script>

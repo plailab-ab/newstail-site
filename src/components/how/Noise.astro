@@ -1,0 +1,62 @@
+---
+/**
+ * Bruset (2026-10-27): rader av rubriker på olika språk, från olika källor, publicerade vid
+ * olika tider, som driver förbi i olika takt. Den enda bilden på sajten som får vara stökig –
+ * med flit. Bara transform animeras (billigt för kompositorn); stilla med reduced motion.
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+type Item = [string, string, string, string]; // tid, källa, språk, rubrik
+const rows: Item[][] = [
+  [
+    ["03:12", "Reuters", "EN", "Central bank signals slower pace of cuts"],
+    ["06:40", "Dagens industri", "SV", "Marknaden räknar med sänkning före jul"],
+    ["07:05", "Handelsblatt", "DE", "Baukosten steigen zum dritten Quartal in Folge"],
+    ["08:30", "Fastighetsvärlden", "SV", "Vakanserna minskar i Smålands kontorsmarknad"],
+    ["09:10", "Expansión", "ES", "El alquiler de oficinas repunta en Madrid"],
+    ["11:45", "FT", "EN", "European REITs rally on rate hopes"],
+  ],
+  [
+    ["04:50", "Boverket", "SV", "Nya krav på energideklarationer från årsskiftet"],
+    ["05:20", "Le Monde", "FR", "Immobilier : les taux repartent à la baisse"],
+    ["07:55", "SvD", "SV", "Byggstarterna på lägsta nivån sedan 2012"],
+    ["10:15", "Bloomberg", "EN", "Nordic property deals pick up in Q3"],
+    ["12:00", "Jönköpings-Posten", "SV", "1 200 bostäder planeras vid Munksjön"],
+    ["14:20", "Immobilien Zeitung", "DE", "Leerstand in Büroimmobilien sinkt leicht"],
+  ],
+  [
+    ["02:30", "Nikkei", "EN", "Timber prices ease after record year"],
+    ["06:05", "Energimyndigheten", "SV", "Solceller på taken: nya stödregler för flerbostadshus"],
+    ["08:45", "El País", "ES", "La banca prevé más hipotecas a tipo fijo"],
+    ["09:40", "Riksbanken", "SV", "Protokoll från det penningpolitiska mötet"],
+    ["13:10", "The Guardian", "EN", "Cities rethink office space after hybrid work"],
+    ["16:30", "Hallpressen", "SV", "HV71 vände och vann i Linköping"],
+  ],
+  [
+    ["01:15", "AP", "EN", "Interest-rate decision expected Thursday"],
+    ["06:20", "Sydsvenskan", "SV", "Hyrorna höjs 3,2 procent i Småland"],
+    ["07:30", "FAZ", "DE", "Wohnungsbau: Genehmigungen gehen weiter zurück"],
+    ["10:50", "Cinco Días", "ES", "Las socimis ganan atractivo con la bajada de tipos"],
+    ["15:00", "Di", "SV", "Fastighetsbolagen refinansierar till lägre ränta"],
+    ["17:40", "Reuters", "EN", "Energy efficiency rules tighten across the EU"],
+  ],
+];
+const label = lang === "sv" ? "Ett dygn av nyheter som rör ett fastighetsbolag i Jönköping – en bråkdel." : "One day of news that concerns a property company in Jönköping – a fraction.";
+---
+
+<div class="noise" role="img" aria-label={label}>
+  {rows.map((row, r) => (
+    <div class={`noise-row noise-row-${r}`} style={`--r: ${r}`}>
+      {[...row, ...row].map(([t, src, lg, h]) => (
+        <span class="noise-item">
+          <small>{t} · {src} · {lg}</small>
+          {h}
+        </span>
+      ))}
+    </div>
+  ))}
+  <span class="noise-fade noise-fade-l" aria-hidden="true"></span>
+  <span class="noise-fade noise-fade-r" aria-hidden="true"></span>
+</div>

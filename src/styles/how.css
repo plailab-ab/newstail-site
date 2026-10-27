@@ -1,0 +1,345 @@
+/*
+ * Så funkar det "under huven" (2026-10-27): bruset, intaget, jämförelsen och ämnesmolnet.
+ * Tekniskt i känslan – monospace-etiketter, linjer, punkter – utan att visa någon arkitektur.
+ * Rörelse bara i transform och opacity; stilla med prefers-reduced-motion.
+ */
+
+.how-hero {
+  flex-direction: column;
+  justify-content: center;
+}
+.how-hero .wide {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+.how-hero-text {
+  max-width: 44rem;
+}
+.how-mono,
+.in-mono,
+.noise-item small,
+.how-meta {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.how-meta {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 2.2rem;
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+.how-meta li::before {
+  content: "— ";
+  color: var(--ink-3);
+}
+
+/* ---------- Bruset ---------- */
+.noise {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding: 0.4rem 0;
+  -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.noise-row {
+  display: flex;
+  gap: 0.7rem;
+  width: max-content;
+  will-change: transform;
+  animation: noise-drift calc(70s + var(--r) * 14s) linear infinite;
+}
+.noise-row-1,
+.noise-row-3 {
+  animation-direction: reverse;
+}
+.noise-row-1 {
+  opacity: 0.75;
+}
+.noise-row-2 {
+  opacity: 0.55;
+}
+.noise-row-3 {
+  opacity: 0.4;
+}
+@keyframes noise-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.noise-item {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(17, 19, 24, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.12);
+  font-size: 0.875rem;
+  color: #d3d9e2;
+  white-space: nowrap;
+}
+.noise-item small {
+  font-size: 0.625rem;
+  color: var(--ink-3);
+}
+.noise-fade {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .noise-row {
+    animation: none;
+  }
+}
+
+/* ---------- Illustrationernas scen ---------- */
+.how-split {
+  align-items: center;
+}
+.how-stage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 0;
+}
+
+/* ---------- Intaget ---------- */
+.intake {
+  width: min(100%, 620px);
+  height: auto;
+  display: block;
+}
+.in-ray {
+  stroke: rgba(236, 239, 244, 0.1);
+  stroke-width: 1;
+}
+.in-src {
+  fill: #eceff4;
+  opacity: 0.35;
+  animation: in-pulse 4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.37s);
+}
+@keyframes in-pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.in-mono {
+  fill: var(--ink-3);
+  font-size: 11px;
+}
+.in-tag {
+  fill: #b8c1cd;
+}
+.in-orb {
+  animation: orbturn 120s linear infinite;
+  transform-origin: 360px 360px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .in-src,
+  .in-orb {
+    animation: none;
+  }
+}
+
+/* ---------- Jämförelsen ---------- */
+.compare {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1px minmax(0, 1fr);
+  gap: 1.6rem;
+  align-items: center;
+}
+.cmp-vs {
+  display: block;
+  width: 1px;
+  height: 80%;
+  background: rgba(236, 239, 244, 0.14);
+}
+.cmp-inbox {
+  border-radius: 18px;
+  background: #f4f5f7;
+  color: #1c1f26;
+  padding: 0.9rem 0 0.4rem;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
+  font-size: 0.8125rem;
+}
+.cmp-inbox-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem 0.6rem;
+  font-weight: 600;
+  font-size: 0.9375rem;
+}
+.cmp-badge {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #8a909b;
+  background: #e6e8ec;
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+}
+.cmp-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-top: 1px solid #e3e5ea;
+}
+.cmp-row i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2f6fed;
+  flex: 0 0 auto;
+}
+.cmp-row span {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+}
+.cmp-row small {
+  color: #8a909b;
+  flex: 0 0 auto;
+}
+.cmp-heard {
+  max-width: none;
+}
+.cmp-heard .admc-rows > small {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.875rem;
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* ---------- Ämnesmolnet ---------- */
+.topics {
+  position: relative;
+  width: min(100%, 520px);
+  aspect-ratio: 1;
+}
+.topic {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.14);
+  color: var(--ink-3);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  animation: topic-float 9s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.9s);
+}
+.topic-1 {
+  font-size: 0.9375rem;
+  color: var(--ink-2);
+}
+.topic-2 {
+  font-size: 1.0625rem;
+  color: var(--ink);
+  padding: 0.55rem 1.05rem;
+}
+.topic.is-on {
+  color: var(--ink);
+  background: rgba(236, 239, 244, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.35);
+}
+.topic.is-on i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f2b56b;
+  box-shadow: 0 0 10px rgba(242, 181, 107, 0.7);
+}
+@keyframes topic-float {
+  0%,
+  100% {
+    transform: translate(-50%, -50%);
+  }
+  50% {
+    transform: translate(-50%, calc(-50% - 7px));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topic {
+    animation: none;
+  }
+}
+
+/* ---------- Mobil ---------- */
+@media (max-width: 759px) {
+  .how-hero .wide {
+    gap: 1.4rem;
+  }
+  .noise {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    width: auto;
+    gap: 0.5rem;
+  }
+  .noise-item {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.75rem;
+  }
+  .how-meta {
+    gap: 0.4rem 1.2rem;
+    font-size: 0.6875rem;
+  }
+  .how-stage {
+    order: 2;
+    padding-top: 0.5rem;
+  }
+  .intake {
+    width: min(100%, 360px);
+  }
+  .compare {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .cmp-vs {
+    display: none;
+  }
+  .topics {
+    width: 100%;
+    aspect-ratio: 1 / 1.1;
+  }
+  .topic {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.65rem;
+  }
+  .topic-1 {
+    font-size: 0.8125rem;
+  }
+  .topic-2 {
+    font-size: 0.9375rem;
+    padding: 0.45rem 0.85rem;
+  }
+  .center-wrap .link-more {
+    margin-top: 0;
+  }
+}
