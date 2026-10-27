@@ -1,0 +1,251 @@
+---
+/**
+ * Samtyckesbanner (2026-10-27) med Google Consent Mode v2. Två kategorier utöver det nödvändiga:
+ * statistik (analytics_storage) och marknadsföring (ad_storage, ad_user_data, ad_personalization).
+ * Allt är nekat tills besökaren väljer. "Godkänn alla" och "Neka alla" är lika framträdande, inga
+ * förvalda reglage. Valet sparas i localStorage ("nt-consent", version 2) i högst 12 månader och
+ * kan ändras via "Kakinställningar" i sidfoten (data-consent-open). Standardläget sätts i Base.astro.
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const t =
+  lang === "sv"
+    ? {
+        label: "Kakinställningar",
+        text: "Vi använder kakor för statistik och marknadsföring om du godkänner det. Nödvändiga funktioner fungerar ändå.",
+        more: "Läs mer",
+        href: "/integritet/#sajten",
+        all: "Godkänn alla",
+        none: "Neka alla",
+        custom: "Anpassa",
+        save: "Spara val",
+        nec: ["Nödvändiga", "Sparar ditt val i den här rutan. Alltid på."],
+        stat: ["Statistik", "Google Analytics: hur sajten används, till exempel vilka sidor som läses och vad som klickas."],
+        mkt: ["Marknadsföring", "Google: mäta och anpassa annonser. Används bara om vi annonserar."],
+        on: "På",
+      }
+    : {
+        label: "Cookie settings",
+        text: "We use cookies for statistics and marketing if you allow it. Necessary functions work either way.",
+        more: "Read more",
+        href: "/en/privacy/#site",
+        all: "Accept all",
+        none: "Reject all",
+        custom: "Customise",
+        save: "Save choice",
+        nec: ["Necessary", "Stores your choice in this box. Always on."],
+        stat: ["Statistics", "Google Analytics: how the site is used, such as which pages are read and what is clicked."],
+        mkt: ["Marketing", "Google: measure and tailor ads. Only used if we advertise."],
+        on: "On",
+      };
+---
+
+<div class="consent" id="consent" role="dialog" aria-modal="false" aria-labelledby="consent-title" hidden>
+  <h2 class="consent-title" id="consent-title">{t.label}</h2>
+  <p>
+    {t.text} <a href={t.href}>{t.more}</a>
+  </p>
+  <div class="consent-cats" id="consent-cats" hidden>
+    <div class="consent-cat">
+      <div><strong>{t.nec[0]}</strong><span>{t.nec[1]}</span></div>
+      <span class="consent-always">{t.on}</span>
+    </div>
+    <label class="consent-cat">
+      <div><strong>{t.stat[0]}</strong><span>{t.stat[1]}</span></div>
+      <input type="checkbox" role="switch" data-cat-input="analytics" />
+    </label>
+    <label class="consent-cat">
+      <div><strong>{t.mkt[0]}</strong><span>{t.mkt[1]}</span></div>
+      <input type="checkbox" role="switch" data-cat-input="marketing" />
+    </label>
+  </div>
+  <div class="consent-actions">
+    <button type="button" class="pill pill-secondary" data-consent-all="denied">{t.none}</button>
+    <button type="button" class="pill pill-secondary" data-consent-all="granted">{t.all}</button>
+  </div>
+  <div class="consent-actions consent-actions-2">
+    <button type="button" class="pill pill-ghost" data-consent-custom>{t.custom}</button>
+    <button type="button" class="pill pill-secondary" data-consent-save hidden>{t.save}</button>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const box = document.getElementById("consent");
+    if (!box) return;
+    const KEY = "nt-consent";
+    const MAX_DAYS = 365;
+    const cats = box.querySelector("#consent-cats");
+    const inA = box.querySelector('[data-cat-input="analytics"]');
+    const inM = box.querySelector('[data-cat-input="marketing"]');
+    const saveBtn = box.querySelector("[data-consent-save]");
+    const customBtn = box.querySelector("[data-consent-custom]");
+    let stored = null;
+    try {
+      stored = JSON.parse(localStorage.getItem(KEY) || "null");
+    } catch (e) {}
+    const fresh = stored && stored.v === 2 && (Date.now() - Date.parse(stored.at)) / 864e5 < MAX_DAYS;
+    const open = (custom, focus) => {
+      inA.checked = !!(fresh && stored.analytics);
+      inM.checked = !!(fresh && stored.marketing);
+      cats.hidden = !custom;
+      saveBtn.hidden = !custom;
+      customBtn.hidden = !!custom;
+      box.hidden = false;
+      if (focus) box.querySelector("button")?.focus({ preventScroll: true });
+    };
+    const apply = (analytics, marketing) => {
+      const g = (x) => (x ? "granted" : "denied");
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ v: 2, analytics, marketing, at: new Date().toISOString() }));
+      } catch (e) {}
+      stored = { v: 2, analytics, marketing };
+      window.gtag &&
+        gtag("consent", "update", {
+          analytics_storage: g(analytics),
+          ad_storage: g(marketing),
+          ad_user_data: g(marketing),
+          ad_personalization: g(marketing),
+        });
+      (window.dataLayer = window.dataLayer || []).push({ event: "samtycke", analytics: g(analytics), marketing: g(marketing) });
+      box.hidden = true;
+    };
+    if (!fresh) open(false);
+    box.addEventListener("click", (e) => {
+      const el = e.target instanceof Element ? e.target : null;
+      if (!el) return;
+      const all = el.closest("[data-consent-all]");
+      if (all) return apply(all.getAttribute("data-consent-all") === "granted", all.getAttribute("data-consent-all") === "granted");
+      if (el.closest("[data-consent-custom]")) return open(true, true);
+      if (el.closest("[data-consent-save]")) return apply(inA.checked, inM.checked);
+    });
+    document.addEventListener("click", (e) => {
+      const o = e.target instanceof Element ? e.target.closest("[data-consent-open]") : null;
+      if (o) {
+        e.preventDefault();
+        open(true, true);
+      }
+    });
+  })();
+</script>
+
+<style>
+  .consent {
+    position: fixed;
+    z-index: 40;
+    left: 50%;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    width: min(36rem, calc(100% - 2rem));
+    max-height: calc(100svh - 2rem);
+    overflow-y: auto;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    background: color-mix(in srgb, #0b0d11 94%, transparent);
+    backdrop-filter: blur(12px);
+    color: var(--ink-2);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+  }
+  .consent[hidden],
+  .consent [hidden] {
+    display: none !important;
+  }
+  .consent-title {
+    margin: 0 0 0.35rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .consent p {
+    margin: 0;
+  }
+  .consent a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .consent-cats {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+  .consent-cat {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0.85rem;
+    border: 1px solid var(--line-soft);
+    border-radius: 0.9rem;
+    cursor: pointer;
+  }
+  .consent-cat div {
+    display: grid;
+    gap: 0.1rem;
+  }
+  .consent-cat strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .consent-cat span {
+    font-size: 0.8125rem;
+    color: var(--ink-3);
+  }
+  .consent-cat .consent-always {
+    color: var(--ink-2);
+    white-space: nowrap;
+  }
+  .consent-cat input {
+    appearance: none;
+    flex: none;
+    width: 2.6rem;
+    height: 1.5rem;
+    border-radius: 999px;
+    background: rgba(236, 239, 244, 0.18);
+    position: relative;
+    cursor: pointer;
+    transition: background-color 150ms ease-out;
+  }
+  .consent-cat input::after {
+    content: "";
+    position: absolute;
+    top: 0.2rem;
+    left: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    background: var(--ink);
+    transition: transform 150ms ease-out;
+  }
+  .consent-cat input:checked {
+    background: var(--ink-2);
+  }
+  .consent-cat input:checked::after {
+    transform: translateX(1.1rem);
+    background: #000;
+  }
+  .consent-cat input:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+  .consent-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.9rem;
+  }
+  .consent-actions .pill {
+    flex: 1;
+  }
+  .consent-actions-2 {
+    margin-top: 0.4rem;
+  }
+  @media (max-width: 420px) {
+    .consent-actions {
+      flex-direction: column;
+    }
+  }
+</style>
