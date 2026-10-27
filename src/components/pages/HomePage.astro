@@ -14,6 +14,7 @@ import ScreenRecap from "../air/ScreenRecap.astro";
 import ScreenQuiz from "../air/ScreenQuiz.astro";
 import AdminCard from "../air/AdminCard.astro";
 import FaqList from "../FaqList.astro";
+import IconRow from "../IconRow.astro";
 import { faqFor } from "../../content/faq";
 import { ROUTES, START_URL, UI, type Lang } from "../../content/site";
 
@@ -29,36 +30,36 @@ const REST = "0.5,0.5,0.1,0";
 const c = sv
   ? {
       h1: "En egen nyhetssändning för varje medarbetare.",
-      lead: "Nå de som aldrig öppnar intranätet.",
-      sub: "Internt, branschen och egna intressen – uppläst på det språk var och en väljer.",
+      lead: "Internt, branschen och egna intressen – uppläst på det språk var och en väljer.",
       scene: {
         greeting: "Hej Anna.",
         date: "Torsdag 23 oktober",
         steps: [
-          { t: "Dagens lista står klar när du är det.", d: "Internt, branschen och det du själv följer – i appen varje morgon." },
-          { t: "Dra upp. Lyssna.", d: "Klotet lyfter och värden börjar berätta. Tre till tio minuter." },
+          { t: "Dagens lista står klar när du är det.", d: "Tre till tio minuter. Det du redan hört hoppas över." },
+          { t: "Dra upp. Lyssna.", d: "Klotet lyfter och värden börjar berätta." },
           { t: "Håll klotet, så berättar värden mer.", d: "Svep för nästa. Tryck för paus." },
-          { t: "Det interna först.", d: "Det ni publicerar ligger först i allas sändning – på var och ens språk." },
+          { t: "Det interna först.", d: "Före branschen. Före allt annat." },
         ],
       },
       langTitle: "Alla hänger med. På sitt språk.",
+      langIcons: [["globe", "Fyra språk"], ["headphones", "Samma sändning"], ["person", "Var och en väljer"]],
       langHeading: "Samma nyhet.",
       langSamples: [
-        { code: "SV", name: "Svenska", lead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap.", title: "Hyresförhandlingen för 2027 är klar" },
-        { code: "EN", name: "English", lead: "Everyone picks the host's language. The same news, the same internal messages.", title: "The 2027 rent negotiation is done" },
-        { code: "DE", name: "Deutsch", lead: "Jeder wählt die Sprache des Moderators. Dieselben Nachrichten, dieselben internen Botschaften.", title: "Die Mietverhandlung für 2027 ist abgeschlossen" },
-        { code: "ES", name: "Español", lead: "Cada uno elige el idioma del presentador. Las mismas noticias, los mismos mensajes internos.", title: "La negociación del alquiler para 2027 está cerrada" },
+        { code: "SV", name: "Svenska", lead: "Värden talar det språk du väljer.", title: "Hyresförhandlingen för 2027 är klar" },
+        { code: "EN", name: "English", lead: "The host speaks the language you choose.", title: "The 2027 rent negotiation is done" },
+        { code: "DE", name: "Deutsch", lead: "Der Moderator spricht die Sprache, die du wählst.", title: "Die Mietverhandlung für 2027 ist abgeschlossen" },
+        { code: "ES", name: "Español", lead: "El presentador habla el idioma que tú eliges.", title: "La negociación del alquiler para 2027 está cerrada" },
       ],
       inTitle: "Säg det en gång. Vi läser upp det.",
-      inLead: "Tala in eller skriv. Det ligger först i allas sändning – och ni ser hur många som hört det.",
+      inIcons: [["mic", "Tala in"], ["pen", "Eller skriv"], ["eye", "Se vilka som hört"]],
       inTeams: ["Alla", "Ledning", "Sälj", "Produktion"],
       inFloat: "Vi förvärvar två fastigheter i centrala Växjö",
       inHeard: "har hört det",
       recTitle: "Gå djupare. Minns mer.",
-      recLead: "Recap med källor, skicka vidare till en kollega och ett kort quiz.",
+      recIcons: [["doc", "Recap med källor"], ["share", "Skicka vidare"], ["check", "Kort quiz"]],
       recTabs: ["Recap", "Quiz"],
       leadTitle: "Se att det når fram.",
-      leadLead: "Per team. Aldrig per person.",
+      leadIcons: [["team", "Per team"], ["lock", "Aldrig per person"], ["mail", "Veckans mejl"]],
       leadLink: "Vad ledningen ser",
       faqTitle: "Vanliga frågor.",
       endTitle: "Kom igång i dag.",
@@ -67,36 +68,36 @@ const c = sv
     }
   : {
       h1: "A personal news broadcast for every employee.",
-      lead: "Reach the people who never open the intranet.",
-      sub: "Internal news, the industry and personal interests – read out in the language each person chooses.",
+      lead: "Internal news, the industry and personal interests – read out in the language each person chooses.",
       scene: {
         greeting: "Hi Anna.",
         date: "Thursday 23 October",
         steps: [
-          { t: "Today's list is ready when you are.", d: "Internal, the industry and what you follow – in the app every morning." },
-          { t: "Pull up. Listen.", d: "The orb rises and the host starts talking. Three to ten minutes." },
+          { t: "Today's list is ready when you are.", d: "Three to ten minutes. Anything you've already heard is skipped." },
+          { t: "Pull up. Listen.", d: "The orb rises and the host starts talking." },
           { t: "Hold the orb and the host tells you more.", d: "Swipe for next. Tap to pause." },
-          { t: "Internal first.", d: "What you publish comes first in everyone's broadcast – in each person's language." },
+          { t: "Internal first.", d: "Before the industry. Before everything else." },
         ],
       },
       langTitle: "Everyone keeps up. In their language.",
+      langIcons: [["globe", "Four languages"], ["headphones", "Same broadcast"], ["person", "Everyone chooses"]],
       langHeading: "Same story.",
       langSamples: [
-        { code: "EN", name: "English", lead: "Everyone picks the host's language. The same news, the same internal messages.", title: "The 2027 rent negotiation is done" },
-        { code: "SV", name: "Svenska", lead: "Var och en väljer värdens språk. Samma nyheter, samma interna budskap.", title: "Hyresförhandlingen för 2027 är klar" },
-        { code: "DE", name: "Deutsch", lead: "Jeder wählt die Sprache des Moderators. Dieselben Nachrichten, dieselben internen Botschaften.", title: "Die Mietverhandlung für 2027 ist abgeschlossen" },
-        { code: "ES", name: "Español", lead: "Cada uno elige el idioma del presentador. Las mismas noticias, los mismos mensajes internos.", title: "La negociación del alquiler para 2027 está cerrada" },
+        { code: "EN", name: "English", lead: "The host speaks the language you choose.", title: "The 2027 rent negotiation is done" },
+        { code: "SV", name: "Svenska", lead: "Värden talar det språk du väljer.", title: "Hyresförhandlingen för 2027 är klar" },
+        { code: "DE", name: "Deutsch", lead: "Der Moderator spricht die Sprache, die du wählst.", title: "Die Mietverhandlung für 2027 ist abgeschlossen" },
+        { code: "ES", name: "Español", lead: "El presentador habla el idioma que tú eliges.", title: "La negociación del alquiler para 2027 está cerrada" },
       ],
       inTitle: "Say it once. We read it out.",
-      inLead: "Record or type it. It comes first in everyone's broadcast – and you see how many heard it.",
+      inIcons: [["mic", "Record"], ["pen", "Or type"], ["eye", "See who heard it"]],
       inTeams: ["Everyone", "Management", "Sales", "Production"],
       inFloat: "We are acquiring two properties in central Växjö",
       inHeard: "have heard it",
       recTitle: "Go deeper. Remember more.",
-      recLead: "A recap with sources, send it on to a colleague, and a short quiz.",
+      recIcons: [["doc", "Recap with sources"], ["share", "Send it on"], ["check", "Short quiz"]],
       recTabs: ["Recap", "Quiz"],
       leadTitle: "See that it gets through.",
-      leadLead: "Per team. Never per person.",
+      leadIcons: [["team", "Per team"], ["lock", "Never per person"], ["mail", "Weekly email"]],
       leadLink: "What management sees",
       faqTitle: "Common questions.",
       endTitle: "Get started today.",
@@ -175,7 +176,6 @@ const faq = faqFor("home", lang).slice(0, 4);
     <div class="hero-v3-text stack">
       <h1 class="title-hero">{c.h1}</h1>
       <p class="lead">{c.lead}</p>
-      <p class="hero-sub">{c.sub}</p>
       <div class="actions">
         <a class="pill pill-primary pill-lg" href={START_URL}>{ui.start}</a>
         <a class="link-more" href={R.how}>{ui.nav.how}</a>
@@ -217,6 +217,7 @@ const faq = faqFor("home", lang).slice(0, 4);
           <button type="button" class={`lang-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-i={i}>{x.code}</button>
         ))}
       </div>
+      <IconRow items={c.langIcons as any} />
       <script type="application/json" data-lang-samples set:html={JSON.stringify(c.langSamples.map((x) => x.lead))} />
     </div>
     <div class="split-stage stage-device">
@@ -228,31 +229,31 @@ const faq = faqFor("home", lang).slice(0, 4);
 </section>
 
 <!-- 4. Interninfo -->
-<section class="section" id="inside" data-space data-hue="72" data-orb={REST} data-watch>
-  <div class="split">
-    <div class="split-text stack">
+<section class="section section-center" id="inside" data-space data-hue="72" data-orb={REST} data-watch>
+  <div class="center-wrap">
+    <div class="stack center-head">
       <h2 class="title-xl">{c.inTitle}</h2>
-      <p class="lead">{c.inLead}</p>
-      <div class="chips" aria-hidden="true">
-        {c.inTeams.map((t, i) => <span class={`chip${i === 0 ? " chip-on" : ""}`}>{t}</span>)}
-      </div>
+      <IconRow items={c.inIcons as any} class="icon-row-center" />
     </div>
-    <div class="split-stage stage-device stage-glow" style="--glow-hue: 80">
+    <div class="center-stage stage-device stage-glow" style="--glow-hue: 80">
       <Phone label={sv ? "Publicera i Newstail-appen" : "Publishing in the Newstail app"}>
         <ScreenPublish t={publish} />
       </Phone>
-      <div class="floater floater-inside hide-m" style="left: -4%; top: 30%"><small>{sv ? "Internt" : "Internal"}</small>{c.inFloat}</div>
-      <div class="floater hide-m" style="right: 0; bottom: 18%"><b>38 {sv ? "av" : "of"} 41</b><small>{c.inHeard}</small></div>
+      <div class="floater floater-inside hide-m" style="left: 0; top: 26%"><small>{sv ? "Internt" : "Internal"}</small>{c.inFloat}</div>
+      <div class="floater hide-m" style="right: 0; bottom: 22%"><b>38 {sv ? "av" : "of"} 41</b><small>{c.inHeard}</small></div>
+      <div class="chips chips-float hide-m" aria-hidden="true" style="right: 0; top: 24%">
+        {c.inTeams.map((t, i) => <span class={`chip${i === 0 ? " chip-on" : ""}`}>{t}</span>)}
+      </div>
     </div>
   </div>
 </section>
 
 <!-- 5. Recap + quiz -->
 <section class="section" id="recap" data-space data-hue="300" data-orb={REST} data-watch>
-  <div class="split">
+  <div class="split orb-left">
     <div class="split-text stack">
       <h2 class="title-xl">{c.recTitle}</h2>
-      <p class="lead">{c.recLead}</p>
+      <IconRow items={c.recIcons as any} />
       <div class="flip-tabs" role="tablist">
         {c.recTabs.map((t, i) => <button type="button" class={`flip-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-flip-tab={i}>{t}</button>)}
       </div>
@@ -273,7 +274,7 @@ const faq = faqFor("home", lang).slice(0, 4);
   <div class="lead-wrap">
     <div class="stack lead-head">
       <h2 class="title-xl">{c.leadTitle}</h2>
-      <p class="lead">{c.leadLead}</p>
+      <IconRow items={c.leadIcons as any} class="icon-row-center" />
       <a class="link-more" href={`${R.trust}${lang === "sv" ? "#ser" : "#sees"}`}>{c.leadLink}</a>
     </div>
     <div class="lead-stage">

@@ -13,6 +13,7 @@ import ScreenIkapp from "../air/ScreenIkapp.astro";
 import ScreenPublish from "../air/ScreenPublish.astro";
 import MailCard from "../air/MailCard.astro";
 import AdminCard from "../air/AdminCard.astro";
+import IconRow from "../IconRow.astro";
 import { ROUTES, START_URL, UI, type Lang } from "../../content/site";
 
 interface Props {
@@ -31,7 +32,7 @@ const c = sv
   ? {
       h1: "Så funkar det.",
       lead: "Dra upp. Värden börjar berätta.",
-      sub: "Internt först, sedan branschen, sist det du själv följer. Tre till tio minuter, och det du redan hört hoppas över.",
+      heroIcons: [["clock", "Tre till tio minuter"], ["headphones", "Internt först"], ["check", "Det hörda hoppas över"]],
       langTitle: "Samma budskap. Ditt språk.",
       langLead: "Anna spelade in det på svenska. Alla hörde det på sitt språk.",
       langHeading: "Samma nyhet.",
@@ -42,17 +43,18 @@ const c = sv
         { code: "ES", name: "Español", title: "Adquirimos dos inmuebles en el centro de Växjö" },
       ],
       afterTitle: "Efteråt: läs mer, dela, minns.",
-      afterLead: "Punkterna i text med källor, ”Anna skickade dig det här …” till en kollega, och ett kort quiz så att det fastnar.",
+      afterIcons: [["doc", "Punkterna med källor"], ["share", "Skicka till en kollega"], ["check", "Ett kort quiz"]],
       ikappTitle: "Du är ikapp.",
       ikappLead: "Det du behöver veta. Inget annat. Klotet blir dagens stjärna – sju blir veckans stjärnbild.",
       ikappBtn: "Se ögonblicket",
       pubTitle: "Säg det en gång. Vi läser upp det.",
-      pubLead: "Tala in eller skriv. Värden formulerar, du lyssnar innan och väljer vilka som hör det. Bara de ni utser kan publicera.",
+      pubLead: "Bara de ni utser kan publicera.",
+      pubIcons: [["mic", "Tala in"], ["pen", "Eller skriv"], ["team", "Välj vilka som hör det"]],
       teams: ["Alla", "Förvaltning Jönköping", "Förvaltning Växjö", "Projekt"],
       friTitle: "Missade man det, kommer det på fredag.",
       friLead: "Den som inte hört ett internt budskap får det i fredagsmejlet. Ledningen får veckans ”34 av 41”.",
       leadTitle: "Se att det når fram.",
-      leadLead: "Räckvidd och minne per team. Aldrig per person.",
+      leadIcons: [["team", "Per team"], ["lock", "Aldrig per person"], ["bars", "Räckvidd och minne"]],
       leadLink: "Vad ledningen inte ser",
       startTitle: "Från registrering till första sändning.",
       startLead: "Samma dag. Inga integrationer.",
@@ -66,7 +68,7 @@ const c = sv
   : {
       h1: "How it works.",
       lead: "Pull up. The host starts talking.",
-      sub: "Internal first, then the industry, last what you follow yourself. Three to ten minutes, and anything you've already heard is skipped.",
+      heroIcons: [["clock", "Three to ten minutes"], ["headphones", "Internal first"], ["check", "Heard stories skipped"]],
       langTitle: "Same message. Your language.",
       langLead: "Anna recorded it in Swedish. Everyone heard it in their own language.",
       langHeading: "Same story.",
@@ -77,17 +79,18 @@ const c = sv
         { code: "ES", name: "Español", title: "Adquirimos dos inmuebles en el centro de Växjö" },
       ],
       afterTitle: "Afterwards: read more, share, remember.",
-      afterLead: "The stories as text with sources, “Anna sent you this …” to a colleague, and a short quiz so that it sticks.",
+      afterIcons: [["doc", "The stories with sources"], ["share", "Send to a colleague"], ["check", "A short quiz"]],
       ikappTitle: "You're caught up.",
       ikappLead: "What you need to know. Nothing else. The orb becomes today's star – seven make the week's constellation.",
       ikappBtn: "See the moment",
       pubTitle: "Say it once. We read it out.",
-      pubLead: "Record or type it. The host words it, you listen first and choose who hears it. Only the people you choose can publish.",
+      pubLead: "Only the people you choose can publish.",
+      pubIcons: [["mic", "Record"], ["pen", "Or type"], ["team", "Choose who hears it"]],
       teams: ["Everyone", "Property mgmt Jönköping", "Property mgmt Växjö", "Projects"],
       friTitle: "Missed it? It comes on Friday.",
       friLead: "Anyone who hasn't heard an internal message gets it in the Friday email. Management gets the week's “34 of 41”.",
       leadTitle: "See that it gets through.",
-      leadLead: "Reach and recall per team. Never per person.",
+      leadIcons: [["team", "Per team"], ["lock", "Never per person"], ["bars", "Reach and recall"]],
       leadLink: "What management never sees",
       startTitle: "From sign-up to first broadcast.",
       startLead: "The same day. No integrations.",
@@ -150,7 +153,7 @@ const mail = sv
     <div class="split-text stack">
       <h1 class="title-hero">{c.h1}</h1>
       <p class="lead">{c.lead}</p>
-      <p class="hero-sub">{c.sub}</p>
+      <IconRow items={c.heroIcons as any} />
     </div>
     <div class="split-stage stage-device">
       <Phone label={sv ? "Sändningen i Newstail-appen" : "The broadcast in the Newstail app"}>
@@ -180,7 +183,7 @@ const mail = sv
   <div class="split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.afterTitle}</h2>
-      <p class="lead">{c.afterLead}</p>
+      <IconRow items={c.afterIcons as any} />
     </div>
     <div class="split-stage stage-device">
       <Phone label={sv ? "Recapen med Skicka till kollega" : "The recap with Send to colleague"}>
@@ -217,6 +220,7 @@ const mail = sv
     <div class="split-text stack">
       <h2 class="title-xl">{c.pubTitle}</h2>
       <p class="lead">{c.pubLead}</p>
+      <IconRow items={c.pubIcons as any} />
       <div class="chips" aria-hidden="true">
         {c.teams.map((t, i) => <span class={`chip${i === 0 ? " chip-on" : ""}`}>{t}</span>)}
       </div>
@@ -247,7 +251,7 @@ const mail = sv
   <div class="lead-wrap">
     <div class="stack lead-head">
       <h2 class="title-xl">{c.leadTitle}</h2>
-      <p class="lead">{c.leadLead}</p>
+      <IconRow items={c.leadIcons as any} class="icon-row-center" />
       <a class="link-more" href={`${R.trust}${sv ? "#ser" : "#sees"}`}>{c.leadLink}</a>
     </div>
     <div class="lead-stage">
