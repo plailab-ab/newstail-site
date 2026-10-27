@@ -115,13 +115,13 @@ const c = sv
 
 const sceneItems = sv
   ? [
-      { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Dagens industri · SvD", hue: 150 },
-      { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsvärlden", hue: 200 },
+      { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
+      { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsbladet", hue: 200 },
       { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist", hue: 72, inside: true },
     ]
   : [
-      { topic: "RATES", title: "The market expects a cut before Christmas", src: "Dagens industri · SvD", hue: 150 },
-      { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsvärlden", hue: 200 },
+      { topic: "RATES", title: "The market expects a cut before Christmas", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
+      { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsbladet", hue: 200 },
       { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist", hue: 72, inside: true },
     ];
 const bubbles = sv
@@ -153,20 +153,20 @@ const groupW = [band[0]![2] + band[1]![2], band[2]![2] + band[3]![2] + band[4]![
 /* Svävande källetiketter runt klotet i heron: [text, x %, y %]. */
 const heroTags: [string, number, number][] = sv
   ? [
-      ["06:40 · DAGENS INDUSTRI · SV", -18, 6],
-      ["03:12 · REUTERS · EN", 74, 0],
-      ["07:05 · HANDELSBLATT · DE", 88, 48],
+      ["06:40 · NÄRINGSLIV IDAG · SV", -18, 6],
+      ["03:12 · NORTHWIRE · EN", 74, 0],
+      ["07:05 · WIRTSCHAFT NORD · DE", 88, 48],
       ["08:00 · INTERNT · ANNA", -16, 56],
-      ["09:10 · EXPANSIÓN · ES", 66, 98],
-      ["12:00 · JÖNKÖPINGS-POSTEN · SV", -14, 96],
+      ["09:10 · MERCADO HOY · ES", 66, 98],
+      ["12:00 · VÄTTERBYGDENS TIDNING · SV", -14, 96],
     ]
   : [
-      ["06:40 · DAGENS INDUSTRI · SV", -18, 6],
-      ["03:12 · REUTERS · EN", 74, 0],
-      ["07:05 · HANDELSBLATT · DE", 88, 48],
+      ["06:40 · NÄRINGSLIV IDAG · SV", -18, 6],
+      ["03:12 · NORTHWIRE · EN", 74, 0],
+      ["07:05 · WIRTSCHAFT NORD · DE", 88, 48],
       ["08:00 · INTERNAL · ANNA", -16, 56],
-      ["09:10 · EXPANSIÓN · ES", 66, 98],
-      ["12:00 · JÖNKÖPINGS-POSTEN · SV", -14, 96],
+      ["09:10 · MERCADO HOY · ES", 66, 98],
+      ["12:00 · VÄTTERBYGDENS TIDNING · SV", -14, 96],
     ];
 const publish = sv
   ? { head: "NORDVIK", eyebrow: "NY INTERN NYHET", title: "Vad vill du berätta?", hint: "Tryck på klotet för att börja spela in.", write: "Skriv istället", published: "Publicerat" }

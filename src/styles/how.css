@@ -650,16 +650,16 @@
 }
 @media (max-width: 759px) {
   .aggr .ag-mono {
-    font-size: 17px;
+    font-size: 14px;
   }
   .aggr .ag-sub {
-    font-size: 19px;
+    font-size: 15px;
   }
   .aggr .ag-of {
-    font-size: 22px;
+    font-size: 18px;
   }
   .aggr .ag-big {
-    font-size: 56px;
+    font-size: 46px;
   }
 }
 
@@ -990,5 +990,37 @@
   .price-facts {
     gap: 1.1rem 1.2rem;
     margin-top: 0.4rem;
+  }
+}
+
+/* ---------- Mobilen (2026-10-27): mindre att läsa, inget som ligger på varandra ---------- */
+@media (max-width: 759px) {
+  /* Stapeln: inga tomma parenteser, kortare huvud */
+  .band-groups {
+    display: none;
+  }
+  .band-head {
+    font-size: 0.75rem;
+    gap: 1rem;
+  }
+  .band-head span:first-child {
+    flex: 1 1 auto;
+  }
+  .band-segs {
+    margin-top: 0.6rem;
+  }
+  /* Bruset: tre rader räcker */
+  .noise:not(.noise-compact) .noise-row-3 {
+    display: none;
+  }
+  /* Intaget: större etiketter i den lilla bilden */
+  .intake .in-mono {
+    font-size: 17px;
+  }
+  .intake .in-tag {
+    font-size: 15px;
+  }
+  .intake .in-src {
+    r: 4.5;
   }
 }
