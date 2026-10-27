@@ -1,5 +1,18 @@
 {
+  "trailingSlash": true,
   "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "ny.newstail.io" }],
+      "destination": "https://newstail.io/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "newstail-site.vercel.app" }],
+      "destination": "https://newstail.io/:path*",
+      "permanent": true
+    },
     { "source": "/tekniken", "destination": "/sa-funkar-det/", "permanent": true },
     { "source": "/tekniken/", "destination": "/sa-funkar-det/", "permanent": true },
     { "source": "/en/technology", "destination": "/en/how-it-works/", "permanent": true },
