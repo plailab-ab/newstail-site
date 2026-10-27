@@ -1645,11 +1645,13 @@
   flex-direction: column;
   gap: 0.5rem;
 }
-.script > div:nth-child(2) {
-  opacity: 0.55;
+/* Nedtoningen med färg i stället för opacity, så att texten klarar WCAG AA (4,5:1) mot natten.
+   Opacity 0,55 och 0,3 gav 1,4–3,1:1. --ink-2 och --ink-3 ger minst 5:1. */
+.script > div:nth-child(2) p {
+  color: var(--ink-2);
 }
-.script > div:nth-child(3) {
-  opacity: 0.3;
+.script > div:nth-child(3) p {
+  color: var(--ink-3);
 }
 .script small {
   font-size: 0.8125rem;
