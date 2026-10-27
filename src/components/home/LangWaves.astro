@@ -1,0 +1,27 @@
+---
+/**
+ * Språken (2026-10-27): samma mening på fyra språk, var och en med sina ljudstaplar. Den som
+ * talar just nu lyser och staplarna rör sig; sektionen byter rad av sig själv och vid tryck.
+ */
+export type Wave = { code: string; name: string; text: string };
+interface Props {
+  items: Wave[];
+}
+const { items } = Astro.props;
+const bars = 14;
+---
+
+<div class="waves" data-waves>
+  {items.map((x, i) => (
+    <button type="button" class={`wave${i === 0 ? " is-on" : ""}`} data-wave={i} aria-pressed={i === 0 ? "true" : "false"}>
+      <span class="wave-code">{x.code}</span>
+      <span class="wave-bars" aria-hidden="true">
+        {Array.from({ length: bars }, (_, b) => <i style={`--b: ${b}; --h: ${0.25 + ((b * 7 + i * 3) % 9) / 12}`} />)}
+      </span>
+      <span class="wave-txt">
+        <small>{x.name}</small>
+        {x.text}
+      </span>
+    </button>
+  ))}
+</div>

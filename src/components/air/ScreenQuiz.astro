@@ -7,9 +7,8 @@
 interface Props {
   t: { close: string; q: string; options: string[]; answer: number; right: string; wrong: string; explain: string; kicker?: string };
   company?: string;
-  avatar?: string;
 }
-const { t, company = "NORDVIK", avatar = "AL" } = Astro.props;
+const { t, company = "NORDVIK" } = Astro.props;
 ---
 
 <div class="scr-quiz" data-quiz data-answer={t.answer}>

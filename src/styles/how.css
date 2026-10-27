@@ -650,15 +650,377 @@
 }
 @media (max-width: 759px) {
   .aggr .ag-mono {
-    font-size: 17px;
+    font-size: 14px;
   }
   .aggr .ag-sub {
-    font-size: 19px;
+    font-size: 15px;
   }
   .aggr .ag-of {
-    font-size: 22px;
+    font-size: 18px;
   }
   .aggr .ag-big {
-    font-size: 56px;
+    font-size: 46px;
+  }
+}
+
+/* =====================================================================
+   Startsidan (2026-10-27): källetiketter i heron, bruset + stapeln, ljudstaplar, efteråt
+   ===================================================================== */
+/* Svävande källetiketter runt klotet */
+.hero-tags {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.hero-tags li {
+  position: absolute;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+  white-space: nowrap;
+  padding: 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.1);
+  opacity: 0;
+  animation: tag-float 14s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -2.3s);
+}
+@keyframes tag-float {
+  0%,
+  100% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  12%,
+  40% {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+  52% {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-tags li {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+@media (max-width: 759px) {
+  .hero-tags li {
+    font-size: 0.5625rem;
+    padding: 0.2rem 0.45rem;
+  }
+  .hero-tags li:nth-child(n + 4) {
+    display: none;
+  }
+  .hero-tags li:nth-child(1) {
+    left: 0 !important;
+    top: 2% !important;
+  }
+  .hero-tags li:nth-child(2) {
+    left: auto !important;
+    right: 0;
+    top: 0 !important;
+  }
+  .hero-tags li:nth-child(3) {
+    left: auto !important;
+    right: 0;
+    top: 92% !important;
+  }
+}
+
+/* Ur bruset: två rader brus, sedan stapeln */
+.noise-wide {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.noise-compact {
+  gap: 0.5rem;
+}
+.noise-compact .noise-item {
+  font-size: 0.8125rem;
+  padding: 0.45rem 0.75rem;
+}
+.noise-wide .band {
+  margin-top: 0.4rem;
+}
+
+/* Språken som ljudstaplar */
+.waves {
+  width: min(100%, 560px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.wave {
+  all: unset;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 2.6rem 72px minmax(0, 1fr);
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.9rem 1.1rem;
+  border-radius: 16px;
+  background: rgba(17, 19, 24, 0.7);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.1);
+  color: var(--ink-3);
+  cursor: pointer;
+  transition: background-color 400ms ease, box-shadow 400ms ease, color 400ms ease;
+}
+.wave:focus-visible {
+  outline: 2px solid var(--ink-2);
+  outline-offset: 2px;
+}
+.wave.is-on {
+  background: rgba(17, 19, 24, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.35);
+  color: var(--ink);
+}
+.wave-code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+.wave-bars {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 28px;
+}
+.wave-bars i {
+  width: 2px;
+  height: calc(28px * var(--h));
+  border-radius: 1px;
+  background: currentColor;
+  opacity: 0.45;
+  transform-origin: center;
+}
+.wave.is-on .wave-bars i {
+  opacity: 1;
+  animation: wave-dance 1.1s ease-in-out infinite;
+  animation-delay: calc(var(--b) * -0.09s);
+}
+@keyframes wave-dance {
+  0%,
+  100% {
+    transform: scaleY(0.5);
+  }
+  50% {
+    transform: scaleY(1.4);
+  }
+}
+.wave-txt {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+.wave-txt small {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.wave:not(.is-on) .wave-txt {
+  color: var(--ink-3);
+}
+@media (prefers-reduced-motion: reduce) {
+  .wave.is-on .wave-bars i {
+    animation: none;
+  }
+}
+
+/* Efteråt: tre kort i kaskad */
+.after {
+  width: min(100%, 520px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.after-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 18px;
+  background: rgba(17, 19, 24, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.12);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 600ms ease, transform 600ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(var(--i) * 180ms);
+}
+.in-view .after-card {
+  opacity: 1;
+  transform: none;
+}
+.after-card:nth-child(2) {
+  margin-left: 2rem;
+}
+.after-card:nth-child(3) {
+  margin-left: 4rem;
+}
+.after-k {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+}
+.after-card b {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3;
+}
+.after-card p {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: #b8c1cd;
+}
+.after-src {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+}
+.after-ok {
+  color: #9fd8b0;
+}
+.after-to {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+.after-to i {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-style: normal;
+  font-size: 0.75rem;
+  background: linear-gradient(140deg, #6f8fb4, #a5b5d9);
+  color: #0b0f17;
+}
+.after-opts {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.3rem;
+  flex-wrap: wrap;
+}
+.after-opt {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.16);
+  color: #b8c1cd;
+  font-size: 0.875rem;
+}
+.after-opt.is-right {
+  background: var(--ink);
+  color: #0b0f17;
+  box-shadow: none;
+}
+.after-opt em {
+  font-style: normal;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+@media (max-width: 759px) {
+  .after-card:nth-child(2) {
+    margin-left: 1rem;
+  }
+  .after-card:nth-child(3) {
+    margin-left: 2rem;
+  }
+  .wave {
+    grid-template-columns: 2.2rem 52px minmax(0, 1fr);
+    gap: 0.7rem;
+    padding: 0.75rem 0.9rem;
+  }
+  .wave-txt {
+    font-size: 0.875rem;
+  }
+}
+
+/* ---------- Pris (2026-10-27): fakta i stället för kort ---------- */
+.price-facts {
+  margin: 0;
+  width: min(100%, 520px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem 2rem;
+}
+.price-facts .fact-big {
+  grid-column: 1 / -1;
+}
+.price-facts .fact-big dd {
+  font-size: clamp(2.6rem, 4.5vw, 3.6rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+.timeline small,
+.example small {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.calc-row output {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+@media (max-width: 759px) {
+  .price-facts {
+    gap: 1.1rem 1.2rem;
+    margin-top: 0.4rem;
+  }
+}
+
+/* ---------- Mobilen (2026-10-27): mindre att läsa, inget som ligger på varandra ---------- */
+@media (max-width: 759px) {
+  /* Stapeln: inga tomma parenteser, kortare huvud */
+  .band-groups {
+    display: none;
+  }
+  .band-head {
+    font-size: 0.75rem;
+    gap: 1rem;
+  }
+  .band-head span:first-child {
+    flex: 1 1 auto;
+  }
+  .band-segs {
+    margin-top: 0.6rem;
+  }
+  /* Bruset: tre rader räcker */
+  .noise:not(.noise-compact) .noise-row-3 {
+    display: none;
+  }
+  /* Intaget: större etiketter i den lilla bilden */
+  .intake .in-mono {
+    font-size: 17px;
+  }
+  .intake .in-tag {
+    font-size: 15px;
+  }
+  .intake .in-src {
+    r: 4.5;
   }
 }

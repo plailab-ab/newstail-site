@@ -1,18 +1,18 @@
 ---
 /**
- * Startsidan "En sändning" (2026-10-26): en telefon och ett klot bär hela historien.
- * 1 heron (bara klotet) · 2 scenen – fäst medan man scrollar: klotet flyger in i telefonen,
- * dras upp, sändningen spelar, och tonar bort när scenen lämnar · 3 språket (samma nyhet på
- * fyra språk i telefonen) · 4 internt · 5 recap + quiz · 6 ledningen · 7 frågor · 8 avslut.
- * Klotet är fritt bara i heron; sedan bor det i telefonen. Inget snäpp, hela telefoner.
+ * Startsidan (2026-10-27, "tech och inspiration"): heron med klotet och svävande källetiketter,
+ * scenen (klotet in i telefonen), ur bruset → stapeln, språken som ljudstaplar, det interna
+ * (telefon med flytande kort), efteråt som tre kort, ledningens kort, frågor, avslut.
+ * Klotet är fritt i heron, bor i telefonen i scenen och tonar sedan bort.
+ * Inget snäpp. Scenen är fäst medan man scrollar (data-scene nedan).
  */
 import Phone from "../air/Phone.astro";
 import ScreenScene from "../air/ScreenScene.astro";
-import ScreenLang from "../air/ScreenLang.astro";
 import ScreenPublish from "../air/ScreenPublish.astro";
-import ScreenRecap from "../air/ScreenRecap.astro";
-import ScreenQuiz from "../air/ScreenQuiz.astro";
 import AdminCard from "../air/AdminCard.astro";
+import Noise from "../how/Noise.astro";
+import LangWaves from "../home/LangWaves.astro";
+import After from "../home/After.astro";
 import FaqList from "../FaqList.astro";
 import IconRow from "../IconRow.astro";
 import { faqFor } from "../../content/faq";
@@ -43,21 +43,24 @@ const c = sv
       },
       langTitle: "Alla hänger med. På sitt språk.",
       langIcons: [["globe", "Fyra språk"], ["headphones", "Samma sändning"], ["person", "Var och en väljer"]],
-      langHeading: "Samma nyhet.",
       langSamples: [
-        { code: "SV", name: "Svenska", lead: "Värden talar det språk du väljer.", title: "Hyresförhandlingen för 2027 är klar" },
-        { code: "EN", name: "English", lead: "The host speaks the language you choose.", title: "The 2027 rent negotiation is done" },
-        { code: "DE", name: "Deutsch", lead: "Der Moderator spricht die Sprache, die du wählst.", title: "Die Mietverhandlung für 2027 ist abgeschlossen" },
-        { code: "ES", name: "Español", lead: "El presentador habla el idioma que tú eliges.", title: "La negociación del alquiler para 2027 está cerrada" },
+        { code: "SV", name: "Svenska", text: "Hyresförhandlingen för 2027 är klar. Hyrorna höjs med 3,1 procent från januari." },
+        { code: "EN", name: "English", text: "The 2027 rent negotiation is done. Rents rise 3.1 percent from January." },
+        { code: "DE", name: "Deutsch", text: "Die Mietverhandlung für 2027 ist abgeschlossen. Die Mieten steigen ab Januar um 3,1 Prozent." },
+        { code: "ES", name: "Español", text: "La negociación del alquiler para 2027 está cerrada. Los alquileres suben un 3,1 % desde enero." },
       ],
+      langLead: "Anna spelade in det på svenska. Alla hörde det på sitt språk.",
+      noiseTitle: "Ur bruset: en sändning.",
+      noiseLead: "Allt som publiceras om er bransch och era marknader, på alla språk, dygnet runt – vaskat till sex minuter. Internt först.",
+      bandHead: "Dagens sändning för Anna, förvaltare i Jönköping",
+      groups: ["Internt – alla hör det", "Er omvärld – efter roll", "Ditt eget"],
       inTitle: "Säg det en gång. Vi läser upp det.",
       inIcons: [["mic", "Tala in"], ["pen", "Eller skriv"], ["eye", "Se vilka som hört"]],
       inTeams: ["Alla", "Ledning", "Sälj", "Produktion"],
       inFloat: "Vi förvärvar två fastigheter i centrala Växjö",
       inHeard: "har hört det",
-      recTitle: "Gå djupare. Minns mer.",
+      recTitle: "Efteråt: läs, dela, minns.",
       recIcons: [["doc", "Recap med källor"], ["share", "Skicka vidare"], ["check", "Kort quiz"]],
-      recTabs: ["Recap", "Quiz"],
       leadTitle: "Se att det når fram.",
       leadIcons: [["team", "Per team"], ["lock", "Aldrig per person"], ["mail", "Veckans mejl"]],
       leadLink: "Vad ledningen ser",
@@ -82,21 +85,24 @@ const c = sv
       },
       langTitle: "Everyone keeps up. In their language.",
       langIcons: [["globe", "Four languages"], ["headphones", "Same broadcast"], ["person", "Everyone chooses"]],
-      langHeading: "Same story.",
       langSamples: [
-        { code: "EN", name: "English", lead: "The host speaks the language you choose.", title: "The 2027 rent negotiation is done" },
-        { code: "SV", name: "Svenska", lead: "Värden talar det språk du väljer.", title: "Hyresförhandlingen för 2027 är klar" },
-        { code: "DE", name: "Deutsch", lead: "Der Moderator spricht die Sprache, die du wählst.", title: "Die Mietverhandlung für 2027 ist abgeschlossen" },
-        { code: "ES", name: "Español", lead: "El presentador habla el idioma que tú eliges.", title: "La negociación del alquiler para 2027 está cerrada" },
+        { code: "EN", name: "English", text: "The 2027 rent negotiation is done. Rents rise 3.1 percent from January." },
+        { code: "SV", name: "Svenska", text: "Hyresförhandlingen för 2027 är klar. Hyrorna höjs med 3,1 procent från januari." },
+        { code: "DE", name: "Deutsch", text: "Die Mietverhandlung für 2027 ist abgeschlossen. Die Mieten steigen ab Januar um 3,1 Prozent." },
+        { code: "ES", name: "Español", text: "La negociación del alquiler para 2027 está cerrada. Los alquileres suben un 3,1 % desde enero." },
       ],
+      langLead: "Anna recorded it in Swedish. Everyone heard it in their own language.",
+      noiseTitle: "Out of the noise: one broadcast.",
+      noiseLead: "Everything published about your industry and markets, in every language, around the clock – sifted into six minutes. Internal first.",
+      bandHead: "Today's broadcast for Anna, property manager in Jönköping",
+      groups: ["Internal – everyone hears it", "Your world – by role", "Your own"],
       inTitle: "Say it once. We read it out.",
       inIcons: [["mic", "Record"], ["pen", "Or type"], ["eye", "See who heard it"]],
       inTeams: ["Everyone", "Management", "Sales", "Production"],
       inFloat: "We are acquiring two properties in central Växjö",
       inHeard: "have heard it",
-      recTitle: "Go deeper. Remember more.",
+      recTitle: "Afterwards: read, share, remember.",
       recIcons: [["doc", "Recap with sources"], ["share", "Send it on"], ["check", "Short quiz"]],
-      recTabs: ["Recap", "Quiz"],
       leadTitle: "See that it gets through.",
       leadIcons: [["team", "Per team"], ["lock", "Never per person"], ["mail", "Weekly email"]],
       leadLink: "What management sees",
@@ -109,13 +115,13 @@ const c = sv
 
 const sceneItems = sv
   ? [
-      { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Dagens industri · SvD", hue: 150 },
-      { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsvärlden", hue: 200 },
+      { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
+      { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsbladet", hue: 200 },
       { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist", hue: 72, inside: true },
     ]
   : [
-      { topic: "RATES", title: "The market expects a cut before Christmas", src: "Dagens industri · SvD", hue: 150 },
-      { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsvärlden", hue: 200 },
+      { topic: "RATES", title: "The market expects a cut before Christmas", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
+      { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsbladet", hue: 200 },
       { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist", hue: 72, inside: true },
     ];
 const bubbles = sv
@@ -133,36 +139,35 @@ const bubbles = sv
       { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
       { label: "Something new", kind: "surprise" as const, title: "New energy rules from the new year" },
     ];
-const recap = sv
-  ? {
-      date: "IDAG",
-      send: "Skicka vidare",
-      share: "Dela",
-      items: [
-        { title: "Hyresförhandlingen för 2027 är klar", text: "Hyrorna höjs med 3,1 % i snitt från januari. Förvaltarna får underlaget i veckan.", src: "", inside: true },
-        { title: "Marknaden räknar med sänkning före jul", text: "Bankerna räknar med en sänkning men inte hur stor. Det påverkar värderingarna inför bokslutet.", src: "Dagens industri" },
-      ],
-      follow: [
-        { topic: "Energikrav", why: "Ur det du hört" },
-        { topic: "Bostadsmarknaden", why: "Flera kollegor följer" },
-      ],
-    }
-  : {
-      date: "TODAY",
-      send: "Send on",
-      share: "Share",
-      items: [
-        { title: "The 2027 rent negotiation is done", text: "Rents rise 3.1 % on average from January. Property managers get the material this week.", src: "", inside: true },
-        { title: "The market expects a cut before Christmas", text: "Banks expect a cut but not how big. It affects valuations ahead of year-end.", src: "Dagens industri" },
-      ],
-      follow: [
-        { topic: "Energy rules", why: "From what you heard" },
-        { topic: "Housing market", why: "Several colleagues follow" },
-      ],
-    };
-const quiz = sv
-  ? { close: "Stäng", q: "Hur mycket höjs hyrorna i snitt 2027?", options: ["2,4 %", "3,1 %", "4,0 %"], answer: 1, right: "Rätt!", wrong: "Inte riktigt", explain: "Förhandlingen landade på 3,1 % i snitt från januari – det var dagens interna nyhet." }
-  : { close: "Close", q: "How much do rents rise on average in 2027?", options: ["2.4 %", "3.1 %", "4.0 %"], answer: 1, right: "Correct!", wrong: "Not quite", explain: "The negotiation landed on 3.1 % on average from January – that was today's internal news." };
+const band = [
+  [sv ? "Internt" : "Internal", sv ? "Hyresförhandlingen för 2027 är klar" : "The 2027 rent negotiation is done", 112, 72],
+  [sv ? "Internt" : "Internal", sv ? "Hyresgästdag i Linden på torsdag" : "Tenant day at Linden", 96, 60],
+  [sv ? "Räntor" : "Rates", sv ? "Sänkning före jul?" : "A cut before Christmas?", 150, 150],
+  [sv ? "Lokalmarknaden" : "Office market", sv ? "Vakanserna minskar" : "Fewer empty offices", 128, 200],
+  [sv ? "Energi" : "Energy", sv ? "Nya krav på energideklarationer" : "New energy rating rules", 150, 120],
+  [sv ? "Stadsutveckling" : "City development", sv ? "1 200 bostäder vid Munksjön" : "1,200 homes by Munksjön", 166, 260],
+  ["HV71", sv ? "Vände och vann i Linköping" : "Came back to win in Linköping", 140, 350],
+  [sv ? "Något nytt" : "Something new", sv ? "Solceller på taken" : "Solar on the roofs", 144, 300],
+] as [string, string, number, number][];
+const groupW = [band[0]![2] + band[1]![2], band[2]![2] + band[3]![2] + band[4]![2] + band[5]![2], band[6]![2] + band[7]![2]];
+/* Svävande källetiketter runt klotet i heron: [text, x %, y %]. */
+const heroTags: [string, number, number][] = sv
+  ? [
+      ["06:40 · NÄRINGSLIV IDAG · SV", -18, 6],
+      ["03:12 · NORTHWIRE · EN", 74, 0],
+      ["07:05 · WIRTSCHAFT NORD · DE", 88, 48],
+      ["08:00 · INTERNT · ANNA", -16, 56],
+      ["09:10 · MERCADO HOY · ES", 66, 98],
+      ["12:00 · VÄTTERBYGDENS TIDNING · SV", -14, 96],
+    ]
+  : [
+      ["06:40 · NÄRINGSLIV IDAG · SV", -18, 6],
+      ["03:12 · NORTHWIRE · EN", 74, 0],
+      ["07:05 · WIRTSCHAFT NORD · DE", 88, 48],
+      ["08:00 · INTERNAL · ANNA", -16, 56],
+      ["09:10 · MERCADO HOY · ES", 66, 98],
+      ["12:00 · VÄTTERBYGDENS TIDNING · SV", -14, 96],
+    ];
 const publish = sv
   ? { head: "NORDVIK", eyebrow: "NY INTERN NYHET", title: "Vad vill du berätta?", hint: "Tryck på klotet för att börja spela in.", write: "Skriv istället", published: "Publicerat" }
   : { head: "NORDVIK", eyebrow: "NEW INTERNAL NEWS", title: "What do you want to say?", hint: "Tap the orb to start recording.", write: "Type instead", published: "Published" };
@@ -174,6 +179,9 @@ const faq = faqFor("home", lang).slice(0, 4);
   <div class="hero-v3-inner">
     <div class="stage-hero hero-v3-stage">
       <div class="orb-anchor" data-orb-anchor></div>
+      <ul class="hero-tags" aria-hidden="true">
+        {heroTags.map(([t, x, y], i) => <li style={`left: ${x}%; top: ${y}%; --i: ${i}`}>{t}</li>)}
+      </ul>
     </div>
     <div class="hero-v3-text stack">
       <h1 class="title-hero">{c.h1}</h1>
@@ -212,29 +220,52 @@ const faq = faqFor("home", lang).slice(0, 4);
   </div>
 </section>
 
-<!-- 3. Språket -->
-<section class="section" id="sprak" data-space data-hue="262" data-orb={REST} data-watch>
-  <div class="split lang-split">
-    <div class="split-text stack">
-      <h2 class="title-xl">{c.langTitle}</h2>
-      <p class="lead" data-lang-lead>{c.langSamples[0]!.lead}</p>
-      <div class="lang-row" role="tablist">
-        {c.langSamples.map((x, i) => (
-          <button type="button" class={`lang-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-i={i}>{x.code}</button>
+<!-- 3. Ur bruset: stapeln -->
+<section class="section" id="bruset" data-space data-hue="150" data-orb={REST} data-watch>
+  <div class="wide noise-wide">
+    <div class="wide-head stack">
+      <h2 class="title-xl">{c.noiseTitle}</h2>
+      <p class="lead">{c.noiseLead}</p>
+    </div>
+    <Noise lang={lang} compact />
+    <div class="band" aria-label={c.bandHead}>
+      <div class="band-head"><span>{c.bandHead}</span><span>6 min 12 s</span></div>
+      <div class="band-groups" aria-hidden="true">
+        {groupW.map((w, i) => <div class="band-group" style={`flex: ${w} 1 0`}><span>{c.groups[i]}</span></div>)}
+      </div>
+      <div class="band-segs" aria-hidden="true">
+        {band.map(([, , w, h], i) => <span class="band-seg" style={`flex: ${w} 1 0; --h: ${h}; --i: ${i}`} />)}
+      </div>
+      <div class="band-labels">
+        {band.map(([t, d, w]) => (
+          <div style={`flex: ${w} 1 0`}>
+            <small>{t}</small>
+            <span>{d}</span>
+          </div>
         ))}
       </div>
-      <IconRow items={c.langIcons as any} />
-      <script type="application/json" data-lang-samples set:html={JSON.stringify(c.langSamples.map((x) => x.lead))} />
-    </div>
-    <div class="split-stage stage-device">
-      <Phone label={sv ? "Samma interna nyhet på fyra språk i Newstail-appen" : "The same internal story in four languages in the Newstail app"}>
-        <ScreenLang company="NORDVIK" heading={c.langHeading} items={c.langSamples} />
-      </Phone>
+      <div class="band-legend">
+        {c.groups.map((g) => <span>{g}</span>)}
+      </div>
     </div>
   </div>
 </section>
 
-<!-- 4. Interninfo -->
+<!-- 4. Språket: ljudstaplar -->
+<section class="section" id="sprak" data-space data-hue="262" data-orb={REST} data-watch>
+  <div class="split orb-left how-split">
+    <div class="split-text stack">
+      <h2 class="title-xl">{c.langTitle}</h2>
+      <p class="lead">{c.langLead}</p>
+      <IconRow items={c.langIcons as any} />
+    </div>
+    <div class="split-stage how-stage">
+      <LangWaves items={c.langSamples} />
+    </div>
+  </div>
+</section>
+
+<!-- 5. Interninfo -->
 <section class="section section-center" id="inside" data-space data-hue="72" data-orb={REST} data-watch>
   <div class="center-wrap">
     <div class="stack center-head">
@@ -255,28 +286,20 @@ const faq = faqFor("home", lang).slice(0, 4);
   </div>
 </section>
 
-<!-- 5. Recap + quiz -->
+<!-- 6. Efteråt: tre kort -->
 <section class="section" id="recap" data-space data-hue="300" data-orb={REST} data-watch>
-  <div class="split orb-left">
+  <div class="split how-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.recTitle}</h2>
       <IconRow items={c.recIcons as any} />
-      <div class="flip-tabs" role="tablist">
-        {c.recTabs.map((t, i) => <button type="button" class={`flip-tab${i === 0 ? " is-on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-flip-tab={i}>{t}</button>)}
-      </div>
     </div>
-    <div class="split-stage stage-device stage-flip" data-flip>
-      <Phone label={sv ? "Recapen och quizen i Newstail-appen" : "The recap and quiz in the Newstail app"}>
-        <div class="scr-flip">
-          <ScreenRecap lang={lang} {...recap} />
-          <ScreenQuiz t={quiz} />
-        </div>
-      </Phone>
+    <div class="split-stage how-stage">
+      <After lang={lang} />
     </div>
   </div>
 </section>
 
-<!-- 6. Ledningen -->
+<!-- 7. Ledningen -->
 <section class="section section-lead" id="ledare" data-space data-hue="262" data-orb={REST} data-watch>
   <div class="lead-wrap">
     <div class="stack lead-head">
@@ -291,7 +314,7 @@ const faq = faqFor("home", lang).slice(0, 4);
   </div>
 </section>
 
-<!-- 7. Frågor -->
+<!-- 8. Frågor -->
 <section class="section" id="fragor" data-space data-hue="262" data-orb={REST} data-watch>
   <div class="faq-split">
     <div class="stack">
@@ -302,7 +325,7 @@ const faq = faqFor("home", lang).slice(0, 4);
   </div>
 </section>
 
-<!-- 8. Avslut -->
+<!-- 9. Avslut -->
 <section class="section closing" data-space data-hue="200" data-orb={REST} data-watch>
   <div class="stack closing-text">
     <h2 class="title-xl">{c.endTitle}</h2>
@@ -448,79 +471,34 @@ const faq = faqFor("home", lang).slice(0, 4);
     update();
   }
 
-  // Språket: bubblorna i telefonen tänds en i taget av sig själva; texten utanför byts bara
-  // när någon trycker på en flik (då stannar växlingen).
-  const langSec = document.getElementById("sprak");
-  const samplesEl = langSec?.querySelector<HTMLScriptElement>("[data-lang-samples]");
-  if (langSec && samplesEl) {
-    const leads = JSON.parse(samplesEl.textContent || "[]") as string[];
-    const lead = langSec.querySelector<HTMLElement>("[data-lang-lead]")!;
-    const tabs = [...langSec.querySelectorAll<HTMLElement>(".lang-tab")];
-    const bubbles = [...langSec.querySelectorAll<HTMLElement>("[data-lang-b]")];
+  // Språken: raden som talar lyser och staplarna rör sig; byter själv var fjärde sekund,
+  // och vid tryck (då stannar växlingen).
+  const wavesEl = document.querySelector<HTMLElement>("[data-waves]");
+  if (wavesEl) {
+    const rows = [...wavesEl.querySelectorAll<HTMLButtonElement>("[data-wave]")];
     let i = 0;
     let timer = 0;
-    const light = (k: number) => {
-      i = k;
-      bubbles.forEach((b, j) => b.classList.toggle("is-on", j === k));
-    };
     const show = (k: number) => {
-      light(k);
-      lead.classList.add("is-switching");
-      window.setTimeout(() => {
-        lead.textContent = leads[k] ?? "";
-        lead.classList.remove("is-switching");
-      }, 220);
-      tabs.forEach((t, j) => {
-        t.classList.toggle("is-on", j === k);
-        t.setAttribute("aria-selected", j === k ? "true" : "false");
+      i = k;
+      rows.forEach((r, j) => {
+        r.classList.toggle("is-on", j === k);
+        r.setAttribute("aria-pressed", j === k ? "true" : "false");
       });
     };
     const start = () => {
       if (timer || reduced) return;
-      timer = window.setInterval(() => light((i + 1) % bubbles.length), 3000);
+      timer = window.setInterval(() => show((i + 1) % rows.length), 4000);
     };
     const stop = () => {
       clearInterval(timer);
       timer = 0;
     };
-    new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(langSec);
-    tabs.forEach((t, k) =>
-      t.addEventListener("click", () => {
+    new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(wavesEl);
+    rows.forEach((r, k) =>
+      r.addEventListener("click", () => {
         stop();
         show(k);
       }),
     );
-  }
-
-  // Recap och quiz i samma telefon: flikarna byter, och den växlar själv tills någon klickar.
-  const recapSec = document.getElementById("recap");
-  if (recapSec) {
-    const flip = recapSec.querySelector<HTMLElement>(".scr-flip")!;
-    const tabs = [...recapSec.querySelectorAll<HTMLButtonElement>("[data-flip-tab]")];
-    let i = 0;
-    let timer = 0;
-    const show = (k: number) => {
-      i = k;
-      flip.classList.toggle("is-quiz", k === 1);
-      tabs.forEach((t, j) => {
-        t.classList.toggle("is-on", j === k);
-        t.setAttribute("aria-selected", j === k ? "true" : "false");
-      });
-    };
-    const start = () => {
-      if (timer || reduced) return;
-      timer = window.setInterval(() => show((i + 1) % 2), 8000);
-    };
-    const stop = () => {
-      clearInterval(timer);
-      timer = 0;
-    };
-    tabs.forEach((t, k) =>
-      t.addEventListener("click", () => {
-        stop();
-        show(k);
-      }),
-    );
-    new IntersectionObserver(([e]) => (e!.isIntersecting ? start() : stop()), { threshold: 0.5 }).observe(recapSec);
   }
 </script>
