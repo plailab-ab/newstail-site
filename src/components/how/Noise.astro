@@ -6,8 +6,10 @@
  */
 interface Props {
   lang: "sv" | "en";
+  /** Två rader i stället för fyra (startsidan). */
+  compact?: boolean;
 }
-const { lang } = Astro.props;
+const { lang, compact = false } = Astro.props;
 type Item = [string, string, string, string]; // tid, källa, språk, rubrik
 const rows: Item[][] = [
   [
@@ -46,8 +48,8 @@ const rows: Item[][] = [
 const label = lang === "sv" ? "Ett dygn av nyheter som rör ett fastighetsbolag i Jönköping – en bråkdel." : "One day of news that concerns a property company in Jönköping – a fraction.";
 ---
 
-<div class="noise" role="img" aria-label={label}>
-  {rows.map((row, r) => (
+<div class={`noise${compact ? " noise-compact" : ""}`} role="img" aria-label={label}>
+  {(compact ? rows.slice(0, 2) : rows).map((row, r) => (
     <div class={`noise-row noise-row-${r}`} style={`--r: ${r}`}>
       {[...row, ...row].map(([t, src, lg, h]) => (
         <span class="noise-item">

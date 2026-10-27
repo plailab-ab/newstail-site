@@ -16,13 +16,12 @@ interface Props {
   send: string;
   share: string;
   company?: string;
-  avatar?: string;
   follow?: { topic: string; why?: string }[];
   sheet?: { title: string; people: string[]; note: string; button: string; foot: string };
   /** Behålls för bakåtkompatibilitet – quizen är en egen skärm (ScreenQuiz). */
   quiz?: unknown;
 }
-const { lang = "sv", date, items, send, share, company = "NORDVIK", avatar = "AL", follow = [], sheet } = Astro.props;
+const { lang = "sv", date, items, send, share, company = "NORDVIK", follow = [], sheet } = Astro.props;
 const sv = lang === "sv";
 const L = sv
   ? { close: "Stäng", hear: "Hör igen", inside: "Internt", thanks: "Tack", follow: "ATT FÖLJA", cancel: "Avbryt" }

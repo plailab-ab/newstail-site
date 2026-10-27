@@ -22,6 +22,7 @@ const c = sv
       unit: "kr",
       per: "per användare och månad",
       checks: ["Allt ingår", "Minst tio användare", "Ingen bindningstid", "Ni ser beloppet innan det dras"],
+      priceFacts: [["MINST", "10 användare"], ["PROVPERIOD", "14 dagar gratis"], ["BINDNING", "Ingen"], ["KORT UNDER PROVET", "Nej"], ["INGÅR", "Allt"]],
       cta: "Prova gratis i 14 dagar",
       fine: "Inget kort under provperioden. Priser exkl. moms. 17 € i övriga Europa, 18 $ i resten av världen.",
       calcKicker: "Räkna",
@@ -51,6 +52,7 @@ const c = sv
       unit: "€",
       per: "per user and month",
       checks: ["Everything included", "Ten users minimum", "No lock-in", "You see the amount before it's charged"],
+      priceFacts: [["MINIMUM", "10 users"], ["TRIAL", "14 days free"], ["LOCK-IN", "None"], ["CARD DURING TRIAL", "No"], ["INCLUDED", "Everything"]],
       cta: "Try it free for 14 days",
       fine: "No card during the trial. Prices excl. VAT. SEK 179 in Sweden, $18 outside Europe.",
       calcKicker: "Calculate",
@@ -74,33 +76,39 @@ const c = sv
       big: "Volume pricing above 1,000 users – talk to us",
     };
 const E0 = 34;
+const REST = "0.5,0.5,0.1,0";
 ---
 
-<section class="section sub-top" data-space data-hue="200" data-watch>
-  <div class="split">
+<section class="section sub-top price-hero" data-space data-hue="200" data-orb={REST} data-watch>
+  <div class="split how-split">
     <div class="split-text stack">
       <h1 class="title-hero">{c.h1}</h1>
       <p class="lead">{c.lead}</p>
-    </div>
-    <div class="split-stage stage-reach">
-      <div class="plan">
-        <span class="plan-name">{c.plan}</span>
-        <span class="plan-price">
-          {sv ? <b>{PRICE} kr</b> : <b>€{PRICE}</b>}
-          <span>{c.per}</span>
-        </span>
-        <ul class="checks">{c.checks.map((x) => <li>{x}</li>)}</ul>
+      <div class="actions">
         <a class="pill pill-primary pill-lg" href={START_URL}>{c.cta}</a>
-        <p class="plan-fine">{c.fine}</p>
       </div>
+      <p class="note">{c.fine}</p>
+    </div>
+    <div class="split-stage how-stage">
+      <dl class="facts price-facts">
+        <div class="fact fact-big">
+          <dt class="how-mono">{c.per.toUpperCase()}</dt>
+          <dd>{sv ? `${PRICE} kr` : `€${PRICE}`}</dd>
+        </div>
+        {c.priceFacts.map(([k, v]) => (
+          <div class="fact">
+            <dt class="how-mono">{k}</dt>
+            <dd>{v}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
   </div>
 </section>
 
-<section class="section" id={sv ? "rakna" : "calculate"} data-space data-hue="150" data-watch>
+<section class="section" id={sv ? "rakna" : "calculate"} data-space data-hue="150" data-orb={REST} data-watch>
   <div class="wide">
     <div class="wide-head stack">
-      <p class="kicker">{c.calcKicker}</p>
       <h2 class="title-xl">{c.calcTitle}</h2>
     </div>
     <div class="calc" style="margin-top: 3rem" data-calc data-price={PRICE} data-lang={lang}>
@@ -122,10 +130,9 @@ const E0 = 34;
   </div>
 </section>
 
-<section class="section" data-space data-hue="72" data-watch>
+<section class="section" data-space data-hue="72" data-orb={REST} data-watch>
   <div class="wide">
     <div class="wide-head stack">
-      <p class="kicker">{c.payKicker}</p>
       <h2 class="title-xl">{c.payTitle}</h2>
     </div>
     <div class="timeline">
@@ -142,7 +149,7 @@ const E0 = 34;
   </div>
 </section>
 
-<section class="section" data-space data-hue="262" data-watch>
+<section class="section" data-space data-hue="262" data-orb={REST} data-watch>
   <div class="wide">
     <div class="wide-head stack">
       <h2 class="title-xl">{c.inclTitle}</h2>
@@ -157,7 +164,7 @@ const E0 = 34;
   </div>
 </section>
 
-<section class="section" id={sv ? "fragor" : "questions"} data-space data-hue="200" data-watch>
+<section class="section" id={sv ? "fragor" : "questions"} data-space data-hue="200" data-orb={REST} data-watch>
   <div class="faq-split">
     <div class="stack">
       <h2 class="title-xl">{c.faqTitle}</h2>

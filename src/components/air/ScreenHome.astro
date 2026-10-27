@@ -13,10 +13,8 @@ interface Props {
   /** Tända dagar i veckans himmel (0–7). */
   lit?: number;
   recap?: string;
-  /** Initialer i avataren. */
-  avatar?: string;
 }
-const { company, greeting, date, items, lit = 3, recap = "Recap", avatar = "AL" } = Astro.props;
+const { company, greeting, date, items, lit = 3, recap = "Recap" } = Astro.props;
 /* Karlavagnen (samma form som appens starfield.ts), i rutan 50,534 → 216×101. */
 const shape: [number, number][] = [
   [0, 0],

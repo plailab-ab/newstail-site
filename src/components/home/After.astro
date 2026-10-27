@@ -1,0 +1,73 @@
+---
+/**
+ * Efteråt (2026-10-27): tre kort som kommer i tur och ordning när de syns – recapen med
+ * källor, "Skicka vidare" till en kollega och quizen med rätt svar tänt.
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+const t = sv
+  ? {
+      recap: "RECAP",
+      title: "Hyresförhandlingen för 2027 är klar",
+      text: "Hyrorna höjs med 3,1 % i snitt från januari. Förvaltarna får underlaget i veckan.",
+      src: "Internt · Anna Lindqvist",
+      send: "SKICKA VIDARE",
+      to: "Till Johan",
+      note: "Värt att ha med sig inför budgetmötet.",
+      sent: "Johan hör det i sin nästa sändning",
+      quiz: "QUIZ",
+      q: "Hur mycket höjs hyrorna i snitt 2027?",
+      opts: ["2,4 %", "3,1 %", "4,0 %"],
+      right: "Rätt",
+    }
+  : {
+      recap: "RECAP",
+      title: "The 2027 rent negotiation is done",
+      text: "Rents rise 3.1 % on average from January. Property managers get the material this week.",
+      src: "Internal · Anna Lindqvist",
+      send: "SEND ON",
+      to: "To Johan",
+      note: "Worth having before the budget meeting.",
+      sent: "Johan hears it in his next broadcast",
+      quiz: "QUIZ",
+      q: "How much do rents rise on average in 2027?",
+      opts: ["2.4 %", "3.1 %", "4.0 %"],
+      right: "Correct",
+    };
+---
+
+<div class="after" role="img" aria-label={sv ? "Recap, skicka vidare och quiz" : "Recap, send on and quiz"}>
+  <div class="after-card" style="--i: 0">
+    <small class="after-k">{t.recap}</small>
+    <b>{t.title}</b>
+    <p>{t.text}</p>
+    <span class="after-src">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3h7v7M21 3l-9 9M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>
+      {t.src}
+    </span>
+  </div>
+  <div class="after-card after-send" style="--i: 1">
+    <small class="after-k">{t.send}</small>
+    <span class="after-to"><i>J</i>{t.to}</span>
+    <p>“{t.note}”</p>
+    <span class="after-src after-ok">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+      {t.sent}
+    </span>
+  </div>
+  <div class="after-card after-quiz" style="--i: 2">
+    <small class="after-k">{t.quiz}</small>
+    <b>{t.q}</b>
+    <span class="after-opts">
+      {t.opts.map((o, i) => (
+        <span class={`after-opt${i === 1 ? " is-right" : ""}`}>
+          {o}
+          {i === 1 && <em>{t.right}</em>}
+        </span>
+      ))}
+    </span>
+  </div>
+</div>

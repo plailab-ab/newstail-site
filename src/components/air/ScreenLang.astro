@@ -9,9 +9,8 @@ interface Props {
   company: string;
   heading: string;
   items: LangBubble[];
-  avatar?: string;
 }
-const { company, heading, items, avatar = "AL" } = Astro.props;
+const { company, heading, items } = Astro.props;
 ---
 
 <div class="scr-lang">
