@@ -1,0 +1,62 @@
+---
+/**
+ * Ämnena (2026-10-27): ett moln av ämnen – från räntor till HV71 – runt ett litet klot.
+ * De man följer lyser; resten är där att hämta med ett tryck.
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+type T = [string, number, number, number, boolean?]; // text, x%, y%, storlek 0–2, följer
+const topics: T[] = sv
+  ? [
+      ["Räntor", 50, 14, 2, true],
+      ["Energikrav", 20, 26, 1, true],
+      ["HV71", 82, 24, 2, true],
+      ["Kontorsmarknaden", 68, 40, 1, true],
+      ["Bostadsmarknaden", 14, 48, 1],
+      ["Hållbarhet", 86, 56, 1],
+      ["Formel 1", 30, 68, 1],
+      ["AI", 60, 74, 2],
+      ["Stadsutveckling", 10, 84, 0],
+      ["Elpriser", 46, 90, 1],
+      ["Padel", 90, 82, 0],
+      ["Lokalpolitik", 74, 10, 0],
+      ["Startups", 36, 34, 0],
+      ["Spanien", 86, 94, 0],
+      ["Konkurrenter", 28, 8, 0],
+      ["Trädgård", 8, 66, 0],
+      ["Börsen", 52, 54, 0],
+      ["Löpning", 20, 94, 0],
+    ]
+  : [
+      ["Interest rates", 50, 14, 2, true],
+      ["Energy rules", 20, 26, 1, true],
+      ["HV71", 82, 24, 2, true],
+      ["Office market", 68, 40, 1, true],
+      ["Housing market", 14, 48, 1],
+      ["Sustainability", 86, 56, 1],
+      ["Formula 1", 30, 68, 1],
+      ["AI", 60, 74, 2],
+      ["City planning", 10, 84, 0],
+      ["Power prices", 46, 90, 1],
+      ["Padel", 90, 82, 0],
+      ["Local politics", 74, 10, 0],
+      ["Startups", 36, 34, 0],
+      ["Spain", 86, 94, 0],
+      ["Competitors", 28, 8, 0],
+      ["Gardening", 8, 66, 0],
+      ["Stock market", 52, 54, 0],
+      ["Running", 20, 94, 0],
+    ];
+---
+
+<div class="topics" role="img" aria-label={sv ? "Ämnen man kan följa – några lyser: de man valt" : "Topics to follow – some lit: the ones you chose"}>
+  {topics.map(([t, x, y, s, on], i) => (
+    <span class={`topic topic-${s}${on ? " is-on" : ""}`} style={`left: ${x}%; top: ${y}%; --i: ${i}`}>
+      {on && <i aria-hidden="true"></i>}
+      {t}
+    </span>
+  ))}
+</div>

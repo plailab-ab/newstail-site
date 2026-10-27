@@ -78,9 +78,9 @@ export const FOOTER: Record<Lang, FooterCol[]> = {
       links: [
         { t: "Så funkar det", href: "/sa-funkar-det/" },
         { t: "Sändningen", href: "/sa-funkar-det/#lyssnar" },
-        { t: "Språken", href: "/sa-funkar-det/#sprak" },
+        { t: "Språken", href: "/#sprak" },
         { t: "Interninfo", href: "/sa-funkar-det/#publicerar" },
-        { t: "Insikter", href: "/sa-funkar-det/#ledningen" },
+        { t: "Insikter", href: "/#ledare" },
         { t: "Pris", href: "/pris/" },
       ],
     },
@@ -160,9 +160,9 @@ export const FOOTER: Record<Lang, FooterCol[]> = {
       links: [
         { t: "How it works", href: "/en/how-it-works/" },
         { t: "The broadcast", href: "/en/how-it-works/#listen" },
-        { t: "Languages", href: "/en/how-it-works/#languages" },
+        { t: "Languages", href: "/en/#sprak" },
         { t: "Internal news", href: "/en/how-it-works/#publish" },
-        { t: "Insights", href: "/en/how-it-works/#leaders" },
+        { t: "Insights", href: "/en/#ledare" },
         { t: "Pricing", href: "/en/pricing/" },
       ],
     },

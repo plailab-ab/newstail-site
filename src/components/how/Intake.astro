@@ -1,0 +1,51 @@
+---
+/**
+ * Intaget (2026-10-27): källor runt om som strålar in mot klotet, dygnsringen i mitten.
+ * Ritat som SVG ur listor här – ingen riktig arkitektur, bara bilden av att allt lyssnas på,
+ * oberoende av språk och klockslag. Punkterna pulserar i otakt (CSS, bara opacity).
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+const C = 360;
+const RING = 196;
+const N = 40;
+const langs = ["SV", "EN", "DE", "ES", "FR", "EN", "SV", "DA", "NO", "FI", "NL", "IT"];
+const sources = Array.from({ length: N }, (_, i) => {
+  const a = (i / N) * Math.PI * 2 - Math.PI / 2 + ((i * 7) % 5) * 0.012;
+  const r = 292 + ((i * 13) % 4) * 14;
+  return { x: C + Math.cos(a) * r, y: C + Math.sin(a) * r, rx: C + Math.cos(a) * (RING + 6), ry: C + Math.sin(a) * (RING + 6), tag: i % 5 === 0 ? langs[(i / 5) % langs.length] : null, i };
+});
+const ticks = Array.from({ length: 24 }, (_, h) => {
+  const a = (h / 24) * Math.PI * 2 - Math.PI / 2;
+  const long = h % 6 === 0;
+  return { x1: C + Math.cos(a) * (RING - (long ? 14 : 7)), y1: C + Math.sin(a) * (RING - (long ? 14 : 7)), x2: C + Math.cos(a) * RING, y2: C + Math.sin(a) * RING, h, long, lx: C + Math.cos(a) * (RING - 32), ly: C + Math.sin(a) * (RING - 32) };
+});
+const label = sv ? "Källor på många språk strålar in mot klotet, dygnet runt." : "Sources in many languages converge on the orb, around the clock.";
+---
+
+<svg class="intake" viewBox="0 0 720 720" role="img" aria-label={label}>
+  <defs>
+    <radialGradient id="in-glow"><stop offset="0" stop-color="oklch(0.7 0.12 220)" stop-opacity="0.35"></stop><stop offset="1" stop-color="oklch(0.7 0.12 220)" stop-opacity="0"></stop></radialGradient>
+  </defs>
+  <circle cx={C} cy={C} r="300" fill="url(#in-glow)" opacity="0.5"></circle>
+  <!-- strålarna -->
+  {sources.map((s) => <line class="in-ray" x1={s.x.toFixed(1)} y1={s.y.toFixed(1)} x2={s.rx.toFixed(1)} y2={s.ry.toFixed(1)} style={`--i: ${s.i}`} />)}
+  <!-- dygnsringen -->
+  <circle cx={C} cy={C} r={RING} fill="none" stroke="rgba(236,239,244,0.22)" stroke-width="1"></circle>
+  {ticks.map((t) => <line x1={t.x1.toFixed(1)} y1={t.y1.toFixed(1)} x2={t.x2.toFixed(1)} y2={t.y2.toFixed(1)} stroke={t.long ? "rgba(236,239,244,0.6)" : "rgba(236,239,244,0.25)"} stroke-width="1" />)}
+  {ticks.filter((t) => t.long).map((t) => <text class="in-mono" x={t.lx.toFixed(1)} y={t.ly.toFixed(1)} text-anchor="middle" dominant-baseline="middle">{String(t.h).padStart(2, "0")}</text>)}
+  <!-- källorna -->
+  {sources.map((s) => (
+    <>
+      <circle class="in-src" cx={s.x.toFixed(1)} cy={s.y.toFixed(1)} r="3" style={`--i: ${s.i}`} />
+      {s.tag && <text class="in-mono in-tag" x={(C + (s.x - C) * 1.09).toFixed(1)} y={(C + (s.y - C) * 1.09).toFixed(1)} text-anchor="middle" dominant-baseline="middle">{s.tag}</text>}
+    </>
+  ))}
+  <!-- klotet -->
+  <circle cx={C} cy={C} r="96" fill="rgba(0,0,0,0.6)"></circle>
+  <image href="/orbs/orb-200.webp" x={C - 88} y={C - 88} width="176" height="176" class="in-orb"></image>
+  <text class="in-mono" x={C} y={C + 128} text-anchor="middle">{sv ? "LYSSNAR · DYGNET RUNT" : "LISTENING · AROUND THE CLOCK"}</text>
+</svg>

@@ -1,0 +1,73 @@
+---
+/**
+ * Jämförelsen (2026-10-27): nyhetsbrevet som ligger oläst i inkorgen – mot samma budskap
+ * som hörts av 38 av 41 före lunch. Två kort, en linje emellan.
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+const t = sv
+  ? {
+      inbox: "Inkorgen",
+      unread: "Olästa",
+      rows: [
+        ["Internt nyhetsbrev · vecka 43", "mån"],
+        ["Internt nyhetsbrev · vecka 42", "13 okt"],
+        ["Vd har ordet – oktober", "6 okt"],
+        ["Internt nyhetsbrev · vecka 41", "6 okt"],
+        ["Påminnelse: nyhetsbrevet", "29 sep"],
+      ],
+      heard: "HAR HÖRT DET · I DAG",
+      of: "av 41",
+      when: "före lunch, på fyra språk",
+      item: "Hyresförhandlingen för 2027 är klar",
+      teams: [["Ledning", 6, 6], ["Förvaltning", 21, 23], ["Projekt", 11, 12]],
+    }
+  : {
+      inbox: "Inbox",
+      unread: "Unread",
+      rows: [
+        ["Internal newsletter · week 43", "Mon"],
+        ["Internal newsletter · week 42", "13 Oct"],
+        ["A word from the CEO – October", "6 Oct"],
+        ["Internal newsletter · week 41", "6 Oct"],
+        ["Reminder: the newsletter", "29 Sep"],
+      ],
+      heard: "HAVE HEARD IT · TODAY",
+      of: "of 41",
+      when: "before lunch, in four languages",
+      item: "The 2027 rent negotiation is done",
+      teams: [["Management", 6, 6], ["Property mgmt", 21, 23], ["Projects", 11, 12]],
+    };
+---
+
+<div class="compare" role="img" aria-label={sv ? "Nyhetsbrev som ingen öppnar, mot ett internt budskap som 38 av 41 hört före lunch" : "Newsletters nobody opens, against an internal message 38 of 41 heard before lunch"}>
+  <div class="cmp-inbox">
+    <div class="cmp-inbox-hd"><span>{t.inbox}</span><span class="cmp-badge">{t.unread} · {t.rows.length}</span></div>
+    {t.rows.map(([s, d]) => (
+      <div class="cmp-row">
+        <i></i>
+        <span>{s}</span>
+        <small>{d}</small>
+      </div>
+    ))}
+  </div>
+  <span class="cmp-vs" aria-hidden="true"></span>
+  <div class="admc cmp-heard">
+    <small>{t.heard}</small>
+    <span class="admc-big"><b>38</b><span>{t.of}</span></span>
+    <span class="admc-sub">{t.when}</span>
+    <div class="admc-rows">
+      <small>{t.item}</small>
+      {(t.teams as [string, number, number][]).map(([name, a, b]) => (
+        <span class="admc-row">
+          <span>{name}</span>
+          <span class="adm-bar"><span style={`width: ${Math.round((a / b) * 100)}%`}></span></span>
+          <span class="admc-num">{a} / {b}</span>
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
