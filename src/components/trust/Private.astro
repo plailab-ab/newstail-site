@@ -1,0 +1,45 @@
+---
+/**
+ * Det egna (2026-10-27): medarbetarens sida av saken, ritad som appens inställningsrader –
+ * vad som är privat, vad som räknas ihop per team, mikrofonen som är av tills man själv
+ * spelar in, och kontot man tar bort själv.
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+type Row = { t: string; d: string; state: string; kind: "lock" | "team" | "mic" | "trash" };
+const rows: Row[] = sv
+  ? [
+      { t: "Egna ämnen", d: "Syns inte för någon annan", state: "PRIVAT", kind: "lock" },
+      { t: "Quizsvar", d: "Räknas ihop per team", state: "ALDRIG PER PERSON", kind: "team" },
+      { t: "Mikrofon", d: "Av tills du själv spelar in", state: "AV", kind: "mic" },
+      { t: "Lyssningshistorik", d: "Används för att hoppa över det du hört", state: "BARA DU", kind: "lock" },
+      { t: "Ta bort kontot", d: "Direkt i appen – allt försvinner", state: "DU BESTÄMMER", kind: "trash" },
+    ]
+  : [
+      { t: "Own topics", d: "Not visible to anyone else", state: "PRIVATE", kind: "lock" },
+      { t: "Quiz answers", d: "Added up per team", state: "NEVER PER PERSON", kind: "team" },
+      { t: "Microphone", d: "Off until you record yourself", state: "OFF", kind: "mic" },
+      { t: "Listening history", d: "Used to skip what you've heard", state: "ONLY YOU", kind: "lock" },
+      { t: "Delete the account", d: "Right in the app – everything goes", state: "YOUR CALL", kind: "trash" },
+    ];
+const ico: Record<Row["kind"], string> = {
+  lock: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+  team: '<circle cx="9" cy="8" r="3.5"/><circle cx="17" cy="9" r="2.5"/><path d="M2 20a7 7 0 0 1 14 0M15 15a5 5 0 0 1 7 5"/>',
+  mic: '<rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 19v3M8 22h8M4 4l16 16"/>',
+  trash: '<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
+};
+---
+
+<div class="priv" role="img" aria-label={sv ? "Medarbetarens egna: privata ämnen, quizsvar per team, mikrofon av, egen radering" : "The employee's own: private topics, quiz answers per team, microphone off, self-service deletion"}>
+  <div class="priv-hd"><span>{sv ? "Ditt" : "Yours"}</span><span class="priv-mono">{sv ? "ANNA · NORDVIK" : "ANNA · NORDVIK"}</span></div>
+  {rows.map((r, i) => (
+    <div class="priv-row" style={`--i: ${i}`}>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ico[r.kind]} />
+      <span class="priv-txt"><b>{r.t}</b><small>{r.d}</small></span>
+      <span class="priv-state">{r.state}</span>
+    </div>
+  ))}
+</div>

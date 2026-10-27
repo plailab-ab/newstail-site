@@ -1,0 +1,63 @@
+---
+/**
+ * Källspåret (2026-10-27): tre källor som blir en punkt i sändningen, med originalen kvar att
+ * läsa i recapen – och det interna budskapet som lyssnats igenom innan det gick ut.
+ */
+interface Props {
+  lang: "sv" | "en";
+}
+const { lang } = Astro.props;
+const sv = lang === "sv";
+const srcs = sv
+  ? [
+      ["Boverket", "06:05", "MYNDIGHET"],
+      ["Fastighetsvärlden", "08:30", "BRANSCHPRESS"],
+      ["TT", "09:12", "NYHETSBYRÅ"],
+    ]
+  : [
+      ["Boverket", "06:05", "AUTHORITY"],
+      ["Fastighetsvärlden", "08:30", "TRADE PRESS"],
+      ["TT", "09:12", "NEWS AGENCY"],
+    ];
+const story = sv
+  ? { tag: "ENERGI", title: "Nya krav på energideklarationer från årsskiftet", foot: "3 källor · läs originalen i recapen" }
+  : { tag: "ENERGY", title: "New energy rating rules from the new year", foot: "3 sources · read the originals in the recap" };
+const inside = sv
+  ? { tag: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", foot: "Anna Lindqvist · lyssnat igenom innan det gick ut" }
+  : { tag: "INTERNAL", title: "The 2027 rent negotiation is done", foot: "Anna Lindqvist · listened through before it went out" };
+---
+
+<div class="trail" role="img" aria-label={sv ? "Tre källor blir en punkt i sändningen; det interna lyssnas igenom innan det går ut" : "Three sources become one story in the broadcast; internal messages are listened through before they go out"}>
+  <div class="trail-srcs">
+    {srcs.map(([n, t, k], i) => (
+      <span class="trail-src" style={`--i: ${i}`}>
+        <small>{t} · {k}</small>
+        {n}
+      </span>
+    ))}
+  </div>
+  <svg class="trail-lines" viewBox="0 0 80 240" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 40 C 40 40, 40 120, 80 120" fill="none" stroke="rgba(236,239,244,0.28)" stroke-width="1"></path>
+    <path d="M0 120 L 80 120" fill="none" stroke="rgba(236,239,244,0.28)" stroke-width="1"></path>
+    <path d="M0 200 C 40 200, 40 120, 80 120" fill="none" stroke="rgba(236,239,244,0.28)" stroke-width="1"></path>
+    <circle cx="80" cy="120" r="3" fill="#eceff4"></circle>
+  </svg>
+  <div class="trail-out">
+    <div class="trail-story">
+      <small>{story.tag}</small>
+      <b>{story.title}</b>
+      <span class="trail-foot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+        {story.foot}
+      </span>
+    </div>
+    <div class="trail-story is-inside">
+      <small>{inside.tag}</small>
+      <b>{inside.title}</b>
+      <span class="trail-foot">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"></path></svg>
+        {inside.foot}
+      </span>
+    </div>
+  </div>
+</div>

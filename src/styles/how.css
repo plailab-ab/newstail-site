@@ -343,3 +343,322 @@
     margin-top: 0;
   }
 }
+
+/* =====================================================================
+   Trygghet (2026-10-27): aggregatet, det egna, källspåret, fakta i en rad
+   ===================================================================== */
+.how-mono {
+  font-size: 0.75rem;
+  color: var(--ink-3);
+}
+
+/* Aggregatet */
+.aggr {
+  width: min(100%, 760px);
+  height: auto;
+  display: block;
+}
+.ag-ray {
+  stroke: url(#ag-ray);
+  stroke-width: 1;
+  opacity: 0;
+  transition: opacity 600ms ease;
+  transition-delay: calc(400ms + var(--i) * 25ms);
+}
+.in-view .ag-ray {
+  opacity: 1;
+}
+.ag-dot {
+  fill: rgba(236, 239, 244, 0.22);
+  transition: fill 400ms ease;
+  transition-delay: calc(var(--i) * 30ms);
+}
+.in-view .ag-dot.is-on {
+  fill: #eceff4;
+}
+.ag-mono {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  fill: var(--ink-3);
+}
+.ag-big {
+  font-size: 44px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  fill: #eceff4;
+}
+.ag-of {
+  font-size: 16px;
+  fill: #b8c1cd;
+}
+.ag-sub {
+  font-size: 13px;
+  fill: #b8c1cd;
+}
+
+/* Ser / ser aldrig */
+.sees {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  margin-top: 2.6rem;
+}
+.sees-col {
+  border-top: 1px solid rgba(236, 239, 244, 0.22);
+  padding-top: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+.sees-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink-2);
+}
+.sees .checks li {
+  font-size: 1rem;
+}
+
+/* Det egna – appens inställningsrader */
+.priv {
+  width: min(100%, 460px);
+  border-radius: 22px;
+  background: #0d0e11;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  padding: 1.1rem 1.25rem 0.5rem;
+  color: var(--ink);
+}
+.priv-hd {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: 0.7rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.priv-mono {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-3);
+}
+.priv-row {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 500ms ease, transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition-delay: calc(var(--i) * 90ms);
+}
+.in-view .priv-row {
+  opacity: 1;
+  transform: none;
+}
+.priv-row svg {
+  flex: 0 0 auto;
+  color: var(--ink-2);
+}
+.priv-txt {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.priv-txt b {
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+.priv-txt small {
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+.priv-state {
+  flex: 0 0 auto;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.08em;
+  color: #f2b56b;
+  background: rgba(242, 181, 107, 0.1);
+  border-radius: 999px;
+  padding: 0.3rem 0.55rem;
+  white-space: nowrap;
+}
+
+/* Källspåret */
+.trail {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1.2fr);
+  align-items: center;
+  gap: 0.6rem;
+}
+.trail-srcs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.trail-src {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.6rem 0.9rem;
+  border-radius: 12px;
+  background: rgba(17, 19, 24, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.12);
+  font-size: 0.9375rem;
+  color: #d3d9e2;
+}
+.trail-src small {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+}
+.trail-lines {
+  width: 64px;
+  height: 240px;
+}
+.trail-out {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.trail-story {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem;
+  border-radius: 16px;
+  background: rgba(17, 19, 24, 0.9);
+  box-shadow: inset 0 0 0 1px rgba(236, 239, 244, 0.12);
+}
+.trail-story small {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ink-3);
+}
+.trail-story.is-inside small {
+  color: #f2b56b;
+}
+.trail-story.is-inside {
+  box-shadow: inset 0 0 0 1px rgba(242, 181, 107, 0.35);
+}
+.trail-story b {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  line-height: 1.3;
+}
+.trail-foot {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8125rem;
+  color: var(--ink-2);
+  margin-top: 0.2rem;
+}
+
+/* Fakta i en rad */
+.facts {
+  margin: 2.6rem 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem 2.4rem;
+}
+.fact {
+  border-top: 1px solid rgba(236, 239, 244, 0.22);
+  padding-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.fact dt {
+  margin: 0;
+}
+.fact dd {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 759px) {
+  .sees {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+    margin-top: 1.6rem;
+  }
+  .trail {
+    grid-template-columns: minmax(0, 1fr) 36px minmax(0, 1.3fr);
+    gap: 0.3rem;
+  }
+  .trail-lines {
+    width: 36px;
+    height: 200px;
+  }
+  .trail-src {
+    font-size: 0.8125rem;
+    padding: 0.5rem 0.6rem;
+  }
+  .trail-story {
+    padding: 0.8rem 0.9rem;
+  }
+  .trail-story b {
+    font-size: 0.875rem;
+  }
+  .facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.4rem 1.2rem;
+    margin-top: 1.6rem;
+  }
+  .fact dd {
+    font-size: 1.05rem;
+  }
+  .priv {
+    padding: 0.9rem 1rem 0.3rem;
+  }
+}
+
+/* ---------- Startsidan: en nypa av samma känsla ---------- */
+.hero-meta {
+  margin-top: 1.8rem;
+}
+.step-k {
+  display: block;
+  margin-bottom: 0.9rem;
+}
+.end-meta {
+  justify-content: center;
+  margin-top: 1rem;
+}
+@media (max-width: 759px) {
+  .hero-meta {
+    margin-top: 1.2rem;
+  }
+  .step-k {
+    margin-bottom: 0.5rem;
+  }
+}
+.aggr {
+  width: min(100%, 880px);
+}
+@media (max-width: 759px) {
+  .aggr .ag-mono {
+    font-size: 17px;
+  }
+  .aggr .ag-sub {
+    font-size: 19px;
+  }
+  .aggr .ag-of {
+    font-size: 22px;
+  }
+  .aggr .ag-big {
+    font-size: 56px;
+  }
+}
