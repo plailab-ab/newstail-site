@@ -36,6 +36,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
   /* Typografin ett steg mindre överallt (Joel 2026-10-03): rem-basen 15 px i stället för 16. */
   font-size: 14px;
 }
@@ -66,7 +67,9 @@ body {
 body {
   font-size: 16px;
   line-height: 1.5;
-  overflow-x: hidden;
+  /* clip, inte hidden: hidden flyttas upp till sidfönstret, och på mobil gör då en telefonknapp eller
+     annat som sticker ut sidan bredare än skärmen (menyknappen hamnade utanför). clip stannar på body. */
+  overflow-x: clip;
 }
 
 a {

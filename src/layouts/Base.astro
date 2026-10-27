@@ -41,6 +41,28 @@ const isCurrent = (href: string) => (path === href || path.startsWith(href) && h
 <html lang={lang} class={snap ? "snap" : undefined}>
   <head>
     <meta charset="utf-8" />
+    <!-- Samtycke (Consent Mode v2): allt nekat. Det finns ingen samtyckesbanner, så Googles taggar sätter
+         inga kakor och skickar bara kakfria signaler. Måste ligga före Google Tag Manager. -->
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag("consent", "default", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+        functionality_storage: "denied",
+        personalization_storage: "denied",
+        security_storage: "granted",
+      });
+    </script>
+    <!-- Google Tag Manager -->
+    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5F29GCGQ');</script>
+    <!-- End Google Tag Manager -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -75,6 +97,10 @@ const isCurrent = (href: string) => (path === href || path.startsWith(href) && h
     <slot name="head" />
   </head>
   <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5F29GCGQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
     <Space client:load orb={orb} />
     <header class="nav" id="nav">
       <div class="nav-inner">
@@ -224,6 +250,13 @@ const isCurrent = (href: string) => (path === href || path.startsWith(href) && h
         });
         devs.forEach((d) => ro.observe(d));
       }
+    </script>
+    <script is:inline>
+      // Händelse till Google Tag Manager när någon klickar på en länk till provstarten (air.newstail.io/start).
+      document.addEventListener("click", (e) => {
+        const a = e.target instanceof Element ? e.target.closest('a[href^="https://air.newstail.io/start"]') : null;
+        if (a) window.dataLayer.push({ event: "prova_gratis_klick", link_text: (a.textContent || "").trim(), page_path: location.pathname });
+      });
     </script>
   </body>
 </html>
