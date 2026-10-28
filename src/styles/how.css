@@ -1255,3 +1255,9 @@
     --orb-size: min(50vw, 29svh);
   }
 }
+/* Klotet i heron ett steg mindre på datorn också (Joel 2026-10-28). */
+@media (min-width: 760px) {
+  .hero-v3-stage {
+    --orb-size: min(450px, 33vw);
+  }
+}
