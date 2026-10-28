@@ -244,14 +244,16 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
         y: out ? a.y : inn ? b.y : lerp(a.y, b.y, u),
         r: out ? a.r : inn ? b.r : lerp(a.r, b.r, u),
         alpha: lerp(a.alpha, b.alpha, u),
-        pin: u < 0.5 ? a.pin : b.pin,
+        // Fäst så länge platsen kommer från ett ankare – också medan klotet tonar bort ur det.
+        pin: out ? a.pin : inn ? b.pin : u < 0.5 ? a.pin : b.pin,
       };
     };
 
     const frame = (now: number) => {
       if (!running) return;
       raf = requestAnimationFrame(frame);
-      const dt = Math.min(0.1, (now - lastT) / 1000);
+      // Aldrig negativ: första rAF-stämpeln kan ligga före performance.now() vid start.
+      const dt = Math.max(0, Math.min(0.1, (now - lastT) / 1000));
       lastT = now;
       const f = dt * 60;
       const t = (now - t0) / 1000;
@@ -273,10 +275,13 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
       const tx = tg.x * W + (tg.pin ? 0 : pointer.x * 10);
       const ty = tg.y * H + (tg.pin ? 0 : pointer.y * 8);
       const tr = tg.r * minSide;
-      const k = reduced ? 1 : tg.pin ? 0.22 : 0.075;
-      cur.x = approach(cur.x, tx, k, f);
-      cur.y = approach(cur.y, ty, k, f);
-      cur.r = approach(cur.r, tr, k, f);
+      // Står klotet i ett ankare (ringen i telefonen) följer det exakt – ingen mjukning som
+      // släpar efter när sidan scrollar (Joel 2026-10-28: "fast i mitten av cirkeln").
+      const k = reduced ? 1 : 0.075;
+      const kp = tg.pin ? 1 : k;
+      cur.x = approach(cur.x, tx, kp, f);
+      cur.y = approach(cur.y, ty, kp, f);
+      cur.r = approach(cur.r, tr, kp, f);
       cur.alpha = approach(cur.alpha, tg.alpha, k, f);
       cur.hue = ((approach(cur.hue, cur.hue + (((tg.hue - cur.hue + 540) % 360) - 180), 0.06, f) % 360) + 360) % 360;
       const target = toneForHue(cur.hue);
