@@ -39,7 +39,7 @@ const c = sv
       bandHead: "Dagens sändning för Anna, förvaltare i Jönköping",
       groups: ["Internt – alla hör det", "Er omvärld – efter roll", "Ditt eget"],
       insideTitle: "Det interna som ingen läser.",
-      insideLead: "Nyhetsbrevet ligger oläst. Säg det i stället en gång – tala in eller skriv – så går det ut med värdens röst, först i allas sändning, till de team ni väljer. Och ni ser hur många som hört det. Per team, aldrig per person.",
+      insideLead: "Nyhetsbrevet ligger oläst i inkorgen. Säg det i stället en gång, så går det ut med värdens röst – först i allas sändning, på var och ens språk. Före lunch vet ni hur många som hört det.",
       ownTitle: "Det du själv brinner för.",
       ownLead: "Räntor, energikrav eller HV71 – följ med ett tryck, och något nytt varje dag utanför det du valt. Sändningen lär sig av vad du håller klotet på och vad du sveper förbi, och blir bättre för varje gång.",
       swipeTitle: "Och allt det här blir … ett svep.",
@@ -67,7 +67,7 @@ const c = sv
       bandHead: "Today's broadcast for Anna, property manager in Jönköping",
       groups: ["Internal – everyone hears it", "Your world – by role", "Your own"],
       insideTitle: "The internal news nobody reads.",
-      insideLead: "The newsletter sits unread. Say it once instead – record or type – and it goes out in the host's voice, first in everyone's broadcast, to the teams you choose. And you see how many heard it. Per team, never per person.",
+      insideLead: "The newsletter sits unread in the inbox. Say it once instead, and it goes out in the host's voice – first in everyone's broadcast, in each person's language. Before lunch you know how many heard it.",
       ownTitle: "What you care about.",
       ownLead: "Interest rates, energy rules or HV71 – follow with one tap, and something new every day outside what you chose. The broadcast learns from what you hold the orb on and what you swipe past, and gets better every time.",
       swipeTitle: "And all of this becomes … one swipe.",
@@ -203,7 +203,7 @@ const bubbles = sv
     </div>
     <div class="center-stage stage-device">
       <Phone label={sv ? "Newstail-appen: dra upp klotet och lyssna" : "The Newstail app: pull up the orb and listen"}>
-        <ScreenHome company="NORDVIK" greeting={c.sceneGreeting} date={c.sceneDate} items={bubbles} lit={4} />
+        <ScreenHome company="NORDVIK" greeting={c.sceneGreeting} date={c.sceneDate} items={bubbles} />
       </Phone>
     </div>
     <a class="link-more" href={`${R.home}#scen`}>{c.swipeLink}</a>
