@@ -1048,3 +1048,15 @@
     display: none !important;
   }
 }
+
+/* Johan i "Skicka vidare": riktig profilbild */
+.after-to i {
+  overflow: hidden;
+  background: #1a1d23;
+}
+.after-to i img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

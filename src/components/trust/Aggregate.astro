@@ -1,8 +1,7 @@
 ---
 /**
  * Aggregatet (2026-10-27): 41 personer blir ett tal. Punkterna tänds en i taget när bilden
- * kommer i bild, strålar in mot talet "34 av 41" – och ett litet team med tre personer stannar
- * låst: under fem personer visas inga siffror. Hela poängen med Trygghet i en bild.
+ * kommer i bild och strålar in mot talet "34 av 41". Hela poängen med Trygghet i en bild.
  */
 interface Props {
   lang: "sv" | "en";
@@ -12,7 +11,7 @@ const sv = lang === "sv";
 const N = 41;
 const on = new Set([0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 28, 30, 31, 33, 34, 35, 36, 37, 39, 40]);
 const W = 760;
-const H = 420;
+const H = 360;
 // Personerna i en lös svärm till vänster, deterministiskt utspridda.
 const people = Array.from({ length: N }, (_, i) => {
   const col = i % 7;
@@ -23,14 +22,9 @@ const people = Array.from({ length: N }, (_, i) => {
 });
 const TX = 600;
 const TY = 190;
-const small = [
-  { x: 118, y: 372 },
-  { x: 150, y: 372 },
-  { x: 182, y: 372 },
-];
 ---
 
-<svg class="aggr" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={sv ? "41 personer blir talet 34 av 41 – ett team med tre personer visas inte" : "41 people become the figure 34 of 41 – a team of three is not shown"}>
+<svg class="aggr" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={sv ? "41 personer blir talet 34 av 41" : "41 people become the figure 34 of 41"}>
   <defs>
     <linearGradient id="ag-ray" x1="0" x2="1"><stop offset="0" stop-color="#eceff4" stop-opacity="0"></stop><stop offset="1" stop-color="#eceff4" stop-opacity="0.35"></stop></linearGradient>
   </defs>
@@ -45,10 +39,4 @@ const small = [
   <text class="ag-big" x={TX - 70} y={TY + 14}>34</text>
   <text class="ag-of" x={TX - 6} y={TY + 14}>{sv ? "av 41" : "of 41"}</text>
   <text class="ag-sub" x={TX - 70} y={TY + 44}>{sv ? "Hur många. Aldrig vilka." : "How many. Never who."}</text>
-  <!-- det lilla teamet: låst -->
-  <rect x="96" y="346" width="214" height="52" rx="12" fill="none" stroke="rgba(236,239,244,0.14)" stroke-dasharray="3 4"></rect>
-  {small.map((p) => <circle cx={p.x} cy={p.y} r="6" fill="rgba(236,239,244,0.35)" />)}
-  <g transform="translate(222 362)" fill="none" stroke="#9ba7b7" stroke-width="1.6" stroke-linecap="round"><rect x="2" y="8" width="14" height="10" rx="2"></rect><path d="M5 8V6a4 4 0 0 1 8 0v2"></path></g>
-  <text class="ag-mono" x="250" y="376" fill="#9ba7b7">{sv ? "3 PERS · DOLT" : "3 PPL · HIDDEN"}</text>
-  <text class="ag-sub" x="96" y="414" fill="#7c8899">{sv ? "Under fem personer visas inga siffror alls." : "Below five people, no figures are shown at all."}</text>
 </svg>
