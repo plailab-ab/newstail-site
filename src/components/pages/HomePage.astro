@@ -14,7 +14,6 @@ import Noise from "../how/Noise.astro";
 import LangWaves from "../home/LangWaves.astro";
 import After from "../home/After.astro";
 import FaqList from "../FaqList.astro";
-import IconRow from "../IconRow.astro";
 import { faqFor } from "../../content/faq";
 import { ROUTES, START_URL, UI, type Lang } from "../../content/site";
 
@@ -42,7 +41,6 @@ const c = sv
         ],
       },
       langTitle: "Alla hänger med. På sitt språk.",
-      langIcons: [["globe", "Fyra språk"], ["headphones", "Samma sändning"], ["person", "Var och en väljer"]],
       langSamples: [
         { code: "SV", name: "Svenska", text: "Hyresförhandlingen för 2027 är klar. Hyrorna höjs med 3,1 procent från januari." },
         { code: "EN", name: "English", text: "The 2027 rent negotiation is done. Rents rise 3.1 percent from January." },
@@ -55,17 +53,16 @@ const c = sv
       bandHead: "Dagens sändning för Anna, förvaltare i Jönköping",
       groups: ["Internt – alla hör det", "Er omvärld – efter roll", "Ditt eget"],
       inTitle: "Säg det en gång. Vi läser upp det.",
-      inIcons: [["mic", "Tala in"], ["pen", "Eller skriv"], ["eye", "Se vilka som hört"]],
+      inLead: "Tala in eller skriv. Det går ut med värdens röst – och ni ser hur många som hört det.",
       inTeams: ["Alla", "Ledning", "Sälj", "Produktion"],
       inFloat: "Vi förvärvar två fastigheter i centrala Växjö",
       inHeard: "har hört det",
       recTitle: "Efteråt: läs, dela, minns.",
-      recIcons: [["doc", "Recap med källor"], ["share", "Skicka vidare"], ["check", "Kort quiz"]],
+      recLead: "Recapen med källor, skicka vidare till en kollega och ett kort quiz så att det fastnar.",
       leadTitle: "Se att det når fram.",
-      leadIcons: [["team", "Per team"], ["lock", "Aldrig per person"], ["mail", "Veckans mejl"]],
+      leadLead: "Per team, aldrig per person. Och ett mejl på fredagen med veckans siffror.",
       leadLink: "Vad ledningen ser",
       faqTitle: "Vanliga frågor.",
-      heroMeta: ["Alla språk", "Dygnet runt", "Tre till tio minuter"],
       endTitle: "Kom igång i dag.",
       endMeta: ["14 dagar gratis", "Inget kort", "Ingen bindning"],
       endPrice: "Se priser",
@@ -84,7 +81,6 @@ const c = sv
         ],
       },
       langTitle: "Everyone keeps up. In their language.",
-      langIcons: [["globe", "Four languages"], ["headphones", "Same broadcast"], ["person", "Everyone chooses"]],
       langSamples: [
         { code: "EN", name: "English", text: "The 2027 rent negotiation is done. Rents rise 3.1 percent from January." },
         { code: "SV", name: "Svenska", text: "Hyresförhandlingen för 2027 är klar. Hyrorna höjs med 3,1 procent från januari." },
@@ -97,17 +93,16 @@ const c = sv
       bandHead: "Today's broadcast for Anna, property manager in Jönköping",
       groups: ["Internal – everyone hears it", "Your world – by role", "Your own"],
       inTitle: "Say it once. We read it out.",
-      inIcons: [["mic", "Record"], ["pen", "Or type"], ["eye", "See who heard it"]],
+      inLead: "Record or type it. It goes out in the host's voice – and you see how many heard it.",
       inTeams: ["Everyone", "Management", "Sales", "Production"],
       inFloat: "We are acquiring two properties in central Växjö",
       inHeard: "have heard it",
       recTitle: "Afterwards: read, share, remember.",
-      recIcons: [["doc", "Recap with sources"], ["share", "Send it on"], ["check", "Short quiz"]],
+      recLead: "The recap with sources, send it on to a colleague, and a short quiz so that it sticks.",
       leadTitle: "See that it gets through.",
-      leadIcons: [["team", "Per team"], ["lock", "Never per person"], ["mail", "Weekly email"]],
+      leadLead: "Per team, never per person. And an email on Friday with the week's figures.",
       leadLink: "What management sees",
       faqTitle: "Common questions.",
-      heroMeta: ["Every language", "Around the clock", "Three to ten minutes"],
       endTitle: "Get started today.",
       endMeta: ["14 days free", "No card", "No lock-in"],
       endPrice: "See pricing",
@@ -190,9 +185,6 @@ const faq = faqFor("home", lang).slice(0, 4);
         <a class="pill pill-primary pill-lg" href={START_URL}>{ui.start}</a>
         <a class="link-more" href={R.how}>{ui.nav.how}</a>
       </div>
-      <ul class="how-meta hero-meta" aria-hidden="true">
-        {c.heroMeta.map((x) => <li>{x}</li>)}
-      </ul>
     </div>
   </div>
 </section>
@@ -257,7 +249,6 @@ const faq = faqFor("home", lang).slice(0, 4);
     <div class="split-text stack">
       <h2 class="title-xl">{c.langTitle}</h2>
       <p class="lead">{c.langLead}</p>
-      <IconRow items={c.langIcons as any} />
     </div>
     <div class="split-stage how-stage">
       <LangWaves items={c.langSamples} />
@@ -270,15 +261,15 @@ const faq = faqFor("home", lang).slice(0, 4);
   <div class="center-wrap">
     <div class="stack center-head">
       <h2 class="title-xl">{c.inTitle}</h2>
-      <IconRow items={c.inIcons as any} class="icon-row-center" />
+      <p class="lead">{c.inLead}</p>
     </div>
     <div class="center-stage stage-device stage-glow" style="--glow-hue: 80">
       <Phone label={sv ? "Publicera i Newstail-appen" : "Publishing in the Newstail app"}>
         <ScreenPublish t={publish} />
       </Phone>
-      <div class="floater floater-inside hide-m" style="left: 0; top: 26%"><small>{sv ? "Internt" : "Internal"}</small>{c.inFloat}</div>
-      <div class="floater hide-m" style="right: 0; bottom: 22%"><b>38 {sv ? "av" : "of"} 41</b><small>{c.inHeard}</small></div>
-      <div class="floater floater-teams hide-m" aria-hidden="true" style="right: 0; top: 22%">
+      <div class="floater floater-inside hide-m"><small>{sv ? "Internt" : "Internal"}</small>{c.inFloat}</div>
+      <div class="floater floater-heard hide-m"><b>38 {sv ? "av" : "of"} 41</b><small>{c.inHeard}</small></div>
+      <div class="floater floater-teams hide-m" aria-hidden="true">
         <small>{sv ? "Vilka som hör det" : "Who hears it"}</small>
         <span class="chips">{c.inTeams.map((t, i) => <span class={`chip${i === 0 ? " chip-on" : ""}`}>{t}</span>)}</span>
       </div>
@@ -291,7 +282,7 @@ const faq = faqFor("home", lang).slice(0, 4);
   <div class="split how-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.recTitle}</h2>
-      <IconRow items={c.recIcons as any} />
+      <p class="lead">{c.recLead}</p>
     </div>
     <div class="split-stage how-stage">
       <After lang={lang} />
@@ -304,7 +295,7 @@ const faq = faqFor("home", lang).slice(0, 4);
   <div class="lead-wrap">
     <div class="stack lead-head">
       <h2 class="title-xl">{c.leadTitle}</h2>
-      <IconRow items={c.leadIcons as any} class="icon-row-center" />
+      <p class="lead">{c.leadLead}</p>
       <a class="link-more" href={`${R.trust}${lang === "sv" ? "#ser" : "#sees"}`}>{c.leadLink}</a>
     </div>
     <div class="lead-stage">

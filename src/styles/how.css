@@ -1024,3 +1024,27 @@
     r: 4.5;
   }
 }
+
+/* ---------- 2026-10-28: korten knutna till telefonen, färre ikoner ---------- */
+/* Telefonen är 360 px i mitten av scenen; korten överlappar dess kanter i stället för att
+   ligga för sig själva ute i hörnen. */
+.center-stage .floater-inside {
+  left: calc(50% - 360px);
+  top: 26%;
+}
+.center-stage .floater-teams {
+  left: calc(50% + 160px);
+  right: auto;
+  top: 18%;
+}
+.center-stage .floater-heard {
+  left: calc(50% + 115px);
+  right: auto;
+  bottom: 14%;
+}
+/* Stapeln i mobilen: ingen förklaring under – segmenten talar själva */
+@media (max-width: 759px) {
+  .band-legend {
+    display: none !important;
+  }
+}
