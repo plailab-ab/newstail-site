@@ -1,8 +1,9 @@
 ---
 /**
- * Startsidan (2026-10-27, "tech och inspiration"): heron med klotet och svävande källetiketter,
- * scenen (klotet in i telefonen), ur bruset → stapeln, språken som ljudstaplar, det interna
- * (telefon med flytande kort), efteråt som tre kort, ledningens kort, frågor, avslut.
+ * Startsidan = UPPLEVELSEN (2026-10-28): heron med klotet och svävande källetiketter, scenen
+ * (klotet in i telefonen), språken som ljudstaplar, det interna (telefon med flytande kort),
+ * efteråt som tre kort, ledningens kort, frågor, avslut. Problemet och tekniken berättas på
+ * Så funkar det ("under huven"), integriteten på Trygghet – startsidan upprepar dem inte.
  * Klotet är fritt i heron, bor i telefonen i scenen och tonar sedan bort.
  * Inget snäpp. Scenen är fäst medan man scrollar (data-scene nedan).
  */
@@ -10,7 +11,6 @@ import Phone from "../air/Phone.astro";
 import ScreenScene from "../air/ScreenScene.astro";
 import ScreenPublish from "../air/ScreenPublish.astro";
 import AdminCard from "../air/AdminCard.astro";
-import Noise from "../how/Noise.astro";
 import LangWaves from "../home/LangWaves.astro";
 import After from "../home/After.astro";
 import FaqList from "../FaqList.astro";
@@ -48,10 +48,6 @@ const c = sv
         { code: "ES", name: "Español", text: "La negociación del alquiler para 2027 está cerrada. Los alquileres suben un 3,1 % desde enero." },
       ],
       langLead: "Anna spelade in det på svenska. Alla hörde det på sitt språk.",
-      noiseTitle: "Ur bruset: en sändning.",
-      noiseLead: "Allt som publiceras om er bransch och era marknader, på alla språk, dygnet runt – vaskat till sex minuter. Internt först.",
-      bandHead: "Dagens sändning för Anna, förvaltare i Jönköping",
-      groups: ["Internt – alla hör det", "Er omvärld – efter roll", "Ditt eget"],
       inTitle: "Säg det en gång. Vi läser upp det.",
       inLead: "Tala in eller skriv. Det går ut med värdens röst – och ni ser hur många som hört det.",
       inTeams: ["Alla", "Ledning", "Sälj", "Produktion"],
@@ -60,8 +56,8 @@ const c = sv
       recTitle: "Efteråt: läs, dela, minns.",
       recLead: "Recapen med källor, skicka vidare till en kollega och ett kort quiz så att det fastnar.",
       leadTitle: "Se att det når fram.",
-      leadLead: "Per team, aldrig per person. Och ett mejl på fredagen med veckans siffror.",
-      leadLink: "Vad ledningen ser",
+      leadLead: "Hur många som lyssnat och hört det interna, per team. Och ett mejl på fredagen med veckans siffror.",
+      leadLink: "Vad ledningen aldrig ser",
       faqTitle: "Vanliga frågor.",
       endTitle: "Kom igång i dag.",
       endMeta: ["14 dagar gratis", "Inget kort", "Ingen bindning"],
@@ -88,10 +84,6 @@ const c = sv
         { code: "ES", name: "Español", text: "La negociación del alquiler para 2027 está cerrada. Los alquileres suben un 3,1 % desde enero." },
       ],
       langLead: "Anna recorded it in Swedish. Everyone heard it in their own language.",
-      noiseTitle: "Out of the noise: one broadcast.",
-      noiseLead: "Everything published about your industry and markets, in every language, around the clock – sifted into six minutes. Internal first.",
-      bandHead: "Today's broadcast for Anna, property manager in Jönköping",
-      groups: ["Internal – everyone hears it", "Your world – by role", "Your own"],
       inTitle: "Say it once. We read it out.",
       inLead: "Record or type it. It goes out in the host's voice – and you see how many heard it.",
       inTeams: ["Everyone", "Management", "Sales", "Production"],
@@ -100,8 +92,8 @@ const c = sv
       recTitle: "Afterwards: read, share, remember.",
       recLead: "The recap with sources, send it on to a colleague, and a short quiz so that it sticks.",
       leadTitle: "See that it gets through.",
-      leadLead: "Per team, never per person. And an email on Friday with the week's figures.",
-      leadLink: "What management sees",
+      leadLead: "How many listened and heard the internal news, per team. And an email on Friday with the week's figures.",
+      leadLink: "What management never sees",
       faqTitle: "Common questions.",
       endTitle: "Get started today.",
       endMeta: ["14 days free", "No card", "No lock-in"],
@@ -134,17 +126,6 @@ const bubbles = sv
       { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
       { label: "Something new", kind: "surprise" as const, title: "New energy rules from the new year" },
     ];
-const band = [
-  [sv ? "Internt" : "Internal", sv ? "Hyresförhandlingen för 2027 är klar" : "The 2027 rent negotiation is done", 112, 72],
-  [sv ? "Internt" : "Internal", sv ? "Hyresgästdag i Linden på torsdag" : "Tenant day at Linden", 96, 60],
-  [sv ? "Räntor" : "Rates", sv ? "Sänkning före jul?" : "A cut before Christmas?", 150, 150],
-  [sv ? "Lokalmarknaden" : "Office market", sv ? "Vakanserna minskar" : "Fewer empty offices", 128, 200],
-  [sv ? "Energi" : "Energy", sv ? "Nya krav på energideklarationer" : "New energy rating rules", 150, 120],
-  [sv ? "Stadsutveckling" : "City development", sv ? "1 200 bostäder vid Munksjön" : "1,200 homes by Munksjön", 166, 260],
-  ["HV71", sv ? "Vände och vann i Linköping" : "Came back to win in Linköping", 140, 350],
-  [sv ? "Något nytt" : "Something new", sv ? "Solceller på taken" : "Solar on the roofs", 144, 300],
-] as [string, string, number, number][];
-const groupW = [band[0]![2] + band[1]![2], band[2]![2] + band[3]![2] + band[4]![2] + band[5]![2], band[6]![2] + band[7]![2]];
 /* Svävande källetiketter runt klotet i heron: [text, x %, y %]. */
 const heroTags: [string, number, number][] = sv
   ? [
@@ -208,37 +189,6 @@ const faq = faqFor("home", lang).slice(0, 4);
       <Phone clear class="scene-phone" label={sv ? "Newstail-appen: från hemvyn till sändningen" : "The Newstail app: from home to the broadcast"}>
         <ScreenScene company="NORDVIK" greeting={c.scene.greeting} date={c.scene.date} bubbles={bubbles} items={sceneItems} done={sv ? "Avsluta" : "End"} />
       </Phone>
-    </div>
-  </div>
-</section>
-
-<!-- 3. Ur bruset: stapeln -->
-<section class="section full" id="bruset" data-space data-hue="150" data-orb={REST} data-watch>
-  <div class="wide noise-wide">
-    <div class="wide-head stack">
-      <h2 class="title-xl">{c.noiseTitle}</h2>
-      <p class="lead">{c.noiseLead}</p>
-    </div>
-    <Noise lang={lang} compact />
-    <div class="band" aria-label={c.bandHead}>
-      <div class="band-head"><span>{c.bandHead}</span><span>6 min 12 s</span></div>
-      <div class="band-groups" aria-hidden="true">
-        {groupW.map((w, i) => <div class="band-group" style={`flex: ${w} 1 0`}><span>{c.groups[i]}</span></div>)}
-      </div>
-      <div class="band-segs" aria-hidden="true">
-        {band.map(([, , w, h], i) => <span class="band-seg" style={`flex: ${w} 1 0; --h: ${h}; --i: ${i}`} />)}
-      </div>
-      <div class="band-labels">
-        {band.map(([t, d, w]) => (
-          <div style={`flex: ${w} 1 0`}>
-            <small>{t}</small>
-            <span>{d}</span>
-          </div>
-        ))}
-      </div>
-      <div class="band-legend">
-        {c.groups.map((g) => <span>{g}</span>)}
-      </div>
     </div>
   </div>
 </section>

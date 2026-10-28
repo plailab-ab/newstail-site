@@ -1,8 +1,7 @@
 ---
 /**
  * Hemvyn som i appen 2026-10-23: mik + företag + avatar, hälsning, datum, Recap-pillen,
- * pratbubblorna i två kolumner som möts i mitten, veckans himmel (Karlavagnen) till vänster,
- * pilen och det lilla klotet i vilan längst ner.
+ * pratbubblorna i två kolumner som möts i mitten, pilen och det lilla klotet i vilan längst ner.
  */
 export type HomeItem = { label: string; kind: "inside" | "industry" | "own" | "surprise"; title: string };
 interface Props {
@@ -10,22 +9,9 @@ interface Props {
   greeting: string;
   date: string;
   items: HomeItem[];
-  /** Tända dagar i veckans himmel (0–7). */
-  lit?: number;
   recap?: string;
 }
-const { company, greeting, date, items, lit = 3, recap = "Recap" } = Astro.props;
-/* Karlavagnen (samma form som appens starfield.ts), i rutan 50,534 → 216×101. */
-const shape: [number, number][] = [
-  [0, 0],
-  [0.2, 0.12],
-  [0.4, 0.32],
-  [0.6, 0.44],
-  [0.62, 0.92],
-  [0.95, 1],
-  [1, 0.5],
-];
-const stars = shape.map(([x, y], i) => ({ x: 50 + x * 216, y: 534 + y * 101, lit: i < lit, today: i === lit }));
+const { company, greeting, date, items, recap = "Recap" } = Astro.props;
 ---
 
 <div class="scr-home">
@@ -48,17 +34,6 @@ const stars = shape.map(([x, y], i) => ({ x: 50 + x * 216, y: 534 + y * 101, lit
       ))
     }
   </div>
-  <svg class="scr-sky" viewBox="0 0 360 780" width="360" height="780" aria-hidden="true">
-    {stars.map((s) => (
-      <>
-        {s.lit && <circle cx={s.x} cy={s.y} r="11" fill="url(#sky-halo)" />}
-        <circle cx={s.x} cy={s.y} r={s.lit ? 2.6 : s.today ? 2.2 : 1.6} fill="#fff" opacity={s.lit ? 1 : s.today ? 0.6 : 0.4} />
-      </>
-    ))}
-    <defs>
-      <radialGradient id="sky-halo"><stop offset="0" stop-color="#fff" stop-opacity="0.45"></stop><stop offset="1" stop-color="#fff" stop-opacity="0"></stop></radialGradient>
-    </defs>
-  </svg>
   <span class="scr-nudge" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#9ba7b7" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 15 6-6 6 6"></path></svg></span>
   <img class="scr-rest" src="/orbs/orb-262.webp" alt="" width="240" height="240" loading="lazy" decoding="async" />
 </div>
