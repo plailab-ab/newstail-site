@@ -1226,3 +1226,32 @@
   hyphens: auto;
   overflow-wrap: anywhere;
 }
+
+/* ---------- 2026-10-28 kväll: fullskärmskänsla per sektion, mindre klot i mobilen ---------- */
+/* Sektionerna med en illustration får hela skärmen, innehållet mitt i – man ser inte nästa
+   sektions rubrik eller föregående mockups underkant (Joel, mobilen). */
+.section.full {
+  min-height: 100svh;
+  justify-content: center;
+}
+.section.sub-top.how-hero {
+  min-height: 100svh;
+  padding-top: clamp(7rem, 18vh, 12rem);
+  padding-bottom: clamp(6rem, 14vh, 10rem);
+}
+@media (max-width: 759px) {
+  .section.sub-top.how-hero {
+    min-height: 100svh;
+    padding-top: calc(var(--nav-h) + 3rem);
+    padding-bottom: 4rem;
+    justify-content: center;
+  }
+  .section.full {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  /* Klotet i heron ett steg mindre */
+  .hero-v3-stage {
+    --orb-size: min(50vw, 29svh);
+  }
+}

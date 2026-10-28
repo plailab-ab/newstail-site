@@ -98,14 +98,14 @@ const band = [
 const groupW = [band[0]![2] + band[1]![2], band[2]![2] + band[3]![2] + band[4]![2] + band[5]![2], band[6]![2] + band[7]![2]];
 const bubbles = sv
   ? [
-      { label: "Internt", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
+      { label: "Internt · Nordvik", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
       { label: "Bransch", kind: "industry" as const, title: "Hyror upp 3,2 % i Småland" },
       { label: "Räntor", kind: "own" as const, title: "Marknaden räknar med sänkning före jul" },
       { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar i Småland" },
       { label: "Något nytt", kind: "surprise" as const, title: "Nya energikrav från årsskiftet" },
     ]
   : [
-      { label: "Internal", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
+      { label: "Internal · Nordvik", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
       { label: "Industry", kind: "industry" as const, title: "Rents up 3.2 % in Småland" },
       { label: "Rates", kind: "own" as const, title: "The market expects a cut before Christmas" },
       { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
@@ -125,7 +125,7 @@ const bubbles = sv
 </section>
 
 <!-- 2. Vi lyssnar på allt -->
-<section class="section" id={id.listen} data-space data-hue="200" data-orb={REST} data-watch>
+<section class="section full" id={id.listen} data-space data-hue="200" data-orb={REST} data-watch>
   <div class="split orb-left how-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.listenTitle}</h2>
@@ -139,7 +139,7 @@ const bubbles = sv
 </section>
 
 <!-- 3. Urvalet: stapeln -->
-<section class="section" id={id.pick} data-space data-hue="150" data-orb={REST} data-watch>
+<section class="section full" id={id.pick} data-space data-hue="150" data-orb={REST} data-watch>
   <div class="wide">
     <div class="wide-head stack">
       <h2 class="title-xl">{c.pickTitle}</h2>
@@ -169,7 +169,7 @@ const bubbles = sv
 </section>
 
 <!-- 4. Det interna som ingen läser -->
-<section class="section" id={id.inside} data-space data-hue="72" data-orb={REST} data-watch>
+<section class="section full" id={id.inside} data-space data-hue="72" data-orb={REST} data-watch>
   <div class="split how-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.insideTitle}</h2>
@@ -182,7 +182,7 @@ const bubbles = sv
 </section>
 
 <!-- 5. Det du själv brinner för -->
-<section class="section" id={id.own} data-space data-hue="300" data-orb={REST} data-watch>
+<section class="section full" id={id.own} data-space data-hue="300" data-orb={REST} data-watch>
   <div class="split orb-left how-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.ownTitle}</h2>
@@ -195,7 +195,7 @@ const bubbles = sv
 </section>
 
 <!-- 6. Ett svep: telefonen, en gång -->
-<section class="section section-center" id={id.swipe} data-space data-hue="262" data-orb={REST} data-watch>
+<section class="section section-center full" id={id.swipe} data-space data-hue="262" data-orb={REST} data-watch>
   <div class="center-wrap">
     <div class="stack center-head">
       <h2 class="title-xl">{c.swipeTitle}</h2>

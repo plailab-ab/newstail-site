@@ -112,23 +112,23 @@ const sceneItems = sv
   ? [
       { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
       { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsbladet", hue: 200 },
-      { topic: "INTERNT", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist", hue: 72, inside: true },
+      { topic: "INTERNT · NORDVIK", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist, vd", hue: 72, inside: true },
     ]
   : [
       { topic: "RATES", title: "The market expects a cut before Christmas", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
       { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsbladet", hue: 200 },
-      { topic: "INTERNAL", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist", hue: 72, inside: true },
+      { topic: "INTERNAL · NORDVIK", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist, CEO", hue: 72, inside: true },
     ];
 const bubbles = sv
   ? [
-      { label: "Internt", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
+      { label: "Internt · Nordvik", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
       { label: "Bransch", kind: "industry" as const, title: "Hyror upp 3,2 % i Småland" },
       { label: "Räntor", kind: "own" as const, title: "Marknaden räknar med sänkning före jul" },
       { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar i Småland" },
       { label: "Något nytt", kind: "surprise" as const, title: "Nya energikrav från årsskiftet" },
     ]
   : [
-      { label: "Internal", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
+      { label: "Internal · Nordvik", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
       { label: "Industry", kind: "industry" as const, title: "Rents up 3.2 % in Småland" },
       { label: "Rates", kind: "own" as const, title: "The market expects a cut before Christmas" },
       { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
@@ -213,7 +213,7 @@ const faq = faqFor("home", lang).slice(0, 4);
 </section>
 
 <!-- 3. Ur bruset: stapeln -->
-<section class="section" id="bruset" data-space data-hue="150" data-orb={REST} data-watch>
+<section class="section full" id="bruset" data-space data-hue="150" data-orb={REST} data-watch>
   <div class="wide noise-wide">
     <div class="wide-head stack">
       <h2 class="title-xl">{c.noiseTitle}</h2>
@@ -244,7 +244,7 @@ const faq = faqFor("home", lang).slice(0, 4);
 </section>
 
 <!-- 4. Språket: ljudstaplar -->
-<section class="section" id="sprak" data-space data-hue="262" data-orb={REST} data-watch>
+<section class="section full" id="sprak" data-space data-hue="262" data-orb={REST} data-watch>
   <div class="split orb-left how-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.langTitle}</h2>
@@ -257,7 +257,7 @@ const faq = faqFor("home", lang).slice(0, 4);
 </section>
 
 <!-- 5. Interninfo -->
-<section class="section section-center" id="inside" data-space data-hue="72" data-orb={REST} data-watch>
+<section class="section section-center full" id="inside" data-space data-hue="72" data-orb={REST} data-watch>
   <div class="center-wrap">
     <div class="stack center-head">
       <h2 class="title-xl">{c.inTitle}</h2>
@@ -278,7 +278,7 @@ const faq = faqFor("home", lang).slice(0, 4);
 </section>
 
 <!-- 6. Efteråt: tre kort -->
-<section class="section" id="recap" data-space data-hue="300" data-orb={REST} data-watch>
+<section class="section full" id="recap" data-space data-hue="300" data-orb={REST} data-watch>
   <div class="split how-split">
     <div class="split-text stack">
       <h2 class="title-xl">{c.recTitle}</h2>
@@ -291,7 +291,7 @@ const faq = faqFor("home", lang).slice(0, 4);
 </section>
 
 <!-- 7. Ledningen -->
-<section class="section section-lead" id="ledare" data-space data-hue="262" data-orb={REST} data-watch>
+<section class="section section-lead full" id="ledare" data-space data-hue="262" data-orb={REST} data-watch>
   <div class="lead-wrap">
     <div class="stack lead-head">
       <h2 class="title-xl">{c.leadTitle}</h2>
