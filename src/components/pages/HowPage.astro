@@ -31,7 +31,6 @@ const c = sv
   ? {
       h1: "Nyheterna finns. Ingen hinner.",
       lead: "Branschen, marknaderna och det interna – på olika språk, från olika källor, publicerat när som helst. För mycket för en människa. Lagom för en värd.",
-      m: ["Oberoende av språk", "Oberoende av klockslag", "Oberoende av hur många källor"],
       listenTitle: "Vi lyssnar på allt. Hela tiden.",
       listenLead: "Det som publiceras klockan tre på natten på tyska fångas lika säkert som morgonens svenska rubrik.",
       listenIcons: [["globe", "Alla språk"], ["clock", "Dygnet runt"], ["check", "Samma nyhet från flera källor blir en"]],
@@ -40,14 +39,11 @@ const c = sv
       bandHead: "Dagens sändning för Anna, förvaltare i Jönköping",
       groups: ["Internt – alla hör det", "Er omvärld – efter roll", "Ditt eget"],
       insideTitle: "Det interna som ingen läser.",
-      insideLead: "Nyhetsbrevet ligger oläst. Säg det i stället en gång – med värdens röst, först i allas sändning – och se hur många som hört det.",
-      insideIcons: [["mic", "Tala in eller skriv"], ["team", "Välj vilka som hör det"], ["eye", "Per team, aldrig per person"]],
+      insideLead: "Nyhetsbrevet ligger oläst. Säg det i stället en gång – tala in eller skriv – så går det ut med värdens röst, först i allas sändning, till de team ni väljer. Och ni ser hur många som hört det. Per team, aldrig per person.",
       ownTitle: "Det du själv brinner för.",
-      ownLead: "Räntor, energikrav eller HV71 – följ med ett tryck. Sändningen lär sig av vad du håller klotet på och vad du sveper förbi.",
-      ownIcons: [["star", "Följ med ett tryck"], ["bell", "Något nytt varje dag"], ["check", "Blir bättre för varje sändning"]],
+      ownLead: "Räntor, energikrav eller HV71 – följ med ett tryck, och något nytt varje dag utanför det du valt. Sändningen lär sig av vad du håller klotet på och vad du sveper förbi, och blir bättre för varje gång.",
       swipeTitle: "Och allt det här blir … ett svep.",
       swipeLead: "Så mycket teknik. Så lite att göra. Dra upp klotet och lyssna, tre till tio minuter – på det språk du väljer av fyra.",
-      swipeIcons: [["headphones", "Dra upp. Lyssna."], ["globe", "Fyra språk"], ["clock", "Tre till tio minuter"]],
       swipeLink: "Se det på startsidan",
       startTitle: "Från registrering till första sändning.",
       startLead: "Samma dag. Inga integrationer.",
@@ -63,7 +59,6 @@ const c = sv
   : {
       h1: "The news is out there. Nobody has the time.",
       lead: "The industry, the markets and the internal – in different languages, from different sources, published at any hour. Too much for a person. Just right for a host.",
-      m: ["Regardless of language", "Regardless of the hour", "Regardless of how many sources"],
       listenTitle: "We listen to everything. All the time.",
       listenLead: "What is published at three in the morning in German is caught as surely as the Swedish headline of the morning.",
       listenIcons: [["globe", "Every language"], ["clock", "Around the clock"], ["check", "Several sources, one story"]],
@@ -72,14 +67,11 @@ const c = sv
       bandHead: "Today's broadcast for Anna, property manager in Jönköping",
       groups: ["Internal – everyone hears it", "Your world – by role", "Your own"],
       insideTitle: "The internal news nobody reads.",
-      insideLead: "The newsletter sits unread. Say it once instead – in the host's voice, first in everyone's broadcast – and see how many heard it.",
-      insideIcons: [["mic", "Record or type"], ["team", "Choose who hears it"], ["eye", "Per team, never per person"]],
+      insideLead: "The newsletter sits unread. Say it once instead – record or type – and it goes out in the host's voice, first in everyone's broadcast, to the teams you choose. And you see how many heard it. Per team, never per person.",
       ownTitle: "What you care about.",
-      ownLead: "Interest rates, energy rules or HV71 – follow with one tap. The broadcast learns from what you hold the orb on and what you swipe past.",
-      ownIcons: [["star", "Follow with one tap"], ["bell", "Something new every day"], ["check", "Better with every broadcast"]],
+      ownLead: "Interest rates, energy rules or HV71 – follow with one tap, and something new every day outside what you chose. The broadcast learns from what you hold the orb on and what you swipe past, and gets better every time.",
       swipeTitle: "And all of this becomes … one swipe.",
       swipeLead: "So much technology. So little to do. Pull up the orb and listen, three to ten minutes – in the language you choose out of four.",
-      swipeIcons: [["headphones", "Pull up. Listen."], ["globe", "Four languages"], ["clock", "Three to ten minutes"]],
       swipeLink: "See it on the start page",
       startTitle: "From sign-up to first broadcast.",
       startLead: "The same day. No integrations.",
@@ -129,9 +121,6 @@ const bubbles = sv
       <p class="lead">{c.lead}</p>
     </div>
     <Noise lang={lang} />
-    <ul class="how-meta" aria-hidden="true">
-      {c.m.map((x) => <li>{x}</li>)}
-    </ul>
   </div>
 </section>
 
@@ -185,7 +174,6 @@ const bubbles = sv
     <div class="split-text stack">
       <h2 class="title-xl">{c.insideTitle}</h2>
       <p class="lead">{c.insideLead}</p>
-      <IconRow items={c.insideIcons as any} />
     </div>
     <div class="split-stage how-stage">
       <Compare lang={lang} />
@@ -199,7 +187,6 @@ const bubbles = sv
     <div class="split-text stack">
       <h2 class="title-xl">{c.ownTitle}</h2>
       <p class="lead">{c.ownLead}</p>
-      <IconRow items={c.ownIcons as any} />
     </div>
     <div class="split-stage how-stage">
       <Topics lang={lang} />
@@ -213,7 +200,6 @@ const bubbles = sv
     <div class="stack center-head">
       <h2 class="title-xl">{c.swipeTitle}</h2>
       <p class="lead">{c.swipeLead}</p>
-      <IconRow items={c.swipeIcons as any} class="icon-row-center" />
     </div>
     <div class="center-stage stage-device">
       <Phone label={sv ? "Newstail-appen: dra upp klotet och lyssna" : "The Newstail app: pull up the orb and listen"}>

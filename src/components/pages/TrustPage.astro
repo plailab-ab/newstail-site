@@ -30,7 +30,6 @@ const c = sv
   ? {
       h1: "Mönster. Aldrig personer.",
       lead: "Ledningen ser hur många som lyssnat – aldrig vilka. Det är inte en inställning någon kan ändra. Det är så produkten är byggd.",
-      m: ["Aggregat från fem personer", "Inget per person", "Byggt in, inte påslaget"],
       seesTitle: "Vad ledningen ser. Och aldrig ser.",
       seesLead: "Siffror per team, från fem personer. Under det visas ingenting.",
       yesLabel: "Ser",
@@ -42,7 +41,6 @@ const c = sv
       ownIcons: [["lock", "Egna ämnen är privata"], ["mic", "Ingen mikrofon som lyssnar"], ["person", "Radera kontot själv"]],
       contentTitle: "Varje punkt har ett spår.",
       contentLead: "Branschnyheterna bygger på källor du kan läsa i recapen. Det interna kommer bara från dem ni utsett – och lyssnas igenom innan det går ut.",
-      contentIcons: [["doc", "Källor på varje punkt"], ["team", "Bara de ni utser publicerar"], ["headphones", "Hör det innan det går ut"]],
       whereTitle: "Var det bor.",
       whereLead: "Kort och tråkigt, som det ska vara.",
       facts: [
@@ -66,7 +64,6 @@ const c = sv
   : {
       h1: "Patterns. Never people.",
       lead: "Management sees how many listened – never who. That isn't a setting anyone can change. It's how the product is built.",
-      m: ["Aggregates from five people", "Nothing per person", "Built in, not switched on"],
       seesTitle: "What management sees. And never sees.",
       seesLead: "Figures per team, from five people. Below that, nothing is shown.",
       yesLabel: "Sees",
@@ -78,7 +75,6 @@ const c = sv
       ownIcons: [["lock", "Own topics are private"], ["mic", "No microphone listening"], ["person", "Delete the account yourself"]],
       contentTitle: "Every story has a trail.",
       contentLead: "Industry news is built on sources you can read in the recap. Internal news only comes from the people you choose – and is listened through before it goes out.",
-      contentIcons: [["doc", "Sources on every story"], ["team", "Only the people you choose publish"], ["headphones", "Hear it before it goes out"]],
       whereTitle: "Where it lives.",
       whereLead: "Short and boring, as it should be.",
       facts: [
@@ -109,9 +105,6 @@ const c = sv
       <p class="lead">{c.lead}</p>
     </div>
     <Aggregate lang={lang} />
-    <ul class="how-meta" aria-hidden="true">
-      {c.m.map((x) => <li>{x}</li>)}
-    </ul>
   </div>
 </section>
 
@@ -138,7 +131,6 @@ const c = sv
         <ul class="checks no">{c.no.map((x) => <li>{x}</li>)}</ul>
       </div>
     </div>
-    <p class="note">{ui.demoNote}</p>
   </div>
 </section>
 
@@ -162,7 +154,6 @@ const c = sv
     <div class="split-text stack">
       <h2 class="title-xl">{c.contentTitle}</h2>
       <p class="lead">{c.contentLead}</p>
-      <IconRow items={c.contentIcons as any} />
     </div>
     <div class="split-stage how-stage">
       <SourceTrail lang={lang} />

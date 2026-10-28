@@ -19,7 +19,7 @@ import { Starfield } from "./starfield";
  * - Reduced motion: inget andetag, ingen färd, klotet står där sektionen säger.
  */
 
-type Target = { hue: number; x: number; y: number; r: number; alpha: number };
+type Target = { hue: number; x: number; y: number; r: number; alpha: number; pin?: boolean };
 type Section = { el: HTMLElement; anchor: HTMLElement | null; d: Target; m: Target };
 
 const smooth = (x: number) => x * x * (3 - 2 * x);
@@ -80,12 +80,15 @@ function targetFor(s: Section, mobile: boolean, W: number, H: number, minSide: n
   if (a.width < 2) return { ...t, alpha: 0 };
   const cx = a.left + a.width / 2;
   const cy = a.top + a.height / 2;
+  // pin: klotet står i ett element i layouten (t.ex. ringen i scenens telefon) – då ingen
+  // pekar-parallax och snabbare följning, så det alltid sitter mitt i ringen (2026-10-28).
   return {
     hue: t.hue,
     x: cx / W,
     y: cy / H,
     r: a.width / 2 / minSide,
     alpha: t.alpha,
+    pin: true,
   };
 }
 
@@ -241,6 +244,7 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
         y: out ? a.y : inn ? b.y : lerp(a.y, b.y, u),
         r: out ? a.r : inn ? b.r : lerp(a.r, b.r, u),
         alpha: lerp(a.alpha, b.alpha, u),
+        pin: u < 0.5 ? a.pin : b.pin,
       };
     };
 
@@ -266,10 +270,10 @@ export default function Space({ orb: showOrb = true }: { orb?: boolean }) {
 
       const tg = targetNow();
       const minSide = Math.min(W, H);
-      const tx = tg.x * W + pointer.x * 10;
-      const ty = tg.y * H + pointer.y * 8;
+      const tx = tg.x * W + (tg.pin ? 0 : pointer.x * 10);
+      const ty = tg.y * H + (tg.pin ? 0 : pointer.y * 8);
       const tr = tg.r * minSide;
-      const k = reduced ? 1 : 0.075;
+      const k = reduced ? 1 : tg.pin ? 0.22 : 0.075;
       cur.x = approach(cur.x, tx, k, f);
       cur.y = approach(cur.y, ty, k, f);
       cur.r = approach(cur.r, tr, k, f);
