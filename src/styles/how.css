@@ -1060,3 +1060,204 @@
   object-fit: cover;
   display: block;
 }
+
+/* =====================================================================
+   Landningssidor, hubbar och Om oss (2026-10-28): samma grammatik som resten
+   ===================================================================== */
+.lined-link {
+  color: var(--ink);
+  text-decoration: none;
+  transition: border-top-color 200ms ease;
+}
+.lined-link:hover {
+  border-top-color: rgba(236, 239, 244, 0.5);
+}
+.lined-link span {
+  color: var(--ink-2);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.lined-link small.how-mono {
+  margin-top: 0.3rem;
+}
+.land-pains,
+.land-more,
+.hub-list {
+  margin-top: 2.4rem;
+}
+.land-pains .lined span,
+.hub-list .lined span {
+  color: var(--ink-2);
+}
+.land-rowlist {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 8vh, 5.5rem);
+  margin-top: 3rem;
+}
+.land-row .split-text {
+  max-width: 28rem;
+}
+.land-row .title-lg {
+  font-weight: 600;
+}
+.land-row .lead {
+  font-size: 1.0625rem;
+}
+.land-script .after-card.is-inside .after-k {
+  color: #f2b56b;
+}
+.land-script .after-card.is-inside {
+  box-shadow: inset 0 0 0 1px rgba(242, 181, 107, 0.35);
+}
+.land-script .after-card p {
+  color: var(--ink);
+  font-size: 0.9375rem;
+}
+.hub-others {
+  margin-top: 2.6rem;
+}
+.hub-others .lang-tab {
+  text-decoration: none;
+  letter-spacing: 0;
+  font-weight: 500;
+}
+.hub-hero {
+  min-height: 0 !important;
+}
+
+/* Radernas bilder */
+.rv {
+  width: min(100%, 460px);
+}
+.rv-topics,
+.rv-teams {
+  padding: 1.1rem 1.25rem 1.25rem;
+  border-radius: 22px;
+  background: #0d0e11;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.rv-k {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: var(--ink-3);
+}
+.rv-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.rv-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.rv-topic {
+  position: static;
+  transform: none;
+  animation: none;
+}
+.rv-topic i {
+  background: oklch(0.74 0.13 var(--h)) !important;
+  box-shadow: 0 0 10px oklch(0.74 0.13 var(--h) / 0.7) !important;
+}
+.rv-chipsrow {
+  margin-top: 0;
+}
+.rv-inside,
+.rv-reach {
+  max-width: none;
+}
+.rv-reach .admc-rows {
+  margin-top: 0.9rem;
+  padding-top: 0;
+  border-top: 0;
+}
+.rv-lang .wave {
+  cursor: default;
+  grid-template-columns: 2.4rem 56px minmax(0, 1fr);
+  padding: 0.75rem 1rem;
+}
+.rv-lang .wave-txt {
+  font-size: 0.9rem;
+}
+
+/* Om oss */
+.about-stage {
+  min-height: min(420px, 40vw);
+}
+.about-people {
+  margin-top: 2.4rem;
+}
+.about-values {
+  margin-top: 2.4rem;
+}
+.about-facts {
+  margin-top: 0;
+}
+.about-mail {
+  margin-top: clamp(3rem, 10vh, 6rem);
+}
+@media (max-width: 759px) {
+  .about-stage {
+    min-height: 54vw;
+    order: -1;
+  }
+  .land-rowlist {
+    gap: 2.4rem;
+    margin-top: 1.8rem;
+  }
+  .land-pains,
+  .land-more,
+  .hub-list,
+  .about-people,
+  .about-values {
+    margin-top: 1.4rem;
+  }
+}
+
+/* Landningssidornas långa sökrubriker: ett steg mindre än heron på startsidan */
+.landing-h1 {
+  font-size: clamp(2.1rem, 3.5vw, 3.2rem);
+  line-height: 1.06;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+}
+
+/* ---------- 2026-10-28 kväll: fullskärmskänsla per sektion, mindre klot i mobilen ---------- */
+/* Sektionerna med en illustration får hela skärmen, innehållet mitt i – man ser inte nästa
+   sektions rubrik eller föregående mockups underkant (Joel, mobilen). */
+.section.full {
+  min-height: 100svh;
+  justify-content: center;
+}
+.section.sub-top.how-hero {
+  min-height: 100svh;
+  padding-top: clamp(7rem, 18vh, 12rem);
+  padding-bottom: clamp(6rem, 14vh, 10rem);
+}
+@media (max-width: 759px) {
+  .section.sub-top.how-hero {
+    min-height: 100svh;
+    padding-top: calc(var(--nav-h) + 3rem);
+    padding-bottom: 4rem;
+    justify-content: center;
+  }
+  .section.full {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  /* Klotet i heron ett steg mindre */
+  .hero-v3-stage {
+    --orb-size: min(50vw, 29svh);
+  }
+}
+/* Klotet i heron ett steg mindre på datorn också (Joel 2026-10-28). */
+@media (min-width: 760px) {
+  .hero-v3-stage {
+    --orb-size: min(450px, 33vw);
+  }
+}

@@ -33,7 +33,7 @@ const ico: Record<Row["kind"], string> = {
 };
 ---
 
-<div class="priv" role="img" aria-label={sv ? "Medarbetarens egna: privata ämnen, quizsvar per team, mikrofon av, egen radering" : "The employee's own: private topics, quiz answers per team, microphone off, self-service deletion"}>
+<div class="priv" data-watch role="img" aria-label={sv ? "Medarbetarens egna: privata ämnen, quizsvar per team, mikrofon av, egen radering" : "The employee's own: private topics, quiz answers per team, microphone off, self-service deletion"}>
   <div class="priv-hd"><span>{sv ? "Ditt" : "Yours"}</span><span class="priv-mono">{sv ? "ANNA · NORDVIK" : "ANNA · NORDVIK"}</span></div>
   {rows.map((r, i) => (
     <div class="priv-row" style={`--i: ${i}`}>

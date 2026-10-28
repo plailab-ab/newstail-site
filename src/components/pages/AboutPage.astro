@@ -1,5 +1,8 @@
 ---
-/** Om oss: varför, vi som bygger det, vad vi tror på, bolaget och mejlen. */
+/**
+ * Om oss (2026-10-28, i sajtens grammatik): varför, vi som bygger det, vad vi tror på,
+ * bolaget och mejlen. Klotet fritt i heron som på startsidan.
+ */
 import { type Lang } from "../../content/site";
 
 interface Props {
@@ -7,94 +10,88 @@ interface Props {
 }
 const { lang } = Astro.props;
 const sv = lang === "sv";
+const REST = "0.5,0.5,0.1,0";
 const c = sv
   ? {
       h1: "Alla på jobbet ska hänga med.",
-      lead: "[Varför ni startade Newstail – två meningar, med era egna ord.]",
+      lead: "Det viktigaste når sällan fram: varken det som händer i branschen eller det som sägs internt. Så vi byggde en sändning per person – uppläst, på det språk var och en väljer.",
       teamTitle: "Vi som bygger det.",
+      teamLead: "Två grundare, samma roll. Vi bygger produkten, rösten och sajten själva – och svarar själva på mejlen.",
       people: [
-        ["Joel Enhörning", "Medgrundare · [roll]"],
-        ["Jimmy Lindström", "Medgrundare · [roll]"],
+        ["Joel Enhörning", "Medgrundare"],
+        ["Jimmy Lindström", "Medgrundare"],
       ],
       values: [
         ["Röst före text", "Det man hör, hinner man med."],
         ["Alla ska med", "Oavsett språk eller arbetsplats."],
-        ["Integritet först", "Mönster, aldrig personer."],
+        ["Mönster, aldrig personer", "Ledningen ser hur många. Aldrig vilka."],
       ],
       facts: [
-        ["Bolag", "Plailab AB"],
-        ["Org.nr", "559284-2610"],
-        ["Ort", "[Ort]"],
-        ["Grundat", "[År]"],
+        ["BOLAG", "Plailab AB"],
+        ["ORG.NR", "559284-2610"],
+        ["LAND", "Sverige"],
       ],
       mail: "Hör av dig.",
-      photo: "Foto",
     }
   : {
       h1: "Everyone at work should keep up.",
-      lead: "[Why you started Newstail – two sentences, in your own words.]",
+      lead: "The important things rarely get through: neither what happens in the industry nor what is said internally. So we built one broadcast per person – read aloud, in the language each one chooses.",
       teamTitle: "The people building it.",
+      teamLead: "Two founders, the same role. We build the product, the voice and the site ourselves – and answer the emails ourselves.",
       people: [
-        ["Joel Enhörning", "Co-founder · [role]"],
-        ["Jimmy Lindström", "Co-founder · [role]"],
+        ["Joel Enhörning", "Co-founder"],
+        ["Jimmy Lindström", "Co-founder"],
       ],
       values: [
         ["Voice before text", "What you hear, you have time for."],
         ["Everyone included", "Whatever the language or workplace."],
-        ["Privacy first", "Patterns, never people."],
+        ["Patterns, never people", "Management sees how many. Never who."],
       ],
       facts: [
-        ["Company", "Plailab AB"],
-        ["Reg. no.", "559284-2610"],
-        ["Based in", "[City]"],
-        ["Founded", "[Year]"],
+        ["COMPANY", "Plailab AB"],
+        ["REG. NO.", "559284-2610"],
+        ["COUNTRY", "Sweden"],
       ],
       mail: "Get in touch.",
-      photo: "Photo",
     };
-const ph = (s: string) => s.replace(/\[([^\]]+)\]/g, '<span class="todo">[$1]</span>');
 ---
 
-<section class="section sub-top" data-space data-hue="72" data-watch>
-  <div class="split">
+<section class="section sub-top about-hero" data-space data-hue="72" data-orb="0.74,0.5,0.17,1" data-orb-m="0.5,0.26,0.16,1" data-watch>
+  <div class="split how-split">
     <div class="split-text stack">
       <h1 class="title-hero">{c.h1}</h1>
-      <p class="lead" set:html={ph(c.lead)} />
+      <p class="lead">{c.lead}</p>
     </div>
-    <div class="split-stage stage-reach" aria-hidden="true">
-      <img class="about-orb" src="/orbs/orb-72.webp" alt="" width="260" height="260" />
-    </div>
+    <div class="split-stage about-stage" aria-hidden="true"></div>
   </div>
 </section>
 
-<section class="section" data-space data-hue="200" data-watch>
+<section class="section" data-space data-hue="200" data-orb={REST} data-watch>
   <div class="wide">
-    <h2 class="title-xl">{c.teamTitle}</h2>
-    <div class="people">
-      {
-        c.people.map(([n, r]) => (
-          <div class="person">
-            <span class="photo" aria-hidden="true" />
-            <span>
-              <b>{n}</b>
-              <span set:html={ph(r)} />
-            </span>
-          </div>
-        ))
-      }
+    <div class="wide-head stack">
+      <h2 class="title-xl">{c.teamTitle}</h2>
+      <p class="lead">{c.teamLead}</p>
     </div>
-    <div class="grid-3">
+    <div class="grid-2 about-people">
+      {c.people.map(([n, r]) => <div class="lined"><strong>{n}</strong><span>{r}</span></div>)}
+    </div>
+    <div class="grid-3 about-values">
       {c.values.map(([t, d]) => <div class="lined"><strong>{t}</strong><span>{d}</span></div>)}
     </div>
   </div>
 </section>
 
-<section class="section" data-space data-hue="262" data-watch>
+<section class="section" data-space data-hue="262" data-orb={REST} data-watch>
   <div class="wide">
-    <div class="facts-row" style="margin-top: 0">
-      {c.facts.map(([l, v]) => <div><small>{l}</small><b set:html={ph(v)} /></div>)}
-    </div>
-    <div class="stack" style="margin-top: clamp(3rem, 10vh, 6rem)">
+    <dl class="facts about-facts">
+      {c.facts.map(([k, v]) => (
+        <div class="fact">
+          <dt class="how-mono">{k}</dt>
+          <dd>{v}</dd>
+        </div>
+      ))}
+    </dl>
+    <div class="stack about-mail">
       <h2 class="title-xl">{c.mail}</h2>
       <a class="big-mail" href="mailto:hello@newstail.io">hello@newstail.io</a>
     </div>

@@ -1,0 +1,102 @@
+---
+/**
+ * Bilden till en rad i "Så funkar det för er" på landningssidorna (2026-10-28), i samma
+ * grammatik som resten av sajten: mörka kort med linjer, bärnsten för det interna.
+ */
+import type { RowVisual } from "../../content/landing-types";
+interface Props {
+  v: RowVisual;
+}
+const { v } = Astro.props;
+const pct = (a: number, b: number) => Math.round((a / b) * 100);
+const HUES = [72, 200, 150, 262, 350, 300, 120, 30];
+---
+
+{
+  v.kind === "topics" && (
+    <div class="rv rv-topics" role="img" aria-label="Ämnen som följs">
+      <small class="rv-k">FÖLJER</small>
+      <span class="rv-chips">
+        {v.chips.map((c, i) => (
+          <span class="topic topic-1 is-on rv-topic" style={`--h: ${HUES[i % 8]}`}>
+            <i aria-hidden="true" />
+            {c}
+          </span>
+        ))}
+      </span>
+    </div>
+  )
+}
+{
+  v.kind === "inside" && (
+    <div class="rv rv-inside admc" role="img" aria-label={`Internt budskap hört av ${v.heard} av ${v.of}`}>
+      <small>INTERNT · HÖRT</small>
+      <span class="admc-big">
+        <b>{v.heard}</b>
+        <span>av {v.of}</span>
+      </span>
+      <div class="admc-rows">
+        <small>{v.title}</small>
+        <span class="admc-row">
+          <span>Alla</span>
+          <span class="adm-bar">
+            <span style={`width: ${pct(v.heard, v.of)}%`} />
+          </span>
+          <span class="admc-num">
+            {v.heard} / {v.of}
+          </span>
+        </span>
+      </div>
+    </div>
+  )
+}
+{
+  v.kind === "teams" && (
+    <div class="rv rv-teams" role="img" aria-label="Val av team">
+      <small class="rv-k">VILKA SOM HÖR DET</small>
+      <b class="rv-title">{v.title}</b>
+      <span class="chips rv-chipsrow">
+        {v.teams.map((t, i) => (
+          <span class={`chip${i === v.selected ? " chip-on" : ""}`}>{t}</span>
+        ))}
+      </span>
+    </div>
+  )
+}
+{
+  v.kind === "language" && (
+    <div class="rv rv-lang waves" role="img" aria-label="Samma rubrik på flera språk">
+      {v.lines.map((x, i) => (
+        <span class={`wave${i === 0 ? " is-on" : ""}`}>
+          <span class="wave-code">{x.code}</span>
+          <span class="wave-bars" aria-hidden="true">
+            {Array.from({ length: 10 }, (_, b) => (
+              <i style={`--b: ${b}; --h: ${0.25 + ((b * 7 + i * 3) % 9) / 12}`} />
+            ))}
+          </span>
+          <span class="wave-txt">{x.t}</span>
+        </span>
+      ))}
+    </div>
+  )
+}
+{
+  v.kind === "reach" && (
+    <div class="rv rv-reach admc" role="img" aria-label="Räckvidd per budskap">
+      <small>SENASTE INTERNA</small>
+      <div class="admc-rows rv-reachrows">
+        {v.rows.map((x) => (
+          <span class="admc-row">
+            <span>{x.t}</span>
+            <span class="adm-bar">
+              <span style={`width: ${pct(x.heard, x.of)}%`} />
+            </span>
+            <span class="admc-num">
+              {x.heard} / {x.of}
+            </span>
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
