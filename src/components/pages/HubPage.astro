@@ -1,8 +1,8 @@
 ---
-/** Hubbsidan för ett kluster: rubrik och ett kort per sida. */
+/** Hubbsidan för ett kluster (2026-10-28, i sajtens grammatik): rubrik, en linjerad rad per sida, de andra klustren, avslut. */
 import type { Cluster } from "../../content/landing-types";
 import { CLUSTERS, LANDINGS, landingPath } from "../../content/landings";
-import { START_URL, UI } from "../../content/site";
+import { ROUTES, START_URL, UI } from "../../content/site";
 
 interface Props {
   cluster: Cluster;
@@ -11,33 +11,44 @@ const { cluster } = Astro.props;
 const c = CLUSTERS[cluster];
 const pages = LANDINGS.filter((l) => l.cluster === cluster);
 const others = (Object.keys(CLUSTERS) as Cluster[]).filter((k) => k !== cluster);
+const REST = "0.5,0.5,0.1,0";
 ---
 
-<div class="page" data-space data-hue="200">
-  <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Newstail</a><span aria-hidden="true">›</span><span>{c.name}</span></nav>
-  <header class="page-head">
-    <h1 class="title-hero">{c.title}</h1>
-    <p class="lead">{c.lead}</p>
-  </header>
-  <div class="cards-link hub-grid">
-    {
-      pages.map((l) => (
-        <a href={landingPath(l)}>
-          <b>{l.name}</b>
-          <span>{l.card}</span>
-          <span class="headline">{l.phone.topic} · {l.phone.title}</span>
-        </a>
-      ))
-    }
-  </div>
-  <div class="chips" style="margin-top: 3rem">
-    {others.map((k) => <a class="chip" href={`/${k}/`}>{CLUSTERS[k].name}</a>)}
-  </div>
-  <div class="cta-band">
-    <div>
-      <h2>Prova med hela företaget.</h2>
-      <p>14 dagar gratis. {UI.sv.noCard}</p>
+<section class="section sub-top hub-hero" data-space data-hue="200" data-orb={REST} data-watch>
+  <div class="wide">
+    <div class="wide-head stack">
+      <nav class="crumbs" aria-label="Brödsmulor"><a href="/">Newstail</a><span aria-hidden="true">›</span><span>{c.name}</span></nav>
+      <h1 class="title-hero">{c.title}</h1>
+      <p class="lead">{c.lead}</p>
     </div>
-    <a class="pill pill-primary pill-lg" href={START_URL}>{UI.sv.startLong}</a>
+    <div class="grid-3 hub-list">
+      {
+        pages.map((l) => (
+          <a class="lined lined-link" href={landingPath(l)}>
+            <strong>{l.name}</strong>
+            <span>{l.card}</span>
+            <small class="how-mono">{l.phone.topic} · {l.phone.title}</small>
+          </a>
+        ))
+      }
+    </div>
+    <div class="lang-row hub-others">
+      {others.map((k) => <a class="lang-tab" href={`/${k}/`}>{CLUSTERS[k].name}</a>)}
+    </div>
   </div>
-</div>
+</section>
+
+<section class="section closing" data-space data-hue="200" data-orb={REST} data-watch>
+  <div class="stack closing-text">
+    <h2 class="title-xl">Prova med hela företaget.</h2>
+    <ul class="how-meta end-meta" aria-hidden="true">
+      <li>14 dagar gratis</li>
+      <li>Inget kort</li>
+      <li>Ingen bindning</li>
+    </ul>
+    <div class="actions">
+      <a class="pill pill-primary pill-lg" href={START_URL}>{UI.sv.startLong}</a>
+      <a class="pill pill-secondary pill-lg" href={ROUTES.sv.pricing}>Se priser</a>
+    </div>
+  </div>
+</section>
