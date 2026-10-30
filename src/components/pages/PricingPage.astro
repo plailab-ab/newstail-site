@@ -25,12 +25,6 @@ const c = sv
       priceFacts: [["MINST", "10 användare"], ["PROVPERIOD", "14 dagar gratis"], ["BINDNING", "Ingen"], ["KORT UNDER PROVET", "Nej"], ["INGÅR", "Allt"]],
       cta: "Prova gratis i 14 dagar",
       fine: "Inget kort under provperioden. Priser exkl. moms. 17 € i övriga Europa, 18 $ i resten av världen.",
-      calcKicker: "Räkna",
-      calcTitle: "Vad kostar det för er?",
-      emp: "Användare",
-      month: "kr/mån",
-      floor: "Minst tio användare – 1 790 kr i månaden.",
-      dotScale: "En prick = fem personer",
       payKicker: "Betalningen",
       payTitle: "Ni vet beloppet innan det dras.",
       steps: [
@@ -55,12 +49,6 @@ const c = sv
       priceFacts: [["MINIMUM", "10 users"], ["TRIAL", "14 days free"], ["LOCK-IN", "None"], ["CARD DURING TRIAL", "No"], ["INCLUDED", "Everything"]],
       cta: "Try it free for 14 days",
       fine: "No card during the trial. Prices excl. VAT. SEK 179 in Sweden, $18 outside Europe.",
-      calcKicker: "Calculate",
-      calcTitle: "What does it cost for you?",
-      emp: "Users",
-      month: "€/mo",
-      floor: "Ten users minimum – €170 a month.",
-      dotScale: "One dot = five people",
       payKicker: "Payment",
       payTitle: "You know the amount before it's charged.",
       steps: [
@@ -75,7 +63,6 @@ const c = sv
       faqTitle: "Questions about pricing.",
       big: "Volume pricing above 1,000 users – talk to us",
     };
-const E0 = 34;
 const REST = "0.5,0.5,0.1,0";
 ---
 
@@ -105,31 +92,6 @@ const REST = "0.5,0.5,0.1,0";
     </div>
   </div>
 </section>
-
-<section class="section" id={sv ? "rakna" : "calculate"} data-space data-hue="150" data-orb={REST} data-watch>
-  <div class="wide">
-    <div class="wide-head stack">
-      <h2 class="title-xl">{c.calcTitle}</h2>
-    </div>
-    <div class="calc" style="margin-top: 3rem" data-calc data-price={PRICE} data-lang={lang}>
-      <div class="calc-controls">
-        <label class="calc-row">
-          <span>{c.emp}<output data-out="emp">{E0}</output></span>
-          <input type="range" min="1" max="1000" step="1" value={E0} data-in="emp" />
-        </label>
-        <div class="calc-sum" aria-live="polite">
-          <b><span data-out="sum">{sv ? `${(E0 * PRICE).toLocaleString("sv-SE")}` : `€${(E0 * PRICE).toLocaleString("en-GB")}`}</span><small>{c.month}</small></b>
-          <em data-out="floor" hidden>{c.floor}</em>
-        </div>
-      </div>
-      <div>
-        <div class="calc-dots" data-dots aria-hidden="true"></div>
-        <p class="note" data-out="scale" hidden style="text-align: right">{c.dotScale}</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section" data-space data-hue="72" data-orb={REST} data-watch>
   <div class="wide">
     <div class="wide-head stack">
@@ -175,30 +137,3 @@ const REST = "0.5,0.5,0.1,0";
   </div>
 </section>
 
-<script>
-  const root = document.querySelector<HTMLElement>("[data-calc]");
-  if (root) {
-    const price = Number(root.dataset.price);
-    const sv = root.dataset.lang === "sv";
-    const emp = root.querySelector<HTMLInputElement>('[data-in="emp"]')!;
-    const out = (k: string) => root.querySelector<HTMLElement>(`[data-out="${k}"]`)!;
-    const dots = root.querySelector<HTMLElement>("[data-dots]")!;
-    const money = (n: number) => (sv ? n.toLocaleString("sv-SE") : `€${n.toLocaleString("en-GB")}`);
-    const render = () => {
-      const e = Number(emp.value);
-      const billed = Math.max(10, e);
-      const sum = billed * price;
-      out("emp").textContent = String(e);
-      out("sum").textContent = money(sum);
-      out("floor").hidden = e >= 10;
-      const per = e > 300 ? 25 : e > 60 ? 5 : 1;
-      out("scale").hidden = per === 1;
-      out("scale").textContent = sv ? `En prick = ${per} personer` : `One dot = ${per} people`;
-      const n = Math.ceil(e / per);
-      if (dots.children.length !== n) dots.innerHTML = "<i></i>".repeat(n);
-      Array.from(dots.children).forEach((d) => d.classList.add("on"));
-    };
-    emp.addEventListener("input", render);
-    render();
-  }
-</script>

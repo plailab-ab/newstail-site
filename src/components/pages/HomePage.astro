@@ -29,26 +29,26 @@ const REST = "0.5,0.5,0.1,0";
 const c = sv
   ? {
       h1: "En egen nyhetssändning för varje medarbetare.",
-      lead: "Internt, branschen och egna intressen – uppläst på det språk var och en väljer.",
+      lead: "Internt, branschen och personliga intressen – uppläst på det språk var och en väljer.",
       scene: {
         greeting: "Hej Anna.",
         date: "Torsdag 23 oktober",
         steps: [
-          { k: "HEMVYN", t: "Dagens lista står klar när du är det.", d: "Tre till tio minuter. Det du redan hört hoppas över." },
+          { k: "HEMVYN", t: "Dagens spellista står klar när du är det.", d: "Tre till tio minuter med de viktigaste nyheterna för just dig." },
           { k: "DRAGET", t: "Dra upp. Lyssna.", d: "Klotet lyfter och värden börjar berätta." },
-          { k: "SÄNDNINGEN", t: "Håll klotet, så berättar värden mer.", d: "Svep för nästa. Tryck för paus." },
+          { k: "SÄNDNINGEN", t: "Håll inne klotet, så går värden djupare.", d: "Svep för nästa. Tryck för paus." },
           { k: "INTERNT", t: "Det interna först.", d: "Före branschen. Före allt annat." },
         ],
       },
       langTitle: "Alla hänger med. På sitt språk.",
       langSamples: [
-        { code: "SV", name: "Svenska", text: "Hyresförhandlingen för 2027 är klar. Hyrorna höjs med 3,1 procent från januari." },
-        { code: "EN", name: "English", text: "The 2027 rent negotiation is done. Rents rise 3.1 percent from January." },
-        { code: "DE", name: "Deutsch", text: "Die Mietverhandlung für 2027 ist abgeschlossen. Die Mieten steigen ab Januar um 3,1 Prozent." },
-        { code: "ES", name: "Español", text: "La negociación del alquiler para 2027 está cerrada. Los alquileres suben un 3,1 % desde enero." },
+        { code: "SV", name: "Svenska", text: "Byggnationen rullar på och vi flyttar in i den nya kontorsytan på plan 3 till årsskiftet." },
+        { code: "EN", name: "English", text: "Construction is on track and we move into the new office space on floor 3 at the turn of the year." },
+        { code: "DE", name: "Deutsch", text: "Der Bau läuft nach Plan, und zum Jahreswechsel ziehen wir in die neue Bürofläche im 3. Stock." },
+        { code: "ES", name: "Español", text: "La obra avanza según lo previsto y a final de año nos mudamos a la nueva oficina de la planta 3." },
       ],
-      langLead: "Anna spelade in det på svenska. Alla hörde det på sitt språk.",
-      inTitle: "Säg det en gång. Vi läser upp det.",
+      langLead: "Anna spelade in en intern nyhet på svenska. Alla hörde det på sitt språk.",
+      inTitle: "Säg det en gång. Vi informerar teamet direkt.",
       inLead: "Tala in eller skriv. Det går ut med värdens röst – och ni ser hur många som hört det.",
       inTeams: ["Alla", "Ledning", "Sälj", "Produktion"],
       inFloat: "Vi förvärvar två fastigheter i centrala Växjö",
@@ -70,21 +70,21 @@ const c = sv
         greeting: "Hi Anna.",
         date: "Thursday 23 October",
         steps: [
-          { k: "HOME", t: "Today's list is ready when you are.", d: "Three to ten minutes. Anything you've already heard is skipped." },
+          { k: "HOME", t: "Today's playlist is ready when you are.", d: "Three to ten minutes with the most important news for you." },
           { k: "THE PULL", t: "Pull up. Listen.", d: "The orb rises and the host starts talking." },
-          { k: "THE BROADCAST", t: "Hold the orb and the host tells you more.", d: "Swipe for next. Tap to pause." },
+          { k: "THE BROADCAST", t: "Hold the orb and the host goes deeper.", d: "Swipe for next. Tap to pause." },
           { k: "INTERNAL", t: "Internal first.", d: "Before the industry. Before everything else." },
         ],
       },
       langTitle: "Everyone keeps up. In their language.",
       langSamples: [
-        { code: "EN", name: "English", text: "The 2027 rent negotiation is done. Rents rise 3.1 percent from January." },
-        { code: "SV", name: "Svenska", text: "Hyresförhandlingen för 2027 är klar. Hyrorna höjs med 3,1 procent från januari." },
-        { code: "DE", name: "Deutsch", text: "Die Mietverhandlung für 2027 ist abgeschlossen. Die Mieten steigen ab Januar um 3,1 Prozent." },
-        { code: "ES", name: "Español", text: "La negociación del alquiler para 2027 está cerrada. Los alquileres suben un 3,1 % desde enero." },
+        { code: "EN", name: "English", text: "Construction is on track and we move into the new office space on floor 3 at the turn of the year." },
+        { code: "SV", name: "Svenska", text: "Byggnationen rullar på och vi flyttar in i den nya kontorsytan på plan 3 till årsskiftet." },
+        { code: "DE", name: "Deutsch", text: "Der Bau läuft nach Plan, und zum Jahreswechsel ziehen wir in die neue Bürofläche im 3. Stock." },
+        { code: "ES", name: "Español", text: "La obra avanza según lo previsto y a final de año nos mudamos a la nueva oficina de la planta 3." },
       ],
-      langLead: "Anna recorded it in Swedish. Everyone heard it in their own language.",
-      inTitle: "Say it once. We read it out.",
+      langLead: "Anna recorded an internal update in Swedish. Everyone heard it in their own language.",
+      inTitle: "Say it once. The team hears it right away.",
       inLead: "Record or type it. It goes out in the host's voice – and you see how many heard it.",
       inTeams: ["Everyone", "Management", "Sales", "Production"],
       inFloat: "We are acquiring two properties in central Växjö",
@@ -102,29 +102,29 @@ const c = sv
 
 const sceneItems = sv
   ? [
-      { topic: "RÄNTOR", title: "Marknaden räknar med sänkning före jul", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
-      { topic: "BRANSCH", title: "Vakanserna minskar i Smålands kontorsmarknad", src: "Fastighetsbladet", hue: 200 },
-      { topic: "INTERNT · NORDVIK", title: "Hyresförhandlingen för 2027 är klar", src: "Anna Lindqvist, vd", hue: 72, inside: true },
+      { topic: "BRANSCH", title: "Hyror upp 3,2 % i Småland", src: "Fastighetsbladet", hue: 200 },
+      { topic: "NHL", title: "Boone Jenner nominerad till Bill Masterton Memorial Trophy", src: "Sportfanziner · Morgonbladet", hue: 150 },
+      { topic: "INTERNT · NORDVIK", title: "Ny kontorsyta klar till årsskiftet", src: "Anna Lindqvist, vd", hue: 72, inside: true },
     ]
   : [
-      { topic: "RATES", title: "The market expects a cut before Christmas", src: "Näringsliv Idag · Morgonbladet", hue: 150 },
-      { topic: "INDUSTRY", title: "Fewer empty offices in Småland", src: "Fastighetsbladet", hue: 200 },
-      { topic: "INTERNAL · NORDVIK", title: "The 2027 rent negotiation is done", src: "Anna Lindqvist, CEO", hue: 72, inside: true },
+      { topic: "INDUSTRY", title: "Rents up 3.2 % in Småland", src: "Fastighetsbladet", hue: 200 },
+      { topic: "NHL", title: "Boone Jenner nominated for the Bill Masterton Memorial Trophy", src: "Sportfanziner · Morgonbladet", hue: 150 },
+      { topic: "INTERNAL · NORDVIK", title: "New office space ready by the new year", src: "Anna Lindqvist, CEO", hue: 72, inside: true },
     ];
 const bubbles = sv
   ? [
-      { label: "Internt · Nordvik", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
+      { label: "Internt · Nordvik", kind: "inside" as const, title: "Ny kontorsyta klar till årsskiftet" },
       { label: "Bransch", kind: "industry" as const, title: "Hyror upp 3,2 % i Småland" },
-      { label: "Räntor", kind: "own" as const, title: "Marknaden räknar med sänkning före jul" },
-      { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar i Småland" },
-      { label: "Något nytt", kind: "surprise" as const, title: "Nya energikrav från årsskiftet" },
+      { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar inom kommersiella fastigheter" },
+      { label: "NHL", kind: "own" as const, title: "Boone Jenner nominerad till Bill Masterton Memorial Trophy" },
+      { label: "Något nytt", kind: "surprise" as const, title: "Rekordvinst tack vare AI-chip" },
     ]
   : [
-      { label: "Internal · Nordvik", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
+      { label: "Internal · Nordvik", kind: "inside" as const, title: "New office space ready by the new year" },
       { label: "Industry", kind: "industry" as const, title: "Rents up 3.2 % in Småland" },
-      { label: "Rates", kind: "own" as const, title: "The market expects a cut before Christmas" },
-      { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
-      { label: "Something new", kind: "surprise" as const, title: "New energy rules from the new year" },
+      { label: "Industry", kind: "industry" as const, title: "Fewer vacancies in commercial property" },
+      { label: "NHL", kind: "own" as const, title: "Boone Jenner nominated for the Bill Masterton Memorial Trophy" },
+      { label: "Something new", kind: "surprise" as const, title: "Record profit thanks to AI chips" },
     ];
 /* Svävande källetiketter runt klotet i heron: [text, x %, y %]. */
 const heroTags: [string, number, number][] = sv
@@ -132,7 +132,7 @@ const heroTags: [string, number, number][] = sv
       ["06:40 · NÄRINGSLIV IDAG · SV", -18, 6],
       ["03:12 · NORTHWIRE · EN", 74, 0],
       ["07:05 · WIRTSCHAFT NORD · DE", 88, 48],
-      ["08:00 · INTERNT · ANNA", -16, 56],
+      ["08:00 · INTERNT · ANNA, VD", -16, 56],
       ["09:10 · MERCADO HOY · ES", 66, 98],
       ["12:00 · VÄTTERBYGDENS TIDNING · SV", -14, 96],
     ]
@@ -140,13 +140,13 @@ const heroTags: [string, number, number][] = sv
       ["06:40 · NÄRINGSLIV IDAG · SV", -18, 6],
       ["03:12 · NORTHWIRE · EN", 74, 0],
       ["07:05 · WIRTSCHAFT NORD · DE", 88, 48],
-      ["08:00 · INTERNAL · ANNA", -16, 56],
+      ["08:00 · INTERNAL · ANNA, CEO", -16, 56],
       ["09:10 · MERCADO HOY · ES", 66, 98],
       ["12:00 · VÄTTERBYGDENS TIDNING · SV", -14, 96],
     ];
 const publish = sv
-  ? { head: "NORDVIK", eyebrow: "NY INTERN NYHET", title: "Vad vill du berätta?", hint: "Tryck på klotet för att börja spela in.", write: "Skriv istället", published: "Publicerat" }
-  : { head: "NORDVIK", eyebrow: "NEW INTERNAL NEWS", title: "What do you want to say?", hint: "Tap the orb to start recording.", write: "Type instead", published: "Published" };
+  ? { head: "NORDVIK", eyebrow: "SKAPA INTERN NYHET", title: "Vad vill du berätta?", hint: "Tryck på klotet för att spela in.", write: "Skriv istället", published: "Publicerat" }
+  : { head: "NORDVIK", eyebrow: "CREATE INTERNAL NEWS", title: "What do you want to say?", hint: "Tap the orb to record.", write: "Type instead", published: "Published" };
 const faq = faqFor("home", lang).slice(0, 4);
 ---
 
@@ -333,7 +333,7 @@ const faq = faqFor("home", lang).slice(0, 4);
       lastRing = v;
       arc.style.setProperty("--ring", v);
     };
-    const HUES = [150, 200, 72];
+    const HUES = [200, 150, 72];
     const REST_HUE = 262;
     let state = "";
     let item = -1;
