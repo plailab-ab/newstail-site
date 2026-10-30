@@ -13,7 +13,7 @@ const R = ROUTES[lang];
 const ui = UI[lang];
 const more = FAQ.filter((f) => f.cat === faq.cat && f !== faq).slice(0, 4);
 const next: Record<string, [string, string]> = {
-  pricing: [sv ? "Räkna på er" : "Calculate your price", `${R.pricing}${sv ? "#rakna" : "#calculate"}`],
+  pricing: [sv ? "Se priset" : "See the price", R.pricing],
   trust: [sv ? "Mer om trygghet" : "More about trust", R.trust],
   it: [sv ? "Mer om trygghet" : "More about trust", R.trust],
   listen: [sv ? "Så funkar det" : "How it works", R.how],
