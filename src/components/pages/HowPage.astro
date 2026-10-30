@@ -154,8 +154,8 @@ const bubbles = sv
         {band.map(([, , w, h], i) => <span class="band-seg" style={`flex: ${w} 1 0; --h: ${h}; --i: ${i}`} />)}
       </div>
       <div class="band-labels">
-        {band.map(([t, d, w]) => (
-          <div style={`flex: ${w} 1 0`}>
+        {band.map(([t, d, w], i) => (
+          <div style={`flex: ${w} 1 0; --i: ${i}`}>
             <small>{t}</small>
             <span>{d}</span>
           </div>
@@ -164,6 +164,22 @@ const bubbles = sv
       <div class="band-legend">
         {c.groups.map((g) => <span>{g}</span>)}
       </div>
+      <!-- Mobilen (2026-10-30): samma band stående – delarnas höjd är deras längd, grupp för grupp -->
+      <ol class="band-list" aria-hidden="true">
+        {[band.slice(0, 2), band.slice(2, 6), band.slice(6)].map((items, gi) => (
+          <li class="band-list-group">
+            <small class="how-mono">{c.groups[gi]}</small>
+            <ul>
+              {items.map(([t, d, w, h], j) => (
+                <li style={`--h: ${h}; --w: ${w}; --i: ${(gi === 0 ? 0 : gi === 1 ? 2 : 6) + j}`}>
+                  <span class="bl-bar"></span>
+                  <span class="bl-txt"><small>{t}</small><b>{d}</b></span>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
     </div>
   </div>
 </section>

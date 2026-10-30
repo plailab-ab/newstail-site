@@ -3,6 +3,8 @@
  * Intaget (2026-10-27): källor runt om som strålar in mot klotet, dygnsringen i mitten.
  * Ritat som SVG ur listor här – ingen riktig arkitektur, bara bilden av att allt lyssnas på,
  * oberoende av språk och klockslag. Punkterna pulserar i otakt (CSS, bara opacity).
+ * 2026-10-30: när sektionen kommer i bild (.in-view) ritas ringen, punkterna poppar upp och
+ * trådarna dras in mot klotet, en efter en – se "Intaget" i how.css.
  */
 interface Props {
   lang: "sv" | "en";
@@ -30,22 +32,24 @@ const label = sv ? "Källor på många språk strålar in mot klotet, dygnet run
   <defs>
     <radialGradient id="in-glow"><stop offset="0" stop-color="oklch(0.7 0.12 220)" stop-opacity="0.35"></stop><stop offset="1" stop-color="oklch(0.7 0.12 220)" stop-opacity="0"></stop></radialGradient>
   </defs>
-  <circle cx={C} cy={C} r="300" fill="url(#in-glow)" opacity="0.5"></circle>
+  <circle class="in-glow" cx={C} cy={C} r="300" fill="url(#in-glow)" opacity="0.5"></circle>
   <!-- strålarna -->
-  {sources.map((s) => <line class="in-ray" x1={s.x.toFixed(1)} y1={s.y.toFixed(1)} x2={s.rx.toFixed(1)} y2={s.ry.toFixed(1)} style={`--i: ${s.i}`} />)}
+  {sources.map((s) => <line class="in-ray" pathLength="1" x1={s.x.toFixed(1)} y1={s.y.toFixed(1)} x2={s.rx.toFixed(1)} y2={s.ry.toFixed(1)} style={`--i: ${s.i}`} />)}
   <!-- dygnsringen -->
-  <circle cx={C} cy={C} r={RING} fill="none" stroke="rgba(236,239,244,0.22)" stroke-width="1"></circle>
-  {ticks.map((t) => <line x1={t.x1.toFixed(1)} y1={t.y1.toFixed(1)} x2={t.x2.toFixed(1)} y2={t.y2.toFixed(1)} stroke={t.long ? "rgba(236,239,244,0.6)" : "rgba(236,239,244,0.25)"} stroke-width="1" />)}
-  {ticks.filter((t) => t.long).map((t) => <text class="in-mono" x={t.lx.toFixed(1)} y={t.ly.toFixed(1)} text-anchor="middle" dominant-baseline="middle">{String(t.h).padStart(2, "0")}</text>)}
+  <circle class="in-ring" pathLength="1" cx={C} cy={C} r={RING} fill="none" stroke="rgba(236,239,244,0.22)" stroke-width="1" transform={`rotate(-90 ${C} ${C})`}></circle>
+  {ticks.map((t) => <line class="in-tick" x1={t.x1.toFixed(1)} y1={t.y1.toFixed(1)} x2={t.x2.toFixed(1)} y2={t.y2.toFixed(1)} stroke={t.long ? "rgba(236,239,244,0.6)" : "rgba(236,239,244,0.25)"} stroke-width="1" style={`--i: ${t.h}`} />)}
+  {ticks.filter((t) => t.long).map((t) => <text class="in-mono in-late" x={t.lx.toFixed(1)} y={t.ly.toFixed(1)} text-anchor="middle" dominant-baseline="middle">{String(t.h).padStart(2, "0")}</text>)}
   <!-- källorna -->
   {sources.map((s) => (
     <>
-      <circle class="in-src" cx={s.x.toFixed(1)} cy={s.y.toFixed(1)} r="3" style={`--i: ${s.i}`} />
-      {s.tag && <text class="in-mono in-tag" x={(C + (s.x - C) * 1.09).toFixed(1)} y={(C + (s.y - C) * 1.09).toFixed(1)} text-anchor="middle" dominant-baseline="middle">{s.tag}</text>}
+      <g class="in-dot" style={`--i: ${s.i}`}><circle class="in-src" cx={s.x.toFixed(1)} cy={s.y.toFixed(1)} r="3" style={`--i: ${s.i}`} /></g>
+      {s.tag && <text class="in-mono in-tag in-late" x={(C + (s.x - C) * 1.09).toFixed(1)} y={(C + (s.y - C) * 1.09).toFixed(1)} text-anchor="middle" dominant-baseline="middle">{s.tag}</text>}
     </>
   ))}
   <!-- klotet -->
-  <circle cx={C} cy={C} r="96" fill="rgba(0,0,0,0.6)"></circle>
-  <image href="/orbs/orb-200.webp" x={C - 88} y={C - 88} width="176" height="176" class="in-orb"></image>
-  <text class="in-mono" x={C} y={C + 128} text-anchor="middle">{sv ? "LYSSNAR · DYGNET RUNT" : "LISTENING · AROUND THE CLOCK"}</text>
+  <g class="in-core">
+    <circle cx={C} cy={C} r="96" fill="rgba(0,0,0,0.6)"></circle>
+    <image href="/orbs/orb-200.webp" x={C - 88} y={C - 88} width="176" height="176" class="in-orb"></image>
+  </g>
+  <text class="in-mono in-late" x={C} y={C + 128} text-anchor="middle">{sv ? "LYSSNAR · DYGNET RUNT" : "LISTENING · AROUND THE CLOCK"}</text>
 </svg>
