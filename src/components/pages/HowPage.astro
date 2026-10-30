@@ -30,20 +30,20 @@ const id = sv
 const c = sv
   ? {
       h1: "Nyheterna finns. Ingen hinner.",
-      lead: "Branschen, marknaderna och det interna – på olika språk, från olika källor, publicerat när som helst. För mycket för en människa. Lagom för en värd.",
-      listenTitle: "Vi lyssnar på allt. Hela tiden.",
-      listenLead: "Det som publiceras klockan tre på natten på tyska fångas lika säkert som morgonens svenska rubrik.",
+      lead: "Marknaden, konkurrenter, interna nyheter och personliga intressen – på olika språk, från olika källor, publicerat när som helst. För mycket för en människa. Lagom för en Newstail.",
+      listenTitle: "Vi håller koll på allt. Hela tiden.",
+      listenLead: "Det som publiceras klockan tre på natten på franska fångas lika säkert som morgonens svenska nyheter.",
       listenIcons: [["globe", "Alla språk"], ["clock", "Dygnet runt"], ["check", "Samma nyhet från flera källor blir en"]],
       pickTitle: "Vaskar fram det som är ert.",
       pickLead: "Ur bruset blir det en sändning: det interna först, sedan er bransch och era marknader, sist det du själv följer. Det du redan hört hoppas över.",
       bandHead: "Dagens sändning för Anna, förvaltare i Jönköping",
       groups: ["Internt – alla hör det", "Er omvärld – efter roll", "Ditt eget"],
       insideTitle: "Det interna som ingen läser.",
-      insideLead: "Nyhetsbrevet ligger oläst i inkorgen. Säg det i stället en gång, så går det ut med värdens röst – först i allas sändning, på var och ens språk. Före lunch vet ni hur många som hört det.",
+      insideLead: "Nyhetsbrevet ligger oläst i inkorgen. Låt i stället värdens röst förmedla budskapet till hela teamet samtidigt – först i allas sändning, på var och ens språk. Före lunch vet ni hur många som hört det.",
       ownTitle: "Det du själv brinner för.",
-      ownLead: "Räntor, energikrav eller HV71 – följ med ett tryck, och något nytt varje dag utanför det du valt. Sändningen lär sig av vad du håller klotet på och vad du sveper förbi, och blir bättre för varje gång.",
+      ownLead: "Börsen, trädgård eller HV71 – följ med ett tryck, och något nytt varje dag utanför det du valt. Sändningen lär sig av vad du håller klotet på och vad du sveper förbi, och blir bättre för varje gång.",
       swipeTitle: "Och allt det här blir … ett svep.",
-      swipeLead: "Så mycket teknik. Så lite att göra. Dra upp klotet och lyssna, tre till tio minuter – på det språk du väljer av fyra.",
+      swipeLead: "Så mycket teknik. Så enkelt. Dra upp klotet och lyssna, tre till tio minuter – på det språk du själv valt.",
       swipeLink: "Se det på startsidan",
       startTitle: "Från registrering till första sändning.",
       startLead: "Samma dag. Inga integrationer.",
@@ -58,20 +58,20 @@ const c = sv
     }
   : {
       h1: "The news is out there. Nobody has the time.",
-      lead: "The industry, the markets and the internal – in different languages, from different sources, published at any hour. Too much for a person. Just right for a host.",
-      listenTitle: "We listen to everything. All the time.",
-      listenLead: "What is published at three in the morning in German is caught as surely as the Swedish headline of the morning.",
+      lead: "The market, competitors, internal news and personal interests – in different languages, from different sources, published at any hour. Too much for a person. Just right for a Newstail.",
+      listenTitle: "We keep track of everything. All the time.",
+      listenLead: "What is published at three in the morning in French is caught as surely as the Swedish news of the morning.",
       listenIcons: [["globe", "Every language"], ["clock", "Around the clock"], ["check", "Several sources, one story"]],
       pickTitle: "We sift out what is yours.",
       pickLead: "Out of the noise comes a broadcast: internal first, then your industry and markets, last what you follow yourself. Anything you've already heard is skipped.",
       bandHead: "Today's broadcast for Anna, property manager in Jönköping",
       groups: ["Internal – everyone hears it", "Your world – by role", "Your own"],
       insideTitle: "The internal news nobody reads.",
-      insideLead: "The newsletter sits unread in the inbox. Say it once instead, and it goes out in the host's voice – first in everyone's broadcast, in each person's language. Before lunch you know how many heard it.",
+      insideLead: "The newsletter sits unread in the inbox. Let the host's voice deliver the message to the whole team at once instead – first in everyone's broadcast, in each person's language. Before lunch you know how many heard it.",
       ownTitle: "What you care about.",
-      ownLead: "Interest rates, energy rules or HV71 – follow with one tap, and something new every day outside what you chose. The broadcast learns from what you hold the orb on and what you swipe past, and gets better every time.",
+      ownLead: "The stock market, gardening or HV71 – follow with one tap, and something new every day outside what you chose. The broadcast learns from what you hold the orb on and what you swipe past, and gets better every time.",
       swipeTitle: "And all of this becomes … one swipe.",
-      swipeLead: "So much technology. So little to do. Pull up the orb and listen, three to ten minutes – in the language you choose out of four.",
+      swipeLead: "So much technology. So simple. Pull up the orb and listen, three to ten minutes – in the language you chose.",
       swipeLink: "See it on the start page",
       startTitle: "From sign-up to first broadcast.",
       startLead: "The same day. No integrations.",
@@ -86,7 +86,7 @@ const c = sv
     };
 
 const band = [
-  [sv ? "Internt" : "Internal", sv ? "Hyresförhandlingen för 2027 är klar" : "The 2027 rent negotiation is done", 112, 72],
+  [sv ? "Internt" : "Internal", sv ? "Ny kontorsyta klar till årsskiftet" : "New office space ready by the new year", 112, 72],
   [sv ? "Internt" : "Internal", sv ? "Hyresgästdag i Linden på torsdag" : "Tenant day at Linden", 96, 60],
   [sv ? "Räntor" : "Rates", sv ? "Sänkning före jul?" : "A cut before Christmas?", 150, 150],
   [sv ? "Lokalmarknaden" : "Office market", sv ? "Vakanserna minskar" : "Fewer empty offices", 128, 200],
@@ -98,18 +98,18 @@ const band = [
 const groupW = [band[0]![2] + band[1]![2], band[2]![2] + band[3]![2] + band[4]![2] + band[5]![2], band[6]![2] + band[7]![2]];
 const bubbles = sv
   ? [
-      { label: "Internt · Nordvik", kind: "inside" as const, title: "Hyresförhandlingen för 2027 är klar" },
+      { label: "Internt · Nordvik", kind: "inside" as const, title: "Ny kontorsyta klar till årsskiftet" },
       { label: "Bransch", kind: "industry" as const, title: "Hyror upp 3,2 % i Småland" },
-      { label: "Räntor", kind: "own" as const, title: "Marknaden räknar med sänkning före jul" },
-      { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar i Småland" },
-      { label: "Något nytt", kind: "surprise" as const, title: "Nya energikrav från årsskiftet" },
+      { label: "Bransch", kind: "industry" as const, title: "Vakanserna minskar inom kommersiella fastigheter" },
+      { label: "NHL", kind: "own" as const, title: "Boone Jenner nominerad till Bill Masterton Memorial Trophy" },
+      { label: "Något nytt", kind: "surprise" as const, title: "Samsung rapporterar rekordvinst på AI-chip" },
     ]
   : [
-      { label: "Internal · Nordvik", kind: "inside" as const, title: "The 2027 rent negotiation is done" },
+      { label: "Internal · Nordvik", kind: "inside" as const, title: "New office space ready by the new year" },
       { label: "Industry", kind: "industry" as const, title: "Rents up 3.2 % in Småland" },
-      { label: "Rates", kind: "own" as const, title: "The market expects a cut before Christmas" },
-      { label: "Industry", kind: "industry" as const, title: "Fewer empty offices in Småland" },
-      { label: "Something new", kind: "surprise" as const, title: "New energy rules from the new year" },
+      { label: "Industry", kind: "industry" as const, title: "Fewer vacancies in commercial property" },
+      { label: "NHL", kind: "own" as const, title: "Boone Jenner nominated for the Bill Masterton Memorial Trophy" },
+      { label: "Something new", kind: "surprise" as const, title: "Samsung reports record profit on AI chips" },
     ];
 ---
 
