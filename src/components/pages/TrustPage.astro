@@ -4,7 +4,7 @@
  * 1 aggregatet (41 personer blir ett tal, små team låsta) · 2 vad ledningen ser och aldrig ser ·
  * 3 det egna (medarbetarens inställningar) · 4 innehåll med källspår · 5 var det bor (fakta
  * i en rad) · 6 för IT och inköp · 7 frågor. Påståendena följer docs/TREDJEPARTER.md i appens
- * repo: aggregat från fem personer, lagras inom EU, databas i Sverige, ingen AI tränas på
+ * repo: aggregat från fem personer, databas i EU (Stockholm), AI-tjänster utanför EU under standardavtal, ingen AI tränas på
  * kundernas data, inga integrationer, bara inbjudna kommer in.
  */
 import FaqList from "../FaqList.astro";
@@ -44,8 +44,8 @@ const c = sv
       whereTitle: "Var det bor.",
       whereLead: "Kort och tråkigt, som det ska vara.",
       facts: [
-        ["LAGRING", "Inom EU"],
-        ["DATABAS", "Sverige"],
+        ["DATABAS", "EU (Stockholm)"],
+        ["AI-TJÄNSTER", "Utanför EU, under EU:s standardavtal"],
         ["AI-TRÄNING PÅ ERA DATA", "Nej"],
         ["INTEGRATIONER", "Inga"],
         ["VEM KOMMER IN", "Bara de ni bjuder in"],
@@ -77,8 +77,8 @@ const c = sv
       whereTitle: "Where it lives.",
       whereLead: "Short and boring, as it should be.",
       facts: [
-        ["STORAGE", "Within the EU"],
-        ["DATABASE", "Sweden"],
+        ["DATABASE", "EU (Stockholm)"],
+        ["AI SERVICES", "Outside the EU, under EU standard clauses"],
         ["AI TRAINING ON YOUR DATA", "No"],
         ["INTEGRATIONS", "None"],
         ["WHO GETS IN", "Only the people you invite"],

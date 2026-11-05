@@ -472,7 +472,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Var lagras våra data?",
-        a: "Databasen finns i Sverige och data lagras inom EU. Ingen modell tränas på era data.",
+        a: "Databasen ligger i EU, i Stockholm. Text till sändningen bearbetas av AI-tjänster utanför EU, under EU:s standardavtal. Ingen modell tränas på era data.",
       },
       {
         q: "Vad kostar det?",
