@@ -4,8 +4,8 @@
  */
 export type Lang = "sv" | "en";
 
-export const LOGIN_URL = "https://air.newstail.io/login";
-export const START_URL = "https://air.newstail.io/start";
+export const LOGIN_URL = "https://app.newstail.io/login";
+export const START_URL = "https://app.newstail.io/start";
 export const SITE = "https://newstail.io";
 
 export const ROUTES = {
