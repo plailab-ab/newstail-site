@@ -297,8 +297,8 @@ import ConsentBanner from "../components/ConsentBanner.astro";
           if (a) {
             const href = a.getAttribute("href") || "";
             const p = { link_text: txt(a), placement: placement(a) };
-            if (href.startsWith("https://air.newstail.io/start")) return send("prova_gratis_klick", p);
-            if (href.startsWith("https://air.newstail.io/login")) return send("logga_in_klick", p);
+            if (href.startsWith("https://app.newstail.io/start")) return send("prova_gratis_klick", p);
+            if (href.startsWith("https://app.newstail.io/login")) return send("logga_in_klick", p);
             if (href.startsWith("mailto:")) return send("mejl_klick", p);
             if (a.matches(".lang")) return send("sprakbyte", { to_language: a.getAttribute("hreflang") || "" });
             return;
