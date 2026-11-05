@@ -1,6 +1,6 @@
 ---
 /**
- * Om oss (2026-10-28, i sajtens grammatik): varför, vi som bygger det, vad vi tror på,
+ * Om oss (2026-10-28, i sajtens grammatik; historien och grundarna 2026-11-05): varför, så började det, vi som bygger det, vad vi tror på,
  * bolaget och mejlen. Klotet fritt i heron som på startsidan.
  */
 import { type Lang } from "../../content/site";
@@ -15,11 +15,13 @@ const c = sv
   ? {
       h1: "Alla på jobbet ska hänga med.",
       lead: "Det viktigaste når sällan fram: varken det som händer i branschen eller det som sägs internt. Så vi byggde en sändning per person – uppläst, på det språk var och en väljer.",
+      storyTitle: "Så började det.",
+      story: "2020 började vi med en satsning på att analysera padel med AI. 2022 vände vi blicken mot jobbet, där det viktigaste sällan når fram till alla. Sedan dess bygger vi Newstail – med AI hela vägen, från bevakningen av branschen till rösten som läser upp.",
       teamTitle: "Vi som bygger det.",
-      teamLead: "Två grundare, samma roll. Vi bygger produkten, rösten och sajten själva – och svarar själva på mejlen.",
+      teamLead: "Två grundare i Jönköping, samma roll. Ett genuint designintresse och kunderna nära – vi bygger produkten, rösten och sajten själva och svarar själva på mejlen.",
       people: [
-        ["Joel Enhörning", "Medgrundare"],
-        ["Jimmy Lindström", "Medgrundare"],
+        ["Joel Enhörning", "Medgrundare", "Produktutvecklare och designer, utbildad vid Malmö högskola. Har arbetat på Ikea och i designstudio och lett ett gjuteri med design som affärsidé."],
+        ["Jimmy Lindström", "Medgrundare", "Digital marknadsförare i grunden, med tolv år på Länsförsäkringar."],
       ],
       values: [
         ["Röst före text", "Det man hör, hinner man med."],
@@ -29,18 +31,23 @@ const c = sv
       facts: [
         ["BOLAG", "Plailab AB"],
         ["ORG.NR", "559284-2610"],
-        ["LAND", "Sverige"],
+        ["ORT", "Jönköping"],
+        ["GRUNDAT", "2020"],
+        ["NEWSTAIL SEDAN", "2022"],
+        ["NÄTVERK", "Science Park Skövde"],
       ],
       mail: "Hör av dig.",
     }
   : {
       h1: "Everyone at work should keep up.",
       lead: "The important things rarely get through: neither what happens in the industry nor what is said internally. So we built one broadcast per person – read aloud, in the language each one chooses.",
+      storyTitle: "How it started.",
+      story: "In 2020 we started out using AI to analyse padel. In 2022 we turned to the workplace, where the most important things rarely reach everyone. Since then we have been building Newstail – with AI all the way, from tracking the industry to the voice that reads it aloud.",
       teamTitle: "The people building it.",
-      teamLead: "Two founders, the same role. We build the product, the voice and the site ourselves – and answer the emails ourselves.",
+      teamLead: "Two founders in Jönköping, Sweden, the same role. A genuine interest in design and customers close at hand – we build the product, the voice and the site ourselves and answer the emails ourselves.",
       people: [
-        ["Joel Enhörning", "Co-founder"],
-        ["Jimmy Lindström", "Co-founder"],
+        ["Joel Enhörning", "Co-founder", "Product developer and designer, trained at Malmö University. Has worked at IKEA and in a design studio, and led a foundry with design as its business idea."],
+        ["Jimmy Lindström", "Co-founder", "A digital marketer at heart, with twelve years at Länsförsäkringar."],
       ],
       values: [
         ["Voice before text", "What you hear, you have time for."],
@@ -50,7 +57,10 @@ const c = sv
       facts: [
         ["COMPANY", "Plailab AB"],
         ["REG. NO.", "559284-2610"],
-        ["COUNTRY", "Sweden"],
+        ["BASED IN", "Jönköping, Sweden"],
+        ["FOUNDED", "2020"],
+        ["NEWSTAIL SINCE", "2022"],
+        ["NETWORK", "Science Park Skövde"],
       ],
       mail: "Get in touch.",
     };
@@ -66,6 +76,15 @@ const c = sv
   </div>
 </section>
 
+<section class="section" data-space data-hue="140" data-orb={REST} data-watch>
+  <div class="wide">
+    <div class="wide-head stack">
+      <h2 class="title-xl">{c.storyTitle}</h2>
+      <p class="lead">{c.story}</p>
+    </div>
+  </div>
+</section>
+
 <section class="section" data-space data-hue="200" data-orb={REST} data-watch>
   <div class="wide">
     <div class="wide-head stack">
@@ -73,7 +92,7 @@ const c = sv
       <p class="lead">{c.teamLead}</p>
     </div>
     <div class="grid-2 about-people">
-      {c.people.map(([n, r]) => <div class="lined"><strong>{n}</strong><span>{r}</span></div>)}
+      {c.people.map(([n, r, b]) => <div class="lined"><strong>{n}</strong><span>{r}</span><p class="about-bio">{b}</p></div>)}
     </div>
     <div class="grid-3 about-values">
       {c.values.map(([t, d]) => <div class="lined"><strong>{t}</strong><span>{d}</span></div>)}
