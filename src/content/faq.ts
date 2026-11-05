@@ -233,8 +233,8 @@ export const FAQ: Faq[] = [
     slug: { sv: "var-lagras-data", en: "where-is-data-stored" },
     cat: "trust",
     tags: ["trust"],
-    sv: { q: "Var lagras våra data?", a: "Databasen ligger i Sverige och era data lagras inom EU." },
-    en: { q: "Where is our data stored?", a: "The database is in Sweden and your data is stored within the EU." },
+    sv: { q: "Var lagras våra data?", a: "Databasen ligger i EU, i Stockholm. För att göra sändningen skickas text till AI-tjänster utanför EU, under EU:s standardavtal. Ingen av dem tränar på era data. Alla underbiträden står i integritetspolicyn." },
+    en: { q: "Where is our data stored?", a: "The database is in the EU, in Stockholm. To build the broadcast, text is sent to AI services outside the EU, under EU standard clauses. None of them train on your data. All sub-processors are listed in the privacy policy." },
   },
   {
     slug: { sv: "tranas-ai-pa-vara-data", en: "is-ai-trained-on-our-data" },

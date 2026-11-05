@@ -473,7 +473,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Var lagras uppgifterna?",
-        a: "Databasen ligger i Sverige och data lagras inom EU. Ingen modell tränas på era data, och kontot kan raderas i appen.",
+        a: "Databasen ligger i EU, i Stockholm. Text till sändningen bearbetas av AI-tjänster utanför EU, under EU:s standardavtal. Ingen modell tränas på era data, och kontot kan raderas i appen.",
       },
     ],
     related: ["roller/internkommunikator", "branscher/vard-och-omsorg", "/trygghet/"],
