@@ -1195,6 +1195,10 @@
 .about-values {
   margin-top: 2.4rem;
 }
+.lined .about-bio {
+  margin: 0.35rem 0 0;
+  max-width: 42ch;
+}
 .about-facts {
   margin-top: 0;
 }
