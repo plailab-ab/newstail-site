@@ -5,7 +5,7 @@ sin Claude, i chatten. Läs `ARBETSSATT.md` och `README.md` här, och reglerna i
 appens repo (`plailab-ab/newstail-app`) – de gäller också här. Konton och kopplingar: `docs/KONTON.md` i
 appens repo. Standarden för alla appar: Claude Doc "Appuppsättning by the book".
 
-- **Att göra-listan är tavlan** [Newstail – att göra](https://github.com/orgs/plailab-ab/projects/2). Uppgifterna är issues i appens repo (privat) – inga interna uppgifter som issues här, repot är publikt. Regler: appens issue #98 och appens `CLAUDE.md`. Ta uppgiften innan du börjar; pull requesten här skriver `Fixar plailab-ab/newstail-app#<nr>`.
+- **Att göra-listan är tavlan** [Newstail – att göra](https://github.com/orgs/plailab-ab/projects/2). Uppgifterna är issues i appens repo (privat) – inga interna uppgifter som issues här, repot är publikt. Regler: appens issue #98 och appens `CLAUDE.md`. Ta uppgiften innan du gör något annat: läs vem som är tilldelad i issuet, och står ingen annan där, tilldela dig och skriv "tar den" (tilldelningen i issuet gäller, inte tavlan); pull requesten här skriver `Fixar plailab-ab/newstail-app#<nr>`.
 - **Jobba mot GitHub i molnet.** En gren per uppgift (`joel/<kort-namn>` eller `jimmy/<kort-namn>`) → pull request med mallen → förhandslänk + grön kontroll → slå ihop först när personen säger **"kör"**. `main` publiceras av Vercel (team Plailab, projekt newstail-site).
 - **`main` är spärrad:** bara via pull request med grön kontroll. Aldrig force-push.
 - Git-namn: "Claude (via Joel)" eller "Claude (via Jimmy)".
