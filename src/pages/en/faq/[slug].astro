@@ -1,7 +1,7 @@
 ---
 import Base from "../../../layouts/Base.astro";
 import FaqQuestion from "../../../components/pages/FaqQuestion.astro";
-import { CATS, FAQ, faqPath, type Faq } from "../../../content/faq";
+import { CATS, FAQ, faqMeta, faqPath, type Faq } from "../../../content/faq";
 import { breadcrumbs, faqPage } from "../../../content/site";
 
 export function getStaticPaths() {
@@ -15,8 +15,8 @@ const path = faqPath("en", faq.slug.en);
   lang="en"
   path={path}
   altPath={faqPath("sv", faq.slug.sv)}
-  title={`${faq.en.q} | Newstail`}
-  description={faq.en.a.length > 155 ? `${faq.en.a.slice(0, 152).trimEnd()}…` : faq.en.a}
+  title={faqMeta(faq, "en").title}
+  description={faqMeta(faq, "en").description}
   schema={[
     breadcrumbs([
       { name: "Newstail", path: "/en/" },

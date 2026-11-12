@@ -20,6 +20,10 @@
     { "source": "/jamfor/spintr", "destination": "/jamfor/", "permanent": false },
     { "source": "/jamfor/spintr/", "destination": "/jamfor/", "permanent": false },
     { "source": "/jamfor/actimo", "destination": "/jamfor/", "permanent": false },
-    { "source": "/jamfor/actimo/", "destination": "/jamfor/", "permanent": false }
+    { "source": "/jamfor/actimo/", "destination": "/jamfor/", "permanent": false },
+    { "source": "/partner", "destination": "/", "permanent": true },
+    { "source": "/partner/", "destination": "/", "permanent": true },
+    { "source": "/story", "destination": "/om-oss/", "permanent": true },
+    { "source": "/story/", "destination": "/om-oss/", "permanent": true }
   ]
 }
