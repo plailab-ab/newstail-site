@@ -211,6 +211,7 @@ export const orgGraph = (lang: Lang) => [
     url: SITE,
     logo: `${SITE}/newstail-logo.png`,
     email: "hello@newstail.io",
+    sameAs: ["https://www.linkedin.com/showcase/129934096/"],
   },
   {
     "@type": "WebSite",
