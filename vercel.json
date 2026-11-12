@@ -16,6 +16,10 @@
     { "source": "/tekniken", "destination": "/sa-funkar-det/", "permanent": true },
     { "source": "/tekniken/", "destination": "/sa-funkar-det/", "permanent": true },
     { "source": "/en/technology", "destination": "/en/how-it-works/", "permanent": true },
-    { "source": "/en/technology/", "destination": "/en/how-it-works/", "permanent": true }
+    { "source": "/en/technology/", "destination": "/en/how-it-works/", "permanent": true },
+    { "source": "/jamfor/spintr", "destination": "/jamfor/", "permanent": false },
+    { "source": "/jamfor/spintr/", "destination": "/jamfor/", "permanent": false },
+    { "source": "/jamfor/actimo", "destination": "/jamfor/", "permanent": false },
+    { "source": "/jamfor/actimo/", "destination": "/jamfor/", "permanent": false }
   ]
 }

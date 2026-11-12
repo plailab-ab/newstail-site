@@ -8,7 +8,9 @@ import { landingsB } from "./landings-b";
 
 const unchecked = (s: string) => s.includes("[kontrollera]");
 
-export const LANDINGS: Landing[] = [...landingsA, ...landingsB].map((l) =>
+/* Sidor med `paused` (avpublicerade) tas bort här, så att de inte byggs eller länkas någonstans. */
+
+export const LANDINGS: Landing[] = [...landingsA, ...landingsB].filter((l) => !l.paused).map((l) =>
   l.compare ? { ...l, compare: { ...l.compare, rows: l.compare.rows.filter((r) => !unchecked(r.other) && !unchecked(r.newstail)) } } : l,
 );
 

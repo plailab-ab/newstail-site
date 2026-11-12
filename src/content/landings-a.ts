@@ -138,7 +138,7 @@ export const landingsA: Landing[] = [
         a: "Ja, från 10 användare. Det kostar 179 kr per användare och månad, allt ingår.",
       },
     ],
-    related: ["losningar/app-for-personalen", "jamfor/spintr", "/sa-funkar-det/"],
+    related: ["losningar/app-for-personalen", "jamfor/internt-nyhetsbrev", "/sa-funkar-det/"],
   },
 
   {
@@ -188,7 +188,7 @@ export const landingsA: Landing[] = [
       { topic: "KONKURRENTER", t: "Bland konkurrenterna satsar flera på egna transporter i regionen." },
     ],
     faq: [
-      { q: "Vilka telefoner fungerar det på?", a: "iPhone i dag. Android och webb är på väg." },
+      { q: "Vilka telefoner fungerar det på?", a: "iPhone i dag." },
       {
         q: "Hur styr man appen?",
         a: "Tryck på klotet för paus, svep för nästa eller föregående och håll för Berätta mer. Det går också från låsskärmen och hörlurarna.",
@@ -552,6 +552,7 @@ export const landingsA: Landing[] = [
   {
     cluster: "jamfor",
     slug: "spintr",
+    paused: "Avpublicerad 2026-11-12 tills påståendena är belagda med källor (beslut i plailab-ab/newstail-app#101).",
     name: "Newstail och Spintr",
     card: "Spintr är ett intranät. Newstail läser upp det viktigaste för var och en.",
     metaTitle: "Spintr och Newstail: vad är skillnaden? | Newstail",
@@ -630,6 +631,7 @@ export const landingsA: Landing[] = [
   {
     cluster: "jamfor",
     slug: "actimo",
+    paused: "Avpublicerad 2026-11-12 tills påståendena är belagda med källor (beslut i plailab-ab/newstail-app#101).",
     name: "Newstail och Actimo",
     card: "Båda når personal som inte sitter vid en dator. Newstail läser upp det.",
     metaTitle: "Actimo och Newstail: vad är skillnaden? | Newstail",
@@ -682,14 +684,14 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Fungerar det på Android?",
-        a: "I dag finns Newstail för iPhone. Android och webb är på väg.",
+        a: "I dag finns Newstail för iPhone.",
       },
       {
         q: "Vad kostar Newstail?",
         a: "179 kr per användare och månad, exkl. moms. Allt ingår, och det finns ingen bindning.",
       },
     ],
-    related: ["losningar/app-for-personalen", "jamfor/spintr", "branscher/handel-och-butik"],
+    related: ["losningar/app-for-personalen", "jamfor/internt-nyhetsbrev", "branscher/handel-och-butik"],
     compare: {
       other: "Actimo",
       rows: [
@@ -698,7 +700,7 @@ export const landingsA: Landing[] = [
         { label: "Omvärld", newstail: "Bransch, marknad, kunder, konkurrenter", other: "Interna nyheter [kontrollera]" },
         { label: "Se att det kom fram", newstail: "Hört av x av y per team", other: "Bekräftelse på att man läst" },
         { label: "Quiz", newstail: "Kort quiz på det man hört", other: "Quiz och utbildning" },
-        { label: "Finns för", newstail: "iPhone, Android och webb på väg", other: "[kontrollera]" },
+        { label: "Finns för", newstail: "iPhone", other: "[kontrollera]" },
       ],
       fair: "Vill ni bygga utbildningar och kurser för frontlinjen passar Actimo bättre.",
     },

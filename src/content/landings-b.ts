@@ -301,7 +301,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Funkar det på Android?",
-        a: "Appen finns för iPhone i dag. Android och webb är på väg.",
+        a: "Appen finns för iPhone i dag.",
       },
       {
         q: "Kan vi skicka till ett enskilt projekt?",

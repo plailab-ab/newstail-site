@@ -16,6 +16,11 @@ export type Landing = {
   cluster: Cluster;
   /** Sökvägen blir /{cluster}/{slug}/ – små bokstäver, a–z, 0–9 och bindestreck, inga åäö. */
   slug: string;
+  /**
+   * Avpublicerad: sidan byggs inte, syns inte i sitemap, menyer eller "Läs vidare". Texten är skälet.
+   * Ta bort raden för att publicera igen (och ta bort omdirigeringen i vercel.json).
+   */
+  paused?: string;
   /** Namnet i menyer, sidfot och hubbsida (kort). */
   name: string;
   /** En mening till kortet på hubbsidan. */
