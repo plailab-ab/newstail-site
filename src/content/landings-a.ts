@@ -58,7 +58,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Ser ni vad en enskild person har hört?",
-        a: "Nej. Ni ser siffror per team från fem personer, aldrig vad en enskild person har hört.",
+        a: "Nej. Ni ser siffror per team från tre personer, aldrig vad en enskild person har hört.",
       },
       {
         q: "Vad kostar det?",
@@ -263,7 +263,7 @@ export const landingsA: Landing[] = [
       { q: "Kan vi skicka ett besked till bara ett team?", a: "Ja. Ni väljer alla eller ett team när ni publicerar." },
       {
         q: "Ser vi vem som inte har lyssnat?",
-        a: "Nej. Ni ser hur många som hört per team, från fem personer, aldrig vad en enskild person har hört.",
+        a: "Nej. Ni ser hur många som hört per team, från tre personer, aldrig vad en enskild person har hört.",
       },
       {
         q: "Hur når vi dem som missat?",
@@ -404,7 +404,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Ser jag vad en enskild person har hört?",
-        a: "Nej. Du ser siffror per team från fem personer, aldrig vad en enskild person har hört.",
+        a: "Nej. Du ser siffror per team från tre personer, aldrig vad en enskild person har hört.",
       },
     ],
     related: ["losningar/internkommunikation", "guider/bra-internkommunikation", "guider/kommunikationsplan"],
@@ -465,7 +465,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Ser HR vad en enskild medarbetare har hört?",
-        a: "Nej. Ni ser siffror per team från fem personer, aldrig vad en enskild person har hört.",
+        a: "Nej. Ni ser siffror per team från tre personer, aldrig vad en enskild person har hört.",
       },
       {
         q: "Hur går en ny medarbetare med?",
@@ -610,7 +610,7 @@ export const landingsA: Landing[] = [
       },
       {
         q: "Ser man vad en enskild person har hört?",
-        a: "Nej. Ni ser siffror per team från fem personer, aldrig vad en enskild person har hört.",
+        a: "Nej. Ni ser siffror per team från tre personer, aldrig vad en enskild person har hört.",
       },
     ],
     related: ["losningar/intranat", "jamfor/actimo", "/pris/"],
