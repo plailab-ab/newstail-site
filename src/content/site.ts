@@ -126,8 +126,6 @@ export const FOOTER: Record<Lang, FooterCol[]> = {
       sub: {
         t: "Jämför",
         links: [
-          { t: "Newstail och Spintr", href: "/jamfor/spintr/" },
-          { t: "Newstail och Actimo", href: "/jamfor/actimo/" },
           { t: "Internt nyhetsbrev", href: "/jamfor/internt-nyhetsbrev/" },
           { t: "Omvärldsbevakning", href: "/jamfor/omvarldsbevakning-verktyg/" },
         ],

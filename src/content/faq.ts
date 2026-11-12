@@ -281,8 +281,8 @@ export const FAQ: Faq[] = [
     slug: { sv: "finns-for-android", en: "android" },
     cat: "it",
     tags: [],
-    sv: { q: "Finns appen för Android?", a: "Inte än. Appen finns för iPhone, och Android och webben är på väg." },
-    en: { q: "Is there an Android app?", a: "Not yet. The app is on iPhone, and Android and web are on the way." },
+    sv: { q: "Finns appen för Android?", a: "Inte än. Appen finns för iPhone." },
+    en: { q: "Is there an Android app?", a: "Not yet. The app is on iPhone." },
   },
   {
     slug: { sv: "hur-kommer-vi-igang", en: "how-do-we-get-started" },
