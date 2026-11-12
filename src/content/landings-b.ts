@@ -398,7 +398,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Ser cheferna vad var och en har hört?",
-        a: "Nej. Ni ser siffror per team, och bara för team med minst fem personer. Aldrig vad en enskild person har hört.",
+        a: "Nej. Ni ser siffror per team, och bara för team med minst tre personer. Aldrig vad en enskild person har hört.",
       },
       {
         q: "Vad kostar det?",
@@ -468,7 +468,7 @@ export const landingsB: Landing[] = [
       },
       {
         q: "Ser chefen vad var och en har hört?",
-        a: "Nej. Ni ser siffror per team, och bara för team med minst fem personer. Aldrig vad en enskild person har hört.",
+        a: "Nej. Ni ser siffror per team, och bara för team med minst tre personer. Aldrig vad en enskild person har hört.",
       },
       {
         q: "Var lagras våra data?",

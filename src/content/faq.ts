@@ -84,11 +84,11 @@ export const FAQ: Faq[] = [
     tags: ["home", "trust"],
     sv: {
       q: "Kan chefen se vem som har lyssnat?",
-      a: "Nej. Ledningen ser siffror per team, från fem personer, aldrig vad en enskild person har hört.",
+      a: "Nej. Ledningen ser siffror per team, från tre personer, aldrig vad en enskild person har hört.",
     },
     en: {
       q: "Can my manager see what I listened to?",
-      a: "No. Management sees figures per team, from five people, never what an individual has heard.",
+      a: "No. Management sees figures per team, from three people, never what an individual has heard.",
     },
   },
   {
