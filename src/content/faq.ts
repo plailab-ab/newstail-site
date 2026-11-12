@@ -12,8 +12,9 @@ export type Faq = {
   slug: { sv: string; en: string };
   cat: FaqCat;
   tags: FaqTag[];
-  sv: { q: string; a: string };
-  en: { q: string; a: string };
+  /** title: kortare sidtitel när frågan är för lång för Google (titeln blir "<title> | Newstail", högst 60 tecken). */
+  sv: { q: string; a: string; title?: string };
+  en: { q: string; a: string; title?: string };
 };
 
 export const CATS: Record<FaqCat, { sv: string; en: string }> = {
@@ -25,6 +26,16 @@ export const CATS: Record<FaqCat, { sv: string; en: string }> = {
   it: { sv: "IT", en: "IT" },
 };
 
+/** Sidtitel och beskrivning för frågans egen sida: titeln högst ~60 tecken, beskrivningen 70–155. */
+export const faqMeta = (faq: Faq, lang: Lang) => {
+  const f = faq[lang];
+  const title = `${f.title ?? f.q} | Newstail`;
+  const cat = faq.cat === "it" ? "IT" : CATS[faq.cat][lang].toLowerCase();
+  const more = lang === "sv" ? ` Mer om ${cat} i Newstails frågor och svar.` : ` Read more about ${cat} in the Newstail FAQ.`;
+  const a = f.a.length < 70 ? f.a + more : f.a;
+  return { title, description: a.length > 155 ? `${a.slice(0, 152).trimEnd()}…` : a };
+};
+
 export const FAQ: Faq[] = [
   {
     slug: { sv: "na-anstallda-utan-dator", en: "reach-staff-without-a-computer" },
@@ -32,6 +43,7 @@ export const FAQ: Faq[] = [
     tags: ["home"],
     sv: {
       q: "Hur når vi anställda som inte har dator eller jobbmejl?",
+      title: "Nå anställda utan dator eller jobbmejl",
       a: "Via mobilen, i ett format som inte kräver skärmtid. Newstail läser upp era interna nyheter i lurarna, och ni ser hur många som hört dem.",
     },
     en: {
@@ -173,6 +185,7 @@ export const FAQ: Faq[] = [
     },
     en: {
       q: "We are large, or several companies – what do we do?",
+      title: "Large, or several companies?",
       a: "Above 1,000 users we have volume pricing. Get in touch at hello@newstail.io and we'll go through it together.",
     },
   },
@@ -202,10 +215,12 @@ export const FAQ: Faq[] = [
     tags: [],
     sv: {
       q: "Hur håller jag mig uppdaterad i min bransch utan att lägga tid på det?",
+      title: "Uppdaterad i branschen utan att lägga tid",
       a: "Välj upp till tio ämnen och lyssna när du ändå är på väg. Newstail gör en egen sändning till dig med branschens och arbetsplatsens viktigaste nyheter.",
     },
     en: {
       q: "How do I keep up with my industry without spending time on it?",
+      title: "Keep up with your industry without the time",
       a: "Pick up to ten topics and listen while you're on the move. Newstail makes a broadcast for you with the most important news from your industry and your workplace.",
     },
   },

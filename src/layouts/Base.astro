@@ -25,14 +25,16 @@ interface Props {
   schema?: Record<string, unknown>[];
   /** Delningsbild (absolut sökväg på sajten). */
   og?: string;
+  /** Sidan ska inte indexeras (404): ingen canonical, robots noindex. */
+  noindex?: boolean;
 }
-const { lang, path, altPath, title, description, snap = false, orb = false, schema = [], og } = Astro.props;
+const { lang, path, altPath, title, description, snap = false, orb = false, schema = [], og, noindex = false } = Astro.props;
 const ui = UI[lang];
 const R = ROUTES[lang];
 const canonical = `${SITE}${path}`;
 const other = lang === "sv" ? "en" : "sv";
 const switchHref = altPath ?? ROUTES[other].home;
-const ogImage = `${SITE}${og ?? (lang === "sv" ? "/og.png" : "/og-en.png")}`;
+const ogImage = `${SITE}${og ?? (lang === "sv" ? "/og.jpg" : "/og-en.jpg")}`;
 const ld = { "@context": "https://schema.org", "@graph": [...orgGraph(lang), ...schema] };
 const isCurrent = (href: string) => (path === href || path.startsWith(href) && href !== R.home ? "page" : undefined);
 import ConsentBanner from "../components/ConsentBanner.astro";
@@ -82,7 +84,7 @@ import ConsentBanner from "../components/ConsentBanner.astro";
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
     {
       altPath && (
         <>
