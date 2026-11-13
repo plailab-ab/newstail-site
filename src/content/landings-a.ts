@@ -213,7 +213,7 @@ export const landingsA: Landing[] = [
     card: "Säg det en gång, uppläst för alla, och se vilka team som behöver höra det igen.",
     metaTitle: "Förändringskommunikation som når fram | Newstail",
     metaDescription:
-      "Kommunicera förändring en gång, uppläst för alla på sitt eget språk. Se per team att beskedet kom fram och vilka som behöver höra det igen.",
+      "Säg beskedet en gång, uppläst för alla på sitt eget språk. Se per team att beskedet kom fram och vilka som behöver höra det igen.",
     h1: "Förändrings\u00ADkommunikation: säg det en gång, till alla",
     lead: "Beskedet läses upp för varje medarbetare, och ni ser vilka team som behöver höra det igen.",
     phone: { topic: "INTERNT", title: "Så blir den nya organisationen från januari", src: "Från vd" },
@@ -787,12 +787,12 @@ export const landingsA: Landing[] = [
   {
     cluster: "jamfor",
     slug: "omvarldsbevakning-verktyg",
-    name: "Omvärldsbevakning: vad kostar det och vem får läsa?",
+    name: "Mediebevakning: vad kostar det och vem får läsa?",
     card: "Bevakningstjänst, branschpress eller gratisverktyg, och vem som faktiskt får ta del.",
-    metaTitle: "Omvärldsbevakning verktyg: vem får läsa? | Newstail",
+    metaTitle: "Mediebevakning: vad kostar det, vem får läsa? | Newstail",
     metaDescription:
-      "Omvärldsbevakning och mediebevakning: jämför bevakningstjänster, branschpress och gratisverktyg med Newstail, där alla hör det viktigaste uppläst.",
-    h1: "Omvärldsbevakning: vad kostar det och vem får läsa?",
+      "Mediebevakning och omvärldsbevakning: jämför bevakningstjänster, branschpress och gratisverktyg med Newstail, där alla hör det viktigaste uppläst.",
+    h1: "Mediebevakning: vad kostar det och vem får läsa?",
     lead: "De flesta verktyg räknar per läsare eller licens. Newstail låter alla höra det viktigaste.",
     phone: { topic: "MARKNAD", title: "Fler mindre bolag ser över sina lokaler", src: "Affärspress" },
     pains: [
