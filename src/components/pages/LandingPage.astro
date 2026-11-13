@@ -56,6 +56,17 @@ const related = l.related.map(resolveRelated).filter((x) => x !== null);
     <section class="section section-auto" data-space data-hue="200" data-orb={REST}>
       <article class="article">
         <p class="answer">{l.article.answer}</p>
+        {l.article.download && (
+          <div class="download">
+            <div>
+              <p class="download-t">{l.article.download.t}</p>
+              <p class="download-d">{l.article.download.d}</p>
+            </div>
+            <a class="pill pill-primary" href={l.article.download.href} download>
+              Ladda ner mallen
+            </a>
+          </div>
+        )}
         {l.article.sections.map((s) => (
           <section>
             <h2>{s.h}</h2>
@@ -66,6 +77,11 @@ const related = l.related.map(resolveRelated).filter((x) => x !== null);
                   <li>{x}</li>
                 ))}
               </ol>
+            )}
+            {s.link && (
+              <a class="link-more" href={s.link.href}>
+                {s.link.t}
+              </a>
             )}
           </section>
         ))}

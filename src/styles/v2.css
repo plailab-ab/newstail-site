@@ -1806,6 +1806,28 @@
   font-size: 1.0625rem;
   line-height: 1.7;
 }
+.article .download {
+  margin-top: 2rem;
+  padding: 1.25rem 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.article .download-t {
+  color: #fff;
+  font-weight: 600;
+}
+.article .download-d {
+  font-size: 0.95rem;
+}
+.article .link-more {
+  align-self: flex-start;
+}
 .article ol,
 .article ul {
   margin: 0.3rem 0 0;
