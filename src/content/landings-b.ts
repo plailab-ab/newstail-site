@@ -558,10 +558,15 @@ export const landingsB: Landing[] = [
     article: {
       answer:
         "En kommunikationsplan beskriver vad ni vill säga, till vem, i vilka kanaler och när. Den behöver inte vara lång. Skriv ner syftet, målgrupperna och budskapen, välj kanaler som faktiskt når fram och bestäm vem som gör vad. Avsluta med hur ni följer upp att budskapet kom fram och förstods.",
+      download: {
+        href: "/mallar/kommunikationsplan-mall.xlsx",
+        t: "Kommunikationsplan – mall i Excel",
+        d: "De sju rubrikerna, plus ett blad för aktiviteter och tidplan med ett ifyllt exempel. Fungerar i Excel, Numbers och Google Kalkylark.",
+      },
       sections: [
         {
           h: "Mallen",
-          p: "Använd rubrikerna nedan som ett enkelt dokument. En sida per projekt eller förändring brukar räcka.",
+          p: "Mallen har sju rubriker. Ladda ner den i Excel ovan, eller skriv av rubrikerna i ett eget dokument. En sida per projekt eller förändring brukar räcka.",
           list: [
             "Syfte – varför ni kommunicerar och vad som ska vara annorlunda efteråt.",
             "Målgrupper – vilka som berörs, och hur de skiljer sig åt.",
@@ -660,6 +665,11 @@ export const landingsB: Landing[] = [
     article: {
       answer:
         "En omvärldsanalys är ett sätt att förstå vad som händer utanför företaget och vad det kan betyda för er. Ni samlar in signaler om marknad, kunder, konkurrenter, teknik och regler, sorterar dem och drar slutsatser. Analysen gör mest nytta när resultatet når fler än ledningen.",
+      download: {
+        href: "/mallar/omvarldsanalys-mall.xlsx",
+        t: "Omvärldsanalys – mall i Excel",
+        d: "Ett blad för signaler sorterade efter PESTEL, med sannolikhet, påverkan och prioritet, och ett blad för slutsatserna. Med ifyllda exempel.",
+      },
       sections: [
         {
           h: "Vad är en omvärldsanalys?",
@@ -682,8 +692,20 @@ export const landingsB: Landing[] = [
           p: "PESTEL är en checklista med sex områden: politiska, ekonomiska, sociala, teknologiska, ekologiska och legala faktorer. Den hjälper er att inte missa något stort. Ta inte med allt, bara det som faktiskt påverkar er.",
         },
         {
+          h: "Exempel: en grossist med 40 anställda",
+          p: "Ledningen vill veta om de ska anställa fler säljare nästa år. De samlar signaler, ger varje signal en siffra 1–5 för hur sannolik den är och hur mycket den påverkar dem, och multiplicerar. Det som får högst prioritet blir slutsatserna. Exemplet är påhittat, men raderna finns ifyllda i mallen.",
+          list: [
+            "Ekonomiskt – räntan väntas sjunka. Kunderna vågar investera igen. Sannolikhet 3, påverkan 4: prioritet 12.",
+            "Socialt – svårare att rekrytera lagerpersonal. Längre ledtider om lagret inte är bemannat. 4 × 4: prioritet 16.",
+            "Legalt – fler kunder måste redovisa hållbarhet. De större kunderna frågar efter underlag. 5 × 3: prioritet 15.",
+            "Teknologiskt – en konkurrent låter kunderna beställa i en app. Kunderna förväntar sig samma sak. 4 × 3: prioritet 12.",
+            "Slutsats – anställ en säljare, men lös bemanningen på lagret först, och ta fram hållbarhetsunderlag före nästa upphandling.",
+          ],
+        },
+        {
           h: "Bevakning och analys hänger ihop",
           p: "En analys en gång om året blir snabbt gammal. Löpande omvärldsbevakning gör att ni ser signalerna när de dyker upp, och att nästa analys går fortare.",
+          link: { href: "/losningar/omvarldsbevakning/", t: "Så fungerar omvärldsbevakning för hela personalen" },
         },
         {
           h: "Låt resultatet nå fler än ledningen",
@@ -896,6 +918,116 @@ export const landingsB: Landing[] = [
         {
           h: "Följ upp vad som gick fram",
           p: "Se hur många som tagit del av varje steg, och lyssna på frågorna som kommer. Med Newstail ser ni per team hur många som hört ett internt budskap, och ett kort quiz efteråt visar om det fastnade.",
+        },
+      ],
+    },
+  },
+
+  {
+    cluster: "guider",
+    slug: "vad-ar-ett-intranat",
+    name: "Vad är ett intranät?",
+    card: "Vad ett intranät är, vad det brukar innehålla och vad det inte löser.",
+    metaTitle: "Vad är ett intranät? Så fungerar det | Newstail",
+    metaDescription:
+      "Vad är ett intranät, vad brukar det innehålla och vad kostar det? Och vad det inte löser: att nå dem som aldrig loggar in.",
+    h1: "Vad är ett intranät?",
+    lead: "Företagets egen, interna webbplats. Här är vad den gör bra, och vad den inte löser.",
+    phone: { topic: "INTERNT", title: "Nya rutiner för semesteransökan", src: "Från HR" },
+    pains: [
+      { t: "Allt finns på intranätet.", d: "Men få går dit frivilligt." },
+      { t: "Nyheterna ser ut som dokumenten.", d: "Det viktiga i dag drunknar bland det gamla." },
+      { t: "De som jobbar ute loggar aldrig in.", d: "De har ingen dator, och ingen tid att leta." },
+    ],
+    rows: [
+      {
+        t: "Det viktiga läses upp",
+        d: "Det ni publicerar hamnar överst i varje sändning.",
+        visual: { kind: "inside", title: "Nya rutiner för semesteransökan", heard: 38, of: 41 },
+      },
+      {
+        t: "Hörs på allas språk",
+        d: "Var och en hör det på sitt eget språk.",
+        visual: {
+          kind: "language",
+          lines: [
+            { code: "sv", t: "Nya rutiner för semesteransökan" },
+            { code: "en", t: "New routine for holiday requests" },
+            { code: "es", t: "Nueva rutina para pedir vacaciones" },
+          ],
+        },
+      },
+      {
+        t: "Se att det kom fram",
+        d: "Ni ser hur många som hört varje budskap.",
+        visual: {
+          kind: "reach",
+          rows: [
+            { t: "Nya rutiner för semesteransökan", heard: 38, of: 41 },
+            { t: "Brandövning på torsdag", heard: 40, of: 41 },
+            { t: "Ny policy för tjänsteresor", heard: 27, of: 41 },
+          ],
+        },
+      },
+    ],
+    script: [
+      {
+        topic: "INTERNT",
+        t: "Hej Sara. Något internt från HR: semesteransökan för vintern ska vara inne senast den 15 november. Hela rutinen finns på intranätet.",
+      },
+      { topic: "BRANSCH", t: "Sedan branschen. Fler arbetsgivare ser över hur de når personal som inte sitter vid en dator." },
+      { topic: "NÅGOT NYTT", t: "Och något utanför dina ämnen …" },
+    ],
+    faq: [
+      {
+        q: "Vad är skillnaden mellan intranät och internet?",
+        a: "Internet är öppet för alla. Ett intranät är bara för företagets egna medarbetare, och kräver inloggning.",
+      },
+      {
+        q: "Vad ska finnas på ett intranät?",
+        a: "Det medarbetarna behöver hitta själva: policyer, rutiner, blanketter, kontaktuppgifter och nyheter. Börja med det som efterfrågas mest.",
+      },
+      {
+        q: "Behöver mindre företag ett intranät?",
+        a: "Inte alltid. Ett delat dokumentarkiv kan räcka för dokumenten. Det svåra brukar vara att nå ut med det som är nytt, inte att lagra det.",
+      },
+      {
+        q: "Är Newstail ett intranät?",
+        a: "Nej. Newstail har inget arkiv för dokument och kopplas inte ihop med intranätet. Det läser upp det viktigaste för var och en, så att även de som aldrig loggar in får höra det.",
+      },
+    ],
+    related: ["losningar/intranat", "guider/bra-internkommunikation", "losningar/app-for-personalen"],
+    article: {
+      answer:
+        "Ett intranät är företagets egen, interna webbplats. Där samlas policyer, rutiner, dokument, kontaktuppgifter och interna nyheter, och bara medarbetarna kommer åt det. Ett intranät är bra som arkiv: ett ställe där allt finns. Det är sämre på att se till att alla tar del av det som är nytt, särskilt de som inte sitter vid en dator.",
+      sections: [
+        {
+          h: "Vad är ett intranät?",
+          p: "Ordet betyder ungefär internt nät. Det är en webbplats, eller en app, som bara företagets medarbetare kan logga in på. Den fungerar som en gemensam startsida för det som gäller på jobbet.",
+        },
+        {
+          h: "Vad brukar finnas på ett intranät?",
+          p: "Innehållet skiljer sig mellan företag, men det mesta går att dela in i några delar.",
+          list: [
+            "Dokument – policyer, rutiner, mallar och blanketter.",
+            "Nyheter – beslut, förändringar och det som händer på företaget.",
+            "Personer – kontaktuppgifter, organisation och vem som gör vad.",
+            "Verktyg – genvägar till system för tid, lön, ärenden och liknande.",
+            "Samarbete – grupper, kommentarer och delade sidor, i vissa intranät.",
+          ],
+        },
+        {
+          h: "Vad ett intranät gör bra",
+          p: "Det samlar allt på ett ställe. Den som letar efter en rutin eller en blankett vet var den ska leta, och alla hittar samma, senaste version. För företag med många dokument och många kontor är det svårt att klara sig utan.",
+        },
+        {
+          h: "Vad ett intranät inte löser",
+          p: "Ett intranät väntar på att någon ska komma dit. Den som sitter vid en dator hela dagen gör det ibland. Den som står i butiken, kör ut till kunder eller jobbar natt gör det sällan. Nyheterna hamnar dessutom bredvid dokumenten och ser ut som allt annat, och ni vet inte vem som har läst dem.",
+        },
+        {
+          h: "Intranät, eller nå ut?",
+          p: "Fråga er vad ni behöver mest: ett arkiv, eller att nå ut. Behöver ni ett arkiv är ett intranät rätt. Behöver ni nå ut kan ni ta det viktigaste till folk i stället. Newstail ersätter inte intranätet. Ni publicerar ett internt budskap genom att tala in eller skriva i appen, och det läses upp överst i varje medarbetares sändning, före nyheterna från deras bransch. Ni ser hur många i varje team som hört det.",
+          link: { href: "/losningar/intranat/", t: "Behöver ni ett intranät, eller behöver ni nå ut?" },
         },
       ],
     },

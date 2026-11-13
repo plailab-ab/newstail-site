@@ -46,9 +46,9 @@ export const CLUSTERS: Record<Cluster, { name: string; title: string; lead: stri
   guider: {
     name: "Guider",
     title: "Guider.",
-    lead: "Kommunikationsplan, omvärldsanalys och förändring – kort och användbart.",
+    lead: "Kommunikationsplan, omvärldsanalys, intranät och förändring – kort och användbart.",
     metaTitle: "Guider om internkommunikation | Newstail",
-    metaDescription: "Guider om kommunikationsplan, omvärldsanalys, bra internkommunikation och att kommunicera förändring – med mallar och exempel.",
+    metaDescription: "Guider om kommunikationsplan, omvärldsanalys, intranät, bra internkommunikation och att kommunicera förändring – med mallar och exempel.",
   },
 };
 
