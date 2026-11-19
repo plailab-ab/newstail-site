@@ -407,5 +407,15 @@ import ConsentBanner from "../components/ConsentBanner.astro";
         }
       })();
     </script>
+    <!-- Sajtens språk följer med till appen: länkar till app.newstail.io (Kom igång, Logga in) får
+         ?lang=sv|en efter sidans språk, så onboardingen blir på samma språk som sajten. -->
+    <script is:inline>
+      (function () {
+        var lang = document.documentElement.lang === "sv" ? "sv" : "en";
+        document.querySelectorAll('a[href^="https://app.newstail.io"]').forEach(function (a) {
+          try { var u = new URL(a.href); u.searchParams.set("lang", lang); a.href = u.toString(); } catch (e) {}
+        });
+      })();
+    </script>
   </body>
 </html>
