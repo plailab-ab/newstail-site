@@ -47,6 +47,13 @@ export type Landing = {
   related: string[];
   /** Bara jämförelser. */
   compare?: { other: string; rows: { label: string; newstail: string; other: string }[]; fair: string };
-  /** Bara guider: svaret först (40–60 ord) och 3–5 avsnitt. */
-  article?: { answer: string; sections: { h: string; p: string; list?: string[] }[] };
+  /**
+   * Bara guider: svaret först (40–60 ord) och 3–5 avsnitt. `download` = en mall i public/mallar/
+   * (byggs av scripts/make-mallar.py). `link` = en länk vidare under ett avsnitt.
+   */
+  article?: {
+    answer: string;
+    download?: { href: string; t: string; d: string };
+    sections: { h: string; p: string; list?: string[]; link?: { href: string; t: string } }[];
+  };
 };

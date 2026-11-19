@@ -19,14 +19,14 @@ export const CLUSTERS: Record<Cluster, { name: string; title: string; lead: stri
     name: "Lösningar",
     title: "Det Newstail löser.",
     lead: "Från internkommunikation till omvärldsbevakning – uppläst för var och en.",
-    metaTitle: "Lösningar för internkommunikation | Newstail",
+    metaTitle: "Lösningar för att nå alla medarbetare | Newstail",
     metaDescription: "Internkommunikation, app för personalen, förändringskommunikation och omvärldsbevakning – så löser Newstail det med en uppläst sändning per medarbetare.",
   },
   branscher: {
     name: "Branscher",
     title: "Newstail i er bransch.",
     lead: "Samma idé, olika vardag. Så låter det hos er.",
-    metaTitle: "Internkommunikation per bransch | Newstail",
+    metaTitle: "Branscher: fastighet, handel, bygg, vård | Newstail",
     metaDescription: "Fastighet, handel, restaurang och hotell, bygg, industri, vård och omsorg – så når Newstail personalen i er bransch, även dem utan dator.",
   },
   roller: {
@@ -41,13 +41,13 @@ export const CLUSTERS: Record<Cluster, { name: string; title: string; lead: stri
     title: "Newstail jämfört.",
     lead: "Ärligt: när Newstail passar, och när något annat passar bättre.",
     metaTitle: "Jämför Newstail med andra verktyg | Newstail",
-    metaDescription: "Newstail jämfört med intranät, medarbetarappar, interna nyhetsbrev och verktyg för omvärldsbevakning – och när något annat passar bättre.",
+    metaDescription: "Newstail jämfört med intranät, medarbetarappar, interna nyhetsbrev och verktyg för mediebevakning – och när något annat passar bättre.",
   },
   guider: {
     name: "Guider",
     title: "Guider.",
     lead: "Kommunikationsplan, omvärldsanalys och förändring – kort och användbart.",
-    metaTitle: "Guider om internkommunikation | Newstail",
+    metaTitle: "Guider för kommunikatörer och HR | Newstail",
     metaDescription: "Guider om kommunikationsplan, omvärldsanalys, bra internkommunikation och att kommunicera förändring – med mallar och exempel.",
   },
 };

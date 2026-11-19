@@ -101,6 +101,7 @@ export const FOOTER: Record<Lang, FooterCol[]> = {
           { t: "Omvärldsanalys", href: "/guider/omvarldsanalys/" },
           { t: "Bra internkommunikation", href: "/guider/bra-internkommunikation/" },
           { t: "Kommunicera förändring", href: "/guider/kommunicera-forandring/" },
+          { t: "Vad är ett intranät?", href: "/guider/vad-ar-ett-intranat/" },
         ],
       },
     },
@@ -127,7 +128,7 @@ export const FOOTER: Record<Lang, FooterCol[]> = {
         t: "Jämför",
         links: [
           { t: "Internt nyhetsbrev", href: "/jamfor/internt-nyhetsbrev/" },
-          { t: "Omvärldsbevakning", href: "/jamfor/omvarldsbevakning-verktyg/" },
+          { t: "Mediebevakning", href: "/jamfor/omvarldsbevakning-verktyg/" },
         ],
       },
     },
