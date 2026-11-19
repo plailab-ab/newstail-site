@@ -138,7 +138,7 @@ export const landingsA: Landing[] = [
         a: "Ja, från 10 användare. Det kostar 179 kr per användare och månad, allt ingår.",
       },
     ],
-    related: ["losningar/app-for-personalen", "jamfor/internt-nyhetsbrev", "/sa-funkar-det/"],
+    related: ["guider/vad-ar-ett-intranat", "losningar/app-for-personalen", "/sa-funkar-det/"],
   },
 
   {
