@@ -74,12 +74,34 @@ import ConsentBanner from "../components/ConsentBanner.astro";
         }
       } catch (e) {}
     </script>
-    <!-- Google Tag Manager -->
-    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5F29GCGQ');</script>
+    <!-- Google Tag Manager, laddas sent (#188): först när sidan laddats klart (och webbläsaren har tid
+         över), eller direkt vid besökarens första klick, tangent eller scroll. Händelser som hamnar i
+         dataLayer innan dess skickas när Tag Manager väl laddats, så inget tappas. window.ntGtm() laddar
+         direkt (används av mätningen när någon klickar ut till appen innan Tag Manager hunnit laddas). -->
+    <script is:inline>
+      (function (w, d) {
+        var done = false;
+        function load() {
+          if (done) return;
+          done = true;
+          w.dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+          var j = d.createElement("script");
+          j.async = true;
+          j.src = "https://www.googletagmanager.com/gtm.js?id=GTM-5F29GCGQ";
+          d.head.appendChild(j);
+        }
+        w.ntGtm = load;
+        function idle() {
+          if (w.requestIdleCallback) w.requestIdleCallback(load, { timeout: 2000 });
+          else setTimeout(load, 1000);
+        }
+        if (d.readyState === "complete") idle();
+        else w.addEventListener("load", idle, { once: true });
+        ["pointerdown", "keydown", "touchstart", "scroll"].forEach(function (e) {
+          w.addEventListener(e, load, { once: true, passive: true, capture: true });
+        });
+      })(window, document);
+    </script>
     <!-- End Google Tag Manager -->
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
@@ -299,8 +321,31 @@ import ConsentBanner from "../components/ConsentBanner.astro";
           if (a) {
             const href = a.getAttribute("href") || "";
             const p = { link_text: txt(a), placement: placement(a) };
-            if (href.startsWith("https://app.newstail.io/start")) return send("prova_gratis_klick", p);
-            if (href.startsWith("https://app.newstail.io/login")) return send("logga_in_klick", p);
+            const out = href.startsWith("https://app.newstail.io/start") ? "prova_gratis_klick"
+              : href.startsWith("https://app.newstail.io/login") ? "logga_in_klick" : "";
+            if (out) {
+              // Tag Manager laddas sent (#188). Klickar någon ut till appen innan Tag Manager och GA4
+              // (G-50RSFKTJ7Z, taggen i Tag Manager) hunnit laddas, väntar vi tills de är på plats och
+              // händelsen hunnit iväg (GA4 väntar upp till 0,5 s på samtyckesläget, se wait_for_update) – högst 2 s –
+              // innan sidan byts. Annars tappas händelsen.
+              const gtm = () => window.google_tag_manager || {};
+              const ready = () => !!(gtm()["GTM-5F29GCGQ"] && gtm()["G-50RSFKTJ7Z"]);
+              const sameTab = !a.target || a.target === "_self";
+              if (ready() || !sameTab || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return send(out, p);
+              e.preventDefault();
+              let gone = false;
+              const go = () => { if (!gone) { gone = true; location.href = a.href; } };
+              window.ntGtm && window.ntGtm();
+              const start = Date.now();
+              const wait = () => {
+                if (ready()) return send(out, { ...p, eventCallback: () => setTimeout(go, 700), eventTimeout: 1000 });
+                if (Date.now() - start > 1300) { send(out, p); return go(); }
+                setTimeout(wait, 50);
+              };
+              wait();
+              setTimeout(go, 2000);
+              return;
+            }
             if (href.startsWith("mailto:")) return send("mejl_klick", p);
             if (a.matches(".lang")) return send("sprakbyte", { to_language: a.getAttribute("hreflang") || "" });
             return;
