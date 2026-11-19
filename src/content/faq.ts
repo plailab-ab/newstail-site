@@ -314,5 +314,39 @@ export const FAQ: Faq[] = [
   },
 ];
 
+/**
+ * Frågor vars egna sidor döljs för Google (noindex), sv och en. Svaren syns som vanligt på
+ * /fragor/ och på sidorna med frågans tagg – bara frågans egen sida tas ur sökindexet och
+ * sitemap. Beslut: newstail-app#187. Ta bort en rad för att låta sidan synas igen.
+ */
+export const FAQ_NOINDEX: string[] = [
+  // Pris och köpvillkor
+  "vem-raknas-som-anvandare",
+  "efter-provperioden",
+  "mitt-i-manaden",
+  "minsta-antal",
+  "valuta-och-moms",
+  "saga-upp",
+  "manga-anstallda",
+  // Om appen
+  "vilka-sprak",
+  "hur-lang-ar-en-sandning",
+  "vem-kan-publicera",
+  "hur-kommer-vi-igang",
+  // Trygghet och IT
+  "kan-chefen-se-vem-som-lyssnat",
+  "var-lagras-data",
+  "tranas-ai-pa-vara-data",
+  "nar-nagon-slutar",
+  "pub-avtal",
+  "behover-it-gora-nagot",
+  "hur-loggar-man-in",
+  "finns-for-android",
+];
+export const faqNoindex = (faq: Faq) => FAQ_NOINDEX.includes(faq.slug.sv);
+/** Adresserna (sv och en) till de dolda frågesidorna, för sitemap. */
+export const faqNoindexPaths = () =>
+  FAQ.filter(faqNoindex).flatMap((f) => [faqPath("sv", f.slug.sv), faqPath("en", f.slug.en)]);
+
 export const faqFor = (tag: FaqTag, lang: Lang) => FAQ.filter((f) => f.tags.includes(tag)).map((f) => ({ ...f[lang], slug: f.slug[lang] }));
 export const faqPath = (lang: Lang, slug: string) => (lang === "sv" ? `/fragor/${slug}/` : `/en/faq/${slug}/`);
