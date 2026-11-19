@@ -802,8 +802,8 @@ export const landingsB: Landing[] = [
     card: "Säg det flera gånger, i kanaler som når alla, och följ upp vad som gick fram.",
     metaTitle: "Kommunicera förändring – så gör du | Newstail",
     metaDescription:
-      "Så kommunicerar du en förändring så att alla hänger med. Säg det flera gånger, i kanaler som når alla, och följ upp vad som gick fram.",
-    h1: "Så kommunicerar du en förändring så att alla hänger med",
+      "Kommunicera förändring så att alla hänger med: säg det flera gånger, i kanaler som når alla, och följ upp vad som gick fram.",
+    h1: "Kommunicera förändring så att alla hänger med",
     lead: "Säg det flera gånger, så att alla hör det, och följ upp.",
     phone: { topic: "INTERNT", title: "Vi slår ihop kundservice och sälj", src: "Internt" },
     pains: [
